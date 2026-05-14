@@ -537,36 +537,37 @@
 
 /* ── PROMISE ──────────────────────────────── */
 .hp-promise-section {
-  padding: 88px 0; position: relative; overflow: hidden;
-  background: linear-gradient(135deg, var(--hp-maroon-dk) 0%, var(--hp-maroon) 100%);
+  padding: 56px 0; position: relative; overflow: hidden;
+  background: linear-gradient(160deg, #4A0E1A 0%, #6B2737 50%, #C9A055 100%);
 }
 .hp-promise-glow {
-  position: absolute; width: 700px; height: 700px; border-radius: 50%;
+  position: absolute; width: 500px; height: 500px; border-radius: 50%;
   background: radial-gradient(circle, rgba(201,160,85,.1) 0%, transparent 70%);
-  top: -250px; right: -200px; pointer-events: none;
+  top: -150px; right: -150px; pointer-events: none;
 }
 .hp-promise-grid {
-  display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px;
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px;
 }
 .hp-promise-card {
-  background: rgba(255,255,255,.07);
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: 18px; padding: 32px 22px; text-align: center;
+  background: rgba(255,255,255,.08);
+  border: 1.5px solid rgba(255,255,255,.35);
+  border-radius: 14px; padding: 22px 16px; text-align: center;
   backdrop-filter: blur(10px);
+  box-shadow: 0 2px 16px rgba(0,0,0,.15), inset 0 1px 0 rgba(255,255,255,.2);
   transition: background .28s, transform .28s;
 }
-.hp-promise-card:hover { background: rgba(255,255,255,.12); transform: translateY(-5px); }
+.hp-promise-card:hover { background: rgba(255,255,255,.12); transform: translateY(-4px); }
 .hp-promise-icon {
-  width: 60px; height: 60px; border-radius: 14px;
+  width: 48px; height: 48px; border-radius: 12px;
   background: rgba(201,160,85,.15); border: 1px solid rgba(201,160,85,.25);
   display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 16px; color: var(--hp-gold-lt);
+  margin: 0 auto 12px; color: var(--hp-gold-lt);
 }
 .hp-promise-card h4 {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1rem; color: #fff; margin-bottom: 10px; font-weight: 700;
+  font-size: .9rem; color: #fff; margin-bottom: 8px; font-weight: 700;
 }
-.hp-promise-card p { font-size: .8rem; color: rgba(255,255,255,.7); line-height: 1.65; }
+.hp-promise-card p { font-size: .75rem; color: rgba(255,255,255,.7); line-height: 1.6; }
 
 /* ── TESTIMONIALS ─────────────────────────── */
 .hp-testi-grid {

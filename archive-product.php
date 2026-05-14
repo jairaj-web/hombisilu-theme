@@ -204,7 +204,7 @@ $page_title = $cat_slug ? single_term_title('', false) : 'Our Shop';
 /* ── HERO ─────────────────────────────────── */
 .sp-hero {
   position: relative; overflow: hidden;
-  background: linear-gradient(135deg, var(--sp-maroon-dk) 0%, var(--sp-maroon) 60%, #8B3045 100%);
+  background: linear-gradient(160deg, #4A0E1A 0%, #6B2737 50%, #C9A055 100%);
   padding: 72px 24px 80px; text-align: center;
 }
 .sp-hero-bg {
