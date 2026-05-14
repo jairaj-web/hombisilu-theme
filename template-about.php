@@ -6,78 +6,113 @@ get_header();
 $img = get_stylesheet_directory_uri() . '/assets/images/';
 ?>
 
-<main class="about-page">
+<main class="ab-page">
 
-<!-- ════════════════════════════════════════════════════
+<!-- ══════════════════════════════════════════════════
      HERO
-════════════════════════════════════════════════════ -->
-<section class="about-hero">
-  <div class="about-hero-overlay"></div>
-  <div class="container about-hero-inner">
-    <span class="about-eyebrow">Our Story</span>
-    <h1 class="about-hero-title">Born from the Heart<br>of Karnataka</h1>
-    <p class="about-hero-sub">From the fragrant hills of Coorg to your kitchen table — authentic, pure, and made with love.</p>
-    <div class="about-hero-scroll">
-      <span>Scroll to explore</span>
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+══════════════════════════════════════════════════ -->
+<section class="ab-hero">
+  <div class="ab-hero-bg" style="background-image:url('<?php echo $img; ?>about-hero.jpg');"></div>
+  <div class="ab-hero-overlay"></div>
+  <div class="ab-hero-inner">
+    <div class="ab-hero-pills">
+      <span class="ab-pill">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        FSSAI Certified
+      </span>
+      <span class="ab-pill">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+        100% Natural
+      </span>
+      <span class="ab-pill">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        Made in Karnataka
+      </span>
     </div>
+    <h1 class="ab-hero-title">Born from the Heart<br>of <em>Karnataka</em></h1>
+    <p class="ab-hero-sub">From fragrant spice fields to your kitchen table — authentic, pure, and crafted with generational love.</p>
+    <a href="#ab-story" class="ab-hero-scroll" aria-label="Scroll down">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </a>
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════
-     STATS STRIP
-════════════════════════════════════════════════════ -->
-<div class="about-stats-strip">
-  <div class="container">
-    <div class="about-stats-grid">
-      <div class="about-stat">
-        <span class="stat-number">26</span>
-        <span class="stat-label">Products</span>
+<!-- ══════════════════════════════════════════════════
+     STATS
+══════════════════════════════════════════════════ -->
+<div class="ab-stats">
+  <div class="ab-container">
+    <div class="ab-stats-grid">
+      <div class="ab-stat" data-target="26" data-suffix="">
+        <span class="ab-stat-num">26</span>
+        <span class="ab-stat-label">Products</span>
       </div>
-      <div class="about-stat">
-        <span class="stat-number">9</span>
-        <span class="stat-label">Categories</span>
+      <div class="ab-stat" data-target="9" data-suffix="">
+        <span class="ab-stat-num">9</span>
+        <span class="ab-stat-label">Categories</span>
       </div>
-      <div class="about-stat">
-        <span class="stat-number">100%</span>
-        <span class="stat-label">Natural Ingredients</span>
+      <div class="ab-stat" data-target="100" data-suffix="%">
+        <span class="ab-stat-num">100%</span>
+        <span class="ab-stat-label">Natural Ingredients</span>
       </div>
-      <div class="about-stat">
-        <span class="stat-number">0</span>
-        <span class="stat-label">Preservatives Used</span>
+      <div class="ab-stat" data-target="0" data-suffix="">
+        <span class="ab-stat-num">0</span>
+        <span class="ab-stat-label">Preservatives Used</span>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ════════════════════════════════════════════════════
-     OUR STORY — SPLIT LAYOUT
-════════════════════════════════════════════════════ -->
-<section class="about-story-section">
-  <div class="container">
-    <div class="about-story-grid">
+<!-- ══════════════════════════════════════════════════
+     OUR STORY
+══════════════════════════════════════════════════ -->
+<section class="ab-story" id="ab-story">
+  <div class="ab-container">
+    <div class="ab-story-grid">
 
-      <!-- Image side -->
-      <div class="about-story-img-wrap">
-        <div class="about-story-img" style="background-image:url('<?php echo $img; ?>about-story.jpg');"></div>
-        <div class="about-story-badge">
-          <span class="badge-icon">🌿</span>
-          <span class="badge-text">Crafted with Heritage</span>
+      <div class="ab-story-media">
+        <div class="ab-story-img" style="background-image:url('<?php echo $img; ?>about-story.jpg');"></div>
+        <div class="ab-story-float">
+          <span class="ab-story-kannada">ಹೊಂಬಿಸಿಲು</span>
+          <span class="ab-story-meaning">"Golden Sunshine"</span>
         </div>
       </div>
 
-      <!-- Text side -->
-      <div class="about-story-text">
-        <span class="about-label">Who We Are</span>
-        <h2 class="about-h2">What Does <em>Hombisilu</em> Mean?</h2>
-        <div class="about-kannada-block">
-          <span class="kannada-word">ಹೊಂಬಿಸಿಲು</span>
-          <span class="kannada-meaning">"Golden Sunshine" in Kannada</span>
-        </div>
-        <p>Hombisilu was born from a deep-rooted love for South Indian food — not just as sustenance, but as culture, memory, and identity. The name reflects the warmth, nourishment, and brightness we aim to bring into every household.</p>
-        <p>We began with a simple idea: to offer authentic South Indian pantry essentials that urban families could trust — products that taste like home, carry the goodness of tradition, and uphold the integrity of natural ingredients.</p>
-        <p>Based in Bengaluru, Karnataka, we collaborate with skilled artisans, local farmers, and heritage recipe custodians to craft foods that honour South India's rich culinary legacy.</p>
-        <a href="<?php echo get_permalink(wc_get_page_id('shop')); ?>" class="about-story-cta">
+      <div class="ab-story-text">
+        <span class="ab-eyebrow">Who We Are</span>
+        <h2 class="ab-h2">What Does <em>Hombisilu</em> Mean?</h2>
+        <p>Hombisilu was born from a deep-rooted love for South Indian food — not just as sustenance, but as culture, memory, and identity. The name reflects the warmth, nourishment, and brightness we bring to every household.</p>
+        <p>We began with a simple idea: authentic South Indian pantry essentials that urban families could trust — products that taste like home, carry the goodness of tradition, and uphold the integrity of natural ingredients.</p>
+        <p>Based in Bengaluru, Karnataka, we collaborate with skilled artisans, local farmers, and heritage recipe custodians to honour South India's rich culinary legacy.</p>
+
+        <ul class="ab-feature-list">
+          <li>
+            <span class="ab-feat-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+            </span>
+            Zero artificial preservatives or colours
+          </li>
+          <li>
+            <span class="ab-feat-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+            </span>
+            Heritage recipes with modern hygiene standards
+          </li>
+          <li>
+            <span class="ab-feat-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+            </span>
+            FSSAI License: 11225332000490
+          </li>
+          <li>
+            <span class="ab-feat-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 13l4 4L19 7"/></svg>
+            </span>
+            Pan-India delivery from Bengaluru
+          </li>
+        </ul>
+
+        <a href="<?php echo get_permalink(wc_get_page_id('shop')); ?>" class="ab-btn-primary">
           Explore Our Products
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
@@ -87,31 +122,39 @@ $img = get_stylesheet_directory_uri() . '/assets/images/';
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════
+<!-- ══════════════════════════════════════════════════
      MISSION & VISION
-════════════════════════════════════════════════════ -->
-<section class="about-mv-section">
-  <div class="container">
-    <div class="about-mv-grid">
+══════════════════════════════════════════════════ -->
+<section class="ab-mv">
+  <div class="ab-container">
+    <span class="ab-eyebrow" style="display:block;text-align:center;">What Drives Us</span>
+    <h2 class="ab-h2" style="text-align:center;margin-bottom:48px;">Mission &amp; Vision</h2>
+    <div class="ab-mv-grid">
 
-      <div class="about-mv-card mission">
-        <div class="mv-icon">🎯</div>
-        <h3 class="mv-title">Our Mission</h3>
-        <div class="mv-divider"></div>
-        <p class="mv-text">To bring authentic, nourishing, and heritage-inspired South Indian foods to every home — without compromise on purity, quality, or tradition.</p>
-        <ul class="mv-list">
+      <div class="ab-mv-card">
+        <div class="ab-mv-accent ab-mv-accent--mission"></div>
+        <div class="ab-mv-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+        </div>
+        <h3 class="ab-mv-title">Our Mission</h3>
+        <div class="ab-mv-divider"></div>
+        <p>To bring authentic, nourishing, and heritage-inspired South Indian foods to every home — without compromise on purity, quality, or tradition.</p>
+        <ul class="ab-mv-list">
           <li>Zero artificial preservatives or colours</li>
           <li>Heritage recipes, modern hygiene standards</li>
           <li>Affordable premium quality for all families</li>
         </ul>
       </div>
 
-      <div class="about-mv-card vision">
-        <div class="mv-icon">🔭</div>
-        <h3 class="mv-title">Our Vision</h3>
-        <div class="mv-divider"></div>
-        <p class="mv-text">To become India's most trusted name in traditional South Indian food products — bridging generations through flavour and purpose.</p>
-        <ul class="mv-list">
+      <div class="ab-mv-card">
+        <div class="ab-mv-accent ab-mv-accent--vision"></div>
+        <div class="ab-mv-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <h3 class="ab-mv-title">Our Vision</h3>
+        <div class="ab-mv-divider"></div>
+        <p>To become India's most trusted name in traditional South Indian food products — bridging generations through flavour and purpose.</p>
+        <ul class="ab-mv-list">
           <li>Pan-India presence with local roots</li>
           <li>Preserving culinary traditions for generations</li>
           <li>Building lasting trust with every product</li>
@@ -122,122 +165,192 @@ $img = get_stylesheet_directory_uri() . '/assets/images/';
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════
-     OUR VALUES
-════════════════════════════════════════════════════ -->
-<section class="about-values-section">
-  <div class="container">
-    <span class="about-label" style="display:block;text-align:center;">What We Stand For</span>
-    <h2 class="about-h2" style="text-align:center;margin-bottom:12px;">Our Core Values</h2>
-    <p style="text-align:center;color:#7A7A7A;font-style:italic;margin-bottom:52px;">The principles that guide every product we make</p>
+<!-- ══════════════════════════════════════════════════
+     VALUES
+══════════════════════════════════════════════════ -->
+<section class="ab-values">
+  <div class="ab-container">
+    <span class="ab-eyebrow" style="display:block;text-align:center;">What We Stand For</span>
+    <h2 class="ab-h2" style="text-align:center;margin-bottom:8px;">Our Core Values</h2>
+    <p class="ab-section-sub">The principles that guide every product we make</p>
+    <div class="ab-values-grid">
 
-    <div class="about-values-grid">
-      <?php
-      $values = [
-        ['icon'=>'🌿','title'=>'Authenticity',  'desc'=>'Every recipe honours its origins, made the way it has always been made — no shortcuts, no substitutes.'],
-        ['icon'=>'✨','title'=>'Purity',         'desc'=>'No artificial additives, ever. What you see on the label is exactly what goes into the jar.'],
-        ['icon'=>'🤝','title'=>'Integrity',      'desc'=>'Transparent ingredients, honest sourcing, and fair relationships with our farming community.'],
-        ['icon'=>'💪','title'=>'Nourishment',    'desc'=>'Every product is designed to support your health and wellbeing, not just your palate.'],
-        ['icon'=>'📜','title'=>'Heritage',       'desc'=>'We are guardians of South India\'s culinary legacy, one recipe at a time.'],
-        ['icon'=>'🌾','title'=>'Community',      'desc'=>'Supporting local farmers, artisans, and food makers who keep these traditions alive.'],
-      ];
-      foreach ($values as $v) :
-      ?>
-      <div class="about-value-card">
-        <div class="value-icon-wrap"><span><?php echo $v['icon']; ?></span></div>
-        <h4 class="value-title"><?php echo $v['title']; ?></h4>
-        <p class="value-desc"><?php echo $v['desc']; ?></p>
+      <div class="ab-val-card">
+        <div class="ab-val-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h4>Authenticity</h4>
+        <p>Every recipe honours its origins, made the way it has always been made — no shortcuts, no substitutes.</p>
       </div>
-      <?php endforeach; ?>
+
+      <div class="ab-val-card">
+        <div class="ab-val-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <h4>Purity</h4>
+        <p>No artificial additives, ever. What you see on the label is exactly what goes into the jar.</p>
+      </div>
+
+      <div class="ab-val-card">
+        <div class="ab-val-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <h4>Integrity</h4>
+        <p>Transparent ingredients, honest sourcing, and fair relationships with our farming community.</p>
+      </div>
+
+      <div class="ab-val-card">
+        <div class="ab-val-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </div>
+        <h4>Nourishment</h4>
+        <p>Every product is designed to support your health and wellbeing, not just your palate.</p>
+      </div>
+
+      <div class="ab-val-card">
+        <div class="ab-val-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+        </div>
+        <h4>Heritage</h4>
+        <p>We are guardians of South India's culinary legacy, one recipe at a time.</p>
+      </div>
+
+      <div class="ab-val-card">
+        <div class="ab-val-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <h4>Community</h4>
+        <p>Supporting local farmers, artisans, and food makers who keep these traditions alive.</p>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════
-     HOW WE MAKE IT — PROCESS
-════════════════════════════════════════════════════ -->
-<section class="about-process-section">
-  <div class="container">
-    <span class="about-label" style="display:block;text-align:center;color:rgba(255,255,255,.6);">Our Process</span>
-    <h2 class="about-h2" style="text-align:center;color:#fff;margin-bottom:12px;">From Source to Your Table</h2>
-    <p style="text-align:center;color:rgba(255,255,255,.75);font-style:italic;margin-bottom:52px;">Every product goes through four carefully controlled steps</p>
+<!-- ══════════════════════════════════════════════════
+     PROCESS
+══════════════════════════════════════════════════ -->
+<section class="ab-process">
+  <div class="ab-process-glow"></div>
+  <div class="ab-container" style="position:relative;z-index:1;">
+    <span class="ab-eyebrow" style="display:block;text-align:center;color:rgba(245,200,66,.75);">Our Process</span>
+    <h2 class="ab-h2" style="text-align:center;color:#fff;margin-bottom:8px;">From Source to Your Table</h2>
+    <p class="ab-section-sub" style="color:rgba(255,255,255,.6);">Every product goes through four carefully controlled steps</p>
 
-    <div class="about-process-grid">
-      <div class="process-step">
-        <div class="process-num">01</div>
-        <div class="process-icon">🌾</div>
+    <div class="ab-process-grid">
+
+      <div class="ab-proc-step">
+        <div class="ab-proc-num">01</div>
+        <div class="ab-proc-icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
         <h4>Source</h4>
-        <p>We hand-pick ingredients from trusted local farmers and heritage suppliers across Karnataka and South India.</p>
+        <p>Hand-picked ingredients from trusted local farmers and heritage suppliers across Karnataka and South India.</p>
       </div>
-      <div class="process-arrow">→</div>
-      <div class="process-step">
-        <div class="process-num">02</div>
-        <div class="process-icon">🔬</div>
+
+      <div class="ab-proc-arrow">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+
+      <div class="ab-proc-step">
+        <div class="ab-proc-num">02</div>
+        <div class="ab-proc-icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+        </div>
         <h4>Quality Check</h4>
-        <p>Every batch is inspected for freshness, purity, and quality before any processing begins.</p>
+        <p>Every batch inspected for freshness, purity, and quality before any processing begins.</p>
       </div>
-      <div class="process-arrow">→</div>
-      <div class="process-step">
-        <div class="process-num">03</div>
-        <div class="process-icon">👩‍🍳</div>
+
+      <div class="ab-proc-arrow">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+
+      <div class="ab-proc-step">
+        <div class="ab-proc-num">03</div>
+        <div class="ab-proc-icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z"/><path d="M12 6v6l4 2"/></svg>
+        </div>
         <h4>Craft</h4>
         <p>Made in small batches following heritage recipes — sun-dried, hand-ground, slow-cooked, never rushed.</p>
       </div>
-      <div class="process-arrow">→</div>
-      <div class="process-step">
-        <div class="process-num">04</div>
-        <div class="process-icon">📦</div>
-        <h4>Packed & Shipped</h4>
+
+      <div class="ab-proc-arrow">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+
+      <div class="ab-proc-step">
+        <div class="ab-proc-num">04</div>
+        <div class="ab-proc-icon">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h4>Packed &amp; Shipped</h4>
         <p>Hygienically packed and delivered pan-India — from our kitchen in Bengaluru to your doorstep.</p>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════
+<!-- ══════════════════════════════════════════════════
      CERTIFICATIONS
-════════════════════════════════════════════════════ -->
-<section class="about-certs-section">
-  <div class="container">
-    <span class="about-label" style="display:block;text-align:center;">Trust &amp; Transparency</span>
-    <h2 class="about-h2" style="text-align:center;margin-bottom:12px;">Our Certifications</h2>
-    <p style="text-align:center;color:#7A7A7A;font-style:italic;margin-bottom:48px;">Every product you buy is backed by these guarantees</p>
+══════════════════════════════════════════════════ -->
+<section class="ab-certs">
+  <div class="ab-container">
+    <span class="ab-eyebrow" style="display:block;text-align:center;">Trust &amp; Transparency</span>
+    <h2 class="ab-h2" style="text-align:center;margin-bottom:8px;">Our Certifications</h2>
+    <p class="ab-section-sub">Every product you buy is backed by these guarantees</p>
 
-    <div class="about-certs-grid">
-      <div class="cert-card">
-        <div class="cert-icon">🏆</div>
-        <div class="cert-title">FSSAI Licensed</div>
-        <div class="cert-number">11225332000490</div>
-        <div class="cert-desc">Certified by the Food Safety and Standards Authority of India</div>
+    <div class="ab-certs-grid">
+
+      <div class="ab-cert-card">
+        <div class="ab-cert-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="ab-cert-title">FSSAI Licensed</div>
+        <div class="ab-cert-num">11225332000490</div>
+        <p class="ab-cert-desc">Certified by the Food Safety and Standards Authority of India</p>
       </div>
-      <div class="cert-card featured">
-        <div class="cert-badge">Primary</div>
-        <div class="cert-icon">🌿</div>
-        <div class="cert-title">100% Natural</div>
-        <div class="cert-number">Zero Preservatives</div>
-        <div class="cert-desc">No artificial colours, flavours, or preservatives in any product</div>
+
+      <div class="ab-cert-card ab-cert-featured">
+        <div class="ab-cert-badge">Primary</div>
+        <div class="ab-cert-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s-8-4.5-8-11.8V4.5l8-2.5 8 2.5v5.7C20 17.5 12 22 12 22z"/><path d="M9 12l2 2 4-4"/></svg>
+        </div>
+        <div class="ab-cert-title">100% Natural</div>
+        <div class="ab-cert-num">Zero Preservatives</div>
+        <p class="ab-cert-desc">No artificial colours, flavours, or preservatives in any product</p>
       </div>
-      <div class="cert-card">
-        <div class="cert-icon">🇮🇳</div>
-        <div class="cert-title">Product of India</div>
-        <div class="cert-number">Made in Bengaluru</div>
-        <div class="cert-desc">Proudly manufactured in Karnataka, supporting local farmers</div>
+
+      <div class="ab-cert-card">
+        <div class="ab-cert-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        </div>
+        <div class="ab-cert-title">Product of India</div>
+        <div class="ab-cert-num">Made in Bengaluru</div>
+        <p class="ab-cert-desc">Proudly manufactured in Karnataka, supporting local farmers</p>
       </div>
+
     </div>
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════
+<!-- ══════════════════════════════════════════════════
      CTA
-════════════════════════════════════════════════════ -->
-<section class="cta-section">
-  <div class="cta-inner">
-    <span class="eyebrow" style="color:rgba(255,255,255,.6);">Ready to Experience It?</span>
-    <h2 class="cta-title">Taste the Golden Sunshine</h2>
-    <p class="cta-desc">Explore our complete range of 26 authentic South Indian food products — crafted for your family's table.</p>
-    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
-      <a href="<?php echo get_permalink(wc_get_page_id('shop')); ?>" class="btn-white">🛍️ Shop Now</a>
-      <a href="<?php echo home_url('/contact-us'); ?>" style="display:inline-block;border:2px solid rgba(255,255,255,.5);color:#fff;padding:15px 36px;border-radius:24px;font-weight:700;font-size:.97rem;transition:all .28s;">Contact Us</a>
+══════════════════════════════════════════════════ -->
+<section class="ab-cta">
+  <div class="ab-cta-inner">
+    <span class="ab-eyebrow" style="color:rgba(245,200,66,.8);">Ready to Experience It?</span>
+    <h2 class="ab-cta-title">Taste the Golden Sunshine</h2>
+    <p class="ab-cta-desc">Explore our complete range of 26 authentic South Indian food products — crafted for your family's table.</p>
+    <div class="ab-cta-btns">
+      <a href="<?php echo get_permalink(wc_get_page_id('shop')); ?>" class="ab-btn-white">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        Shop Now
+      </a>
+      <a href="<?php echo home_url('/contact-us/'); ?>" class="ab-btn-outline">
+        Contact Us
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
     </div>
   </div>
 </section>
@@ -245,448 +358,475 @@ $img = get_stylesheet_directory_uri() . '/assets/images/';
 </main>
 
 <style>
-/* ── About Page Styles ─────────────────────────────── */
-.about-page { font-family:var(--font-sans,Inter,sans-serif); }
+/* ═══════════════════════════════════════════════════
+   ABOUT PAGE — DESIGN TOKENS
+═══════════════════════════════════════════════════ */
+:root {
+  --ab-maroon:      #6B2737;
+  --ab-maroon-dk:   #4A0E1A;
+  --ab-gold:        #C9A055;
+  --ab-gold-lt:     #F5C842;
+  --ab-cream:       #FFF8F0;
+  --ab-border:      #E8DDD0;
+  --ab-text:        #3A2A20;
+  --ab-muted:       #7A6A60;
+}
 
-/* Hero */
-.about-hero {
-  min-height: 92vh;
-  background:
-    linear-gradient(160deg, rgba(5,20,10,.78) 0%, rgba(20,68,36,.65) 60%, rgba(30,80,48,.52) 100%),
-    url('<?php echo $img; ?>about-hero.jpg') center/cover no-repeat;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.ab-page { font-family: 'Inter', 'Segoe UI', sans-serif; color: var(--ab-text); }
+.ab-container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+.ab-eyebrow {
+  font-size: .7rem; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--ab-gold); margin-bottom: 10px; display: block;
+}
+.ab-h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+  color: var(--ab-maroon); line-height: 1.22; margin-bottom: 24px;
+}
+.ab-h2 em { font-style: italic; color: var(--ab-gold); }
+.ab-section-sub {
+  text-align: center; color: var(--ab-muted); font-style: italic;
+  margin-bottom: 52px; font-size: .97rem;
+}
+
+/* ── HERO ─────────────────────────────────────── */
+.ab-hero {
+  position: relative; min-height: 96vh;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; overflow: hidden;
+}
+.ab-hero-bg {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  transform: scale(1.05);
+  transition: transform 8s ease;
+}
+.ab-hero:hover .ab-hero-bg { transform: scale(1); }
+.ab-hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(74,14,26,.88) 0%,
+    rgba(107,39,55,.72) 50%,
+    rgba(74,14,26,.80) 100%
+  );
+}
+.ab-hero-inner {
+  position: relative; z-index: 2;
+  max-width: 780px; padding: 0 24px;
+}
+.ab-hero-pills {
+  display: flex; gap: 10px; justify-content: center;
+  flex-wrap: wrap; margin-bottom: 32px;
+}
+.ab-pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(201,160,85,.18);
+  border: 1px solid rgba(201,160,85,.4);
+  color: #F5C842; padding: 7px 16px; border-radius: 30px;
+  font-size: .72rem; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; backdrop-filter: blur(8px);
+}
+.ab-hero-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2.8rem, 7vw, 5.4rem);
+  color: #fff; line-height: 1.1; margin-bottom: 22px;
+  font-weight: 700; text-shadow: 0 2px 24px rgba(0,0,0,.35);
+}
+.ab-hero-title em { font-style: italic; color: #F5C842; }
+.ab-hero-sub {
+  font-size: 1.1rem; color: rgba(255,255,255,.82);
+  max-width: 540px; margin: 0 auto 44px;
+  line-height: 1.8; font-style: italic;
+}
+.ab-hero-scroll {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 46px; height: 46px; border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,.35);
+  color: rgba(255,255,255,.7);
+  animation: ab-bob 2.2s ease-in-out infinite;
+  transition: background .25s;
+}
+.ab-hero-scroll:hover { background: rgba(255,255,255,.12); }
+@keyframes ab-bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(7px)} }
+
+/* ── STATS ────────────────────────────────────── */
+.ab-stats {
+  background: #fff;
+  border-bottom: 1px solid var(--ab-border);
+  box-shadow: 0 6px 32px rgba(0,0,0,.06);
+}
+.ab-stats-grid {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  max-width: 880px; margin: 0 auto;
+}
+.ab-stat {
+  padding: 36px 20px; text-align: center;
+  border-right: 1px solid var(--ab-border);
+  transition: background .28s; cursor: default;
+}
+.ab-stat:last-child { border-right: none; }
+.ab-stat:hover { background: var(--ab-cream); }
+.ab-stat-num {
+  display: block;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2.8rem; font-weight: 700;
+  color: var(--ab-maroon); line-height: 1; margin-bottom: 8px;
+}
+.ab-stat-label {
+  font-size: .78rem; color: var(--ab-muted);
+  font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+}
+
+/* ── STORY ────────────────────────────────────── */
+.ab-story { padding: 96px 0; background: #fff; }
+.ab-story-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 72px; align-items: center;
+}
+.ab-story-media { position: relative; }
+.ab-story-img {
+  width: 100%; aspect-ratio: 4/5; border-radius: 24px;
+  background-size: cover; background-position: center;
+  box-shadow: 0 24px 72px rgba(74,14,26,.2);
+}
+.ab-story-float {
+  position: absolute; bottom: -24px; right: -24px;
+  background: var(--ab-maroon); color: #fff;
+  padding: 20px 26px; border-radius: 18px;
+  box-shadow: 0 10px 32px rgba(74,14,26,.35);
   text-align: center;
-  position: relative;
-  overflow: hidden;
 }
-.about-hero-overlay {
-  position:absolute;inset:0;
-  background: radial-gradient(ellipse at center bottom, rgba(212,160,23,.12) 0%, transparent 65%);
+.ab-story-kannada {
+  display: block; font-size: 1.7rem; font-weight: 700; line-height: 1.1;
 }
-.about-hero-inner { position:relative; z-index:1; max-width:760px; padding:0 24px; }
-.about-eyebrow {
-  display:inline-block;
-  background:rgba(212,160,23,.25);
-  border:1px solid rgba(212,160,23,.4);
-  color:#F5C842;
-  padding:7px 22px;
-  border-radius:30px;
-  font-size:.72rem;
-  font-weight:700;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  margin-bottom:28px;
-}
-.about-hero-title {
-  font-family:var(--font-serif,'Playfair Display',Georgia,serif);
-  font-size:clamp(2.8rem,7vw,5.2rem);
-  color:#fff;
-  line-height:1.1;
-  margin-bottom:22px;
-  font-weight:700;
-  text-shadow:0 2px 20px rgba(0,0,0,.3);
-}
-.about-hero-sub {
-  font-size:1.1rem;
-  color:rgba(255,255,255,.82);
-  max-width:520px;
-  margin:0 auto 40px;
-  line-height:1.75;
-  font-style:italic;
-}
-.about-hero-scroll {
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  color:rgba(255,255,255,.55);
-  font-size:.8rem;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  animation: bob 2s ease-in-out infinite;
-}
-@keyframes bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
-
-/* Stats strip */
-.about-stats-strip {
-  background:#fff;
-  border-bottom:1px solid var(--border,#E8DDD0);
-  box-shadow:0 4px 24px rgba(0,0,0,.06);
-}
-.about-stats-grid {
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  max-width:900px;
-  margin:0 auto;
-}
-.about-stat {
-  padding:32px 20px;
-  text-align:center;
-  border-right:1px solid var(--border,#E8DDD0);
-  transition:background .28s;
-}
-.about-stat:last-child { border-right:none; }
-.about-stat:hover { background:var(--light,#FFF8F0); }
-.stat-number {
-  display:block;
-  font-family:var(--font-serif,'Playfair Display',Georgia,serif);
-  font-size:2.6rem;
-  font-weight:700;
-  color:var(--primary,#8B4513);
-  line-height:1;
-  margin-bottom:8px;
-}
-.stat-label {
-  font-size:.8rem;
-  color:var(--muted,#7A7A7A);
-  font-weight:600;
-  text-transform:uppercase;
-  letter-spacing:1px;
+.ab-story-meaning {
+  display: block; font-size: .75rem; color: var(--ab-gold-lt);
+  font-style: italic; margin-top: 4px;
 }
 
-/* Story section */
-.about-story-section { padding:88px 24px; background:#fff; }
-.about-story-grid {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:64px;
-  align-items:center;
-  max-width:1100px;
-  margin:0 auto;
+.ab-story-text { padding-left: 8px; }
+.ab-story-text p { color: #5A4A40; line-height: 1.9; margin-bottom: 16px; font-size: .97rem; }
+.ab-feature-list { list-style: none; padding: 0; margin: 24px 0 32px; }
+.ab-feature-list li {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 0; border-bottom: 1px solid var(--ab-border);
+  font-size: .9rem; color: var(--ab-text);
 }
-.about-story-img-wrap { position:relative; }
-.about-story-img {
-  width:100%;
-  aspect-ratio:4/5;
-  border-radius:20px;
-  background-size:cover;
-  background-position:center;
-  box-shadow:0 20px 60px rgba(0,0,0,.18);
+.ab-feature-list li:last-child { border-bottom: none; }
+.ab-feat-icon {
+  display: flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgba(201,160,85,.15); color: var(--ab-maroon); flex-shrink: 0;
 }
-.about-story-badge {
-  position:absolute;
-  bottom:-20px; right:-20px;
-  background:var(--primary,#8B4513);
-  color:#fff;
-  padding:16px 22px;
-  border-radius:14px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  box-shadow:0 8px 24px rgba(46,107,62,.35);
+.ab-btn-primary {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--ab-maroon); color: #fff !important;
+  padding: 14px 30px; border-radius: 30px;
+  font-weight: 700; font-size: .92rem;
+  transition: all .28s; box-shadow: 0 6px 20px rgba(74,14,26,.3);
+  cursor: pointer;
 }
-.badge-icon { font-size:1.4rem; }
-.badge-text { font-size:.82rem; font-weight:700; line-height:1.3; }
-
-.about-label {
-  font-size:.72rem;
-  font-weight:700;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  color:var(--secondary,#D4A017);
-  margin-bottom:10px;
-  display:block;
-}
-.about-h2 {
-  font-family:var(--font-serif,'Playfair Display',Georgia,serif);
-  font-size:clamp(1.8rem,3.5vw,2.8rem);
-  color:var(--primary,#8B4513);
-  line-height:1.25;
-  margin-bottom:24px;
-}
-.about-h2 em { font-style:italic; color:var(--secondary,#D4A017); }
-.about-kannada-block {
-  display:inline-flex;
-  align-items:center;
-  gap:14px;
-  background:var(--light,#FFF8F0);
-  border:1.5px solid var(--border,#E8DDD0);
-  border-left:4px solid var(--secondary,#D4A017);
-  padding:14px 20px;
-  border-radius:10px;
-  margin-bottom:24px;
-}
-.kannada-word {
-  font-size:1.5rem;
-  color:var(--primary,#8B4513);
-  font-weight:700;
-}
-.kannada-meaning { font-size:.82rem; color:var(--muted,#7A7A7A); font-style:italic; }
-.about-story-text p {
-  color:#555;
-  line-height:1.85;
-  margin-bottom:16px;
-  font-size:.97rem;
-}
-.about-story-cta {
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  margin-top:12px;
-  background:var(--primary,#8B4513);
-  color:#fff;
-  padding:13px 28px;
-  border-radius:30px;
-  font-weight:700;
-  font-size:.9rem;
-  transition:all .28s;
-  box-shadow:0 4px 16px rgba(46,107,62,.3);
-}
-.about-story-cta:hover { background:var(--secondary,#D4A017); transform:translateY(-2px); }
-
-/* Mission & Vision */
-.about-mv-section { padding:80px 24px; background:var(--light,#FFF8F0); }
-.about-mv-grid {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:28px;
-  max-width:960px;
-  margin:0 auto;
-}
-.about-mv-card {
-  background:#fff;
-  border-radius:20px;
-  padding:44px 38px;
-  box-shadow:0 4px 24px rgba(0,0,0,.07);
-  border:1.5px solid var(--border,#E8DDD0);
-  position:relative;
-  overflow:hidden;
-  transition:transform .28s, box-shadow .28s;
-}
-.about-mv-card::before {
-  content:'';
-  position:absolute;
-  top:0; left:0; right:0;
-  height:4px;
-}
-.about-mv-card.mission::before { background:linear-gradient(90deg,#2E6B3E,#D4A017); }
-.about-mv-card.vision::before  { background:linear-gradient(90deg,#D4A017,#2E6B3E); }
-.about-mv-card:hover { transform:translateY(-6px); box-shadow:0 16px 48px rgba(0,0,0,.12); }
-.mv-icon { font-size:2.4rem; margin-bottom:18px; }
-.mv-title {
-  font-family:var(--font-serif,'Playfair Display',Georgia,serif);
-  font-size:1.5rem;
-  color:var(--primary,#8B4513);
-  margin-bottom:14px;
-  font-weight:700;
-}
-.mv-divider {
-  width:40px; height:3px;
-  background:var(--secondary,#D4A017);
-  border-radius:2px;
-  margin-bottom:18px;
-}
-.mv-text { color:#555; line-height:1.8; font-size:.95rem; margin-bottom:20px; }
-.mv-list { list-style:none; padding:0; }
-.mv-list li {
-  padding:8px 0;
-  border-bottom:1px solid var(--border,#E8DDD0);
-  font-size:.88rem;
-  color:#666;
-  padding-left:22px;
-  position:relative;
-}
-.mv-list li:last-child { border-bottom:none; }
-.mv-list li::before {
-  content:'✓';
-  position:absolute;
-  left:0;
-  color:var(--secondary,#D4A017);
-  font-weight:700;
+.ab-btn-primary:hover {
+  background: var(--ab-maroon-dk); transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(74,14,26,.4);
 }
 
-/* Values */
-.about-values-section { padding:80px 24px; background:#fff; }
-.about-values-grid {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:22px;
-  max-width:1100px;
-  margin:0 auto;
+/* ── MISSION & VISION ─────────────────────────── */
+.ab-mv { padding: 88px 0; background: var(--ab-cream); }
+.ab-mv-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 28px; max-width: 960px; margin: 0 auto;
 }
-.about-value-card {
-  background:var(--light,#FFF8F0);
-  border:1.5px solid var(--border,#E8DDD0);
-  border-radius:16px;
-  padding:32px 26px;
-  text-align:center;
-  transition:transform .28s, box-shadow .28s, background .28s, border-color .28s;
+.ab-mv-card {
+  background: #fff; border-radius: 22px;
+  padding: 48px 40px; position: relative; overflow: hidden;
+  border: 1.5px solid var(--ab-border);
+  box-shadow: 0 4px 24px rgba(0,0,0,.06);
+  transition: transform .3s, box-shadow .3s;
 }
-.about-value-card:hover {
-  transform:translateY(-8px);
-  box-shadow:0 16px 40px rgba(0,0,0,.1);
-  background:#fff;
-  border-color:var(--secondary,#D4A017);
+.ab-mv-card:hover { transform: translateY(-7px); box-shadow: 0 20px 56px rgba(0,0,0,.11); }
+.ab-mv-accent {
+  position: absolute; top: 0; left: 0; right: 0; height: 4px; border-radius: 22px 22px 0 0;
 }
-.value-icon-wrap {
-  width:64px; height:64px;
-  background:#fff;
-  border-radius:50%;
-  display:flex; align-items:center; justify-content:center;
-  margin:0 auto 18px;
-  font-size:1.8rem;
-  box-shadow:0 4px 16px rgba(0,0,0,.08);
-  border:1.5px solid var(--border,#E8DDD0);
-  transition:box-shadow .28s;
+.ab-mv-accent--mission { background: linear-gradient(90deg, var(--ab-maroon), var(--ab-gold)); }
+.ab-mv-accent--vision  { background: linear-gradient(90deg, var(--ab-gold), var(--ab-maroon)); }
+.ab-mv-icon {
+  width: 60px; height: 60px; border-radius: 16px;
+  background: rgba(201,160,85,.12);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ab-maroon); margin-bottom: 20px;
 }
-.about-value-card:hover .value-icon-wrap { box-shadow:0 6px 20px rgba(46,107,62,.2); border-color:var(--secondary,#D4A017); }
-.value-title {
-  font-family:var(--font-serif,'Playfair Display',Georgia,serif);
-  font-size:1.1rem;
-  color:var(--primary,#8B4513);
-  margin-bottom:10px;
-  font-weight:700;
+.ab-mv-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.5rem; color: var(--ab-maroon);
+  margin-bottom: 12px; font-weight: 700;
 }
-.value-desc { font-size:.84rem; color:var(--muted,#7A7A7A); line-height:1.65; }
-
-/* Process */
-.about-process-section {
-  padding:80px 24px;
-  background:linear-gradient(135deg,#2E6B3E 0%,#1E5030 100%);
-  position:relative;
-  overflow:hidden;
+.ab-mv-divider {
+  width: 40px; height: 3px; border-radius: 2px;
+  background: var(--ab-gold); margin-bottom: 18px;
 }
-.about-process-section::before {
-  content:'';
-  position:absolute;
-  width:500px; height:500px;
-  border-radius:50%;
-  background:rgba(255,255,255,.04);
-  top:-200px; right:-100px;
+.ab-mv-card p { color: #5A4A40; line-height: 1.8; font-size: .95rem; margin-bottom: 20px; }
+.ab-mv-list { list-style: none; padding: 0; }
+.ab-mv-list li {
+  padding: 9px 0 9px 24px; position: relative;
+  border-bottom: 1px solid var(--ab-border);
+  font-size: .87rem; color: #666;
 }
-.about-process-grid {
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:0;
-  max-width:1100px;
-  margin:0 auto;
-  flex-wrap:wrap;
-}
-.process-step {
-  flex:1;
-  min-width:180px;
-  max-width:220px;
-  background:rgba(255,255,255,.08);
-  border:1px solid rgba(255,255,255,.14);
-  border-radius:16px;
-  padding:32px 22px;
-  text-align:center;
-  color:#fff;
-  backdrop-filter:blur(8px);
-  transition:background .28s, transform .28s;
-}
-.process-step:hover { background:rgba(255,255,255,.13); transform:translateY(-4px); }
-.process-num {
-  font-size:.7rem;
-  font-weight:700;
-  letter-spacing:3px;
-  color:var(--secondary,#D4A017);
-  margin-bottom:10px;
-}
-.process-icon { font-size:2rem; margin-bottom:12px; display:block; }
-.process-step h4 {
-  font-family:var(--font-serif,'Playfair Display',Georgia,serif);
-  font-size:1.05rem;
-  margin-bottom:10px;
-  color:#fff;
-}
-.process-step p { font-size:.8rem; color:rgba(255,255,255,.72); line-height:1.6; }
-.process-arrow {
-  font-size:1.5rem;
-  color:rgba(212,160,23,.6);
-  padding:0 6px;
-  flex-shrink:0;
-  align-self:center;
+.ab-mv-list li:last-child { border-bottom: none; }
+.ab-mv-list li::before {
+  content: '✓'; position: absolute; left: 0;
+  color: var(--ab-gold); font-weight: 700;
 }
 
-/* Certifications */
-.about-certs-section { padding:80px 24px; background:var(--light,#FFF8F0); }
-.about-certs-grid {
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:24px;
-  max-width:900px;
-  margin:0 auto;
+/* ── VALUES ───────────────────────────────────── */
+.ab-values { padding: 88px 0; background: #fff; }
+.ab-values-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 24px; max-width: 1100px; margin: 0 auto;
 }
-.cert-card {
-  background:#fff;
-  border-radius:18px;
-  padding:38px 28px;
-  text-align:center;
-  box-shadow:0 4px 20px rgba(0,0,0,.07);
-  border:1.5px solid var(--border,#E8DDD0);
-  position:relative;
-  transition:transform .28s, box-shadow .28s;
+.ab-val-card {
+  background: var(--ab-cream); border: 1.5px solid var(--ab-border);
+  border-radius: 18px; padding: 36px 28px; text-align: center;
+  position: relative; overflow: hidden;
+  transition: transform .28s, box-shadow .28s, background .28s;
+  cursor: default;
 }
-.cert-card:hover { transform:translateY(-6px); box-shadow:0 16px 40px rgba(0,0,0,.11); }
-.cert-card.featured {
-  background:linear-gradient(160deg,var(--primary,#2E6B3E),#1E5030);
-  color:#fff;
-  border-color:transparent;
-  transform:translateY(-8px);
-  box-shadow:0 16px 48px rgba(46,107,62,.35);
+.ab-val-card::after {
+  content: ''; position: absolute;
+  bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 0; height: 3px;
+  background: var(--ab-maroon); border-radius: 2px;
+  transition: width .35s;
 }
-.cert-card.featured:hover { transform:translateY(-14px); }
-.cert-badge {
-  position:absolute;
-  top:-12px; left:50%; transform:translateX(-50%);
-  background:var(--secondary,#D4A017);
-  color:#fff;
-  padding:4px 16px;
-  border-radius:20px;
-  font-size:.7rem;
-  font-weight:700;
-  letter-spacing:1px;
-  text-transform:uppercase;
+.ab-val-card:hover { transform: translateY(-8px); box-shadow: 0 18px 48px rgba(0,0,0,.1); background: #fff; }
+.ab-val-card:hover::after { width: 60%; }
+.ab-val-icon {
+  width: 68px; height: 68px; border-radius: 18px;
+  background: linear-gradient(135deg, rgba(201,160,85,.15), rgba(107,39,55,.08));
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 18px; color: var(--ab-maroon);
+  border: 1.5px solid rgba(201,160,85,.25);
+  transition: all .28s;
 }
-.cert-icon { font-size:2.4rem; margin-bottom:14px; display:block; }
-.cert-title {
-  font-family:var(--font-serif,'Playfair Display',Georgia,serif);
-  font-size:1.15rem;
-  font-weight:700;
-  color:var(--primary,#8B4513);
-  margin-bottom:4px;
+.ab-val-card:hover .ab-val-icon {
+  background: linear-gradient(135deg, rgba(201,160,85,.25), rgba(107,39,55,.14));
+  transform: scale(1.06);
 }
-.cert-card.featured .cert-title { color:#fff; }
-.cert-number {
-  font-size:.8rem;
-  font-weight:700;
-  color:var(--secondary,#D4A017);
-  margin-bottom:10px;
-  letter-spacing:.5px;
+.ab-val-card h4 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.1rem; color: var(--ab-maroon);
+  margin-bottom: 10px; font-weight: 700;
 }
-.cert-card.featured .cert-number { color:#F5C842; }
-.cert-desc { font-size:.82rem; color:var(--muted,#7A7A7A); line-height:1.6; }
-.cert-card.featured .cert-desc { color:rgba(255,255,255,.75); }
+.ab-val-card p { font-size: .84rem; color: var(--ab-muted); line-height: 1.7; }
 
-/* ── RESPONSIVE ───────────────────────────────────── */
-@media (max-width:900px) {
-  .about-story-grid { grid-template-columns:1fr; gap:40px; }
-  .about-story-img { aspect-ratio:16/9; }
-  .about-story-badge { bottom:-14px; right:14px; }
-  .about-mv-grid { grid-template-columns:1fr; }
-  .about-values-grid { grid-template-columns:repeat(2,1fr); }
-  .about-certs-grid { grid-template-columns:1fr; max-width:400px; }
-  .cert-card.featured { transform:none; }
-  .about-stats-grid { grid-template-columns:repeat(2,1fr); }
-  .about-stat:nth-child(2) { border-right:none; }
-  .about-stat:nth-child(3) { border-top:1px solid var(--border,#E8DDD0); }
-  .process-arrow { display:none; }
-  .about-process-grid { gap:14px; }
-  .process-step { max-width:100%; min-width:140px; }
+/* ── PROCESS ──────────────────────────────────── */
+.ab-process {
+  padding: 88px 0; position: relative; overflow: hidden;
+  background: linear-gradient(135deg, var(--ab-maroon-dk) 0%, var(--ab-maroon) 100%);
 }
-@media (max-width:600px) {
-  .about-hero { min-height:85vh; }
-  .about-hero-title { font-size:clamp(2rem,8vw,3.2rem); }
-  .about-values-grid { grid-template-columns:1fr; }
-  .about-stats-grid { grid-template-columns:repeat(2,1fr); }
-  .about-mv-card { padding:30px 22px; }
-  .about-story-section { padding:56px 20px; }
-  .about-process-section, .about-values-section,
-  .about-certs-section, .about-mv-section { padding:56px 20px; }
+.ab-process-glow {
+  position: absolute; width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,160,85,.12) 0%, transparent 70%);
+  top: -200px; right: -150px; pointer-events: none;
+}
+.ab-process-grid {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0; flex-wrap: wrap; max-width: 1100px; margin: 0 auto;
+}
+.ab-proc-step {
+  flex: 1; min-width: 190px; max-width: 230px;
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 18px; padding: 36px 22px; text-align: center; color: #fff;
+  backdrop-filter: blur(10px);
+  transition: background .28s, transform .28s;
+}
+.ab-proc-step:hover { background: rgba(255,255,255,.13); transform: translateY(-5px); }
+.ab-proc-num {
+  font-size: .68rem; font-weight: 700; letter-spacing: 3px;
+  color: var(--ab-gold); margin-bottom: 12px;
+}
+.ab-proc-icon {
+  width: 58px; height: 58px; border-radius: 14px;
+  background: rgba(201,160,85,.15);
+  border: 1px solid rgba(201,160,85,.25);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 16px; color: var(--ab-gold-lt);
+}
+.ab-proc-step h4 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.05rem; color: #fff; margin-bottom: 10px;
+}
+.ab-proc-step p { font-size: .8rem; color: rgba(255,255,255,.7); line-height: 1.65; }
+.ab-proc-arrow {
+  color: rgba(201,160,85,.5); padding: 0 8px; flex-shrink: 0;
+}
+
+/* ── CERTIFICATIONS ───────────────────────────── */
+.ab-certs { padding: 88px 0; background: var(--ab-cream); }
+.ab-certs-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 24px; max-width: 940px; margin: 0 auto;
+  align-items: start;
+}
+.ab-cert-card {
+  background: #fff; border-radius: 20px; padding: 42px 30px;
+  text-align: center; position: relative;
+  border: 1.5px solid var(--ab-border);
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+  transition: transform .28s, box-shadow .28s;
+}
+.ab-cert-card:hover { transform: translateY(-6px); box-shadow: 0 18px 48px rgba(0,0,0,.1); }
+.ab-cert-featured {
+  background: linear-gradient(160deg, var(--ab-maroon) 0%, var(--ab-maroon-dk) 100%);
+  border-color: transparent;
+  transform: translateY(-10px);
+  box-shadow: 0 20px 56px rgba(74,14,26,.35);
+}
+.ab-cert-featured:hover { transform: translateY(-16px); }
+.ab-cert-badge {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  background: var(--ab-gold); color: var(--ab-maroon-dk);
+  padding: 5px 18px; border-radius: 20px;
+  font-size: .68rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
+}
+.ab-cert-icon {
+  width: 68px; height: 68px; border-radius: 18px;
+  background: rgba(201,160,85,.1);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 16px; color: var(--ab-maroon);
+}
+.ab-cert-featured .ab-cert-icon {
+  background: rgba(255,255,255,.15); color: var(--ab-gold-lt);
+}
+.ab-cert-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.15rem; font-weight: 700; color: var(--ab-maroon); margin-bottom: 6px;
+}
+.ab-cert-featured .ab-cert-title { color: #fff; }
+.ab-cert-num {
+  font-size: .8rem; font-weight: 700; color: var(--ab-gold); margin-bottom: 12px; letter-spacing: .5px;
+}
+.ab-cert-featured .ab-cert-num { color: var(--ab-gold-lt); }
+.ab-cert-desc { font-size: .82rem; color: var(--ab-muted); line-height: 1.6; }
+.ab-cert-featured .ab-cert-desc { color: rgba(255,255,255,.72); }
+
+/* ── CTA ──────────────────────────────────────── */
+.ab-cta {
+  padding: 96px 24px;
+  background: linear-gradient(135deg, var(--ab-maroon-dk) 0%, var(--ab-maroon) 60%, #8B3045 100%);
+  text-align: center; position: relative; overflow: hidden;
+}
+.ab-cta::before {
+  content: ''; position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.ab-cta-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+.ab-cta-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  color: #fff; margin: 12px 0 20px; font-weight: 700;
+  text-shadow: 0 2px 20px rgba(0,0,0,.25);
+}
+.ab-cta-desc { color: rgba(255,255,255,.8); font-size: 1rem; line-height: 1.75; margin-bottom: 40px; }
+.ab-cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.ab-btn-white {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: #fff; color: var(--ab-maroon);
+  padding: 15px 34px; border-radius: 30px;
+  font-weight: 700; font-size: .95rem;
+  transition: all .28s; box-shadow: 0 8px 28px rgba(0,0,0,.2);
+  cursor: pointer;
+}
+.ab-btn-white:hover { background: var(--ab-gold-lt); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(0,0,0,.28); }
+.ab-btn-outline {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 2px solid #C9A055 !important; color: #C9A055 !important;
+  background: rgba(201,160,85,.12);
+  padding: 14px 32px; border-radius: 30px;
+  font-weight: 700; font-size: .95rem;
+  transition: all .28s; cursor: pointer;
+}
+.ab-btn-outline:hover { background: rgba(201,160,85,.22) !important; border-color: #F5C842 !important; color: #F5C842 !important; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.2); }
+
+/* ── RESPONSIVE ────────────────────────────────── */
+@media (max-width: 960px) {
+  .ab-story-grid { grid-template-columns: 1fr; gap: 48px; }
+  .ab-story-img { aspect-ratio: 16/9; }
+  .ab-story-float { bottom: -16px; right: 16px; }
+  .ab-mv-grid { grid-template-columns: 1fr; }
+  .ab-values-grid { grid-template-columns: repeat(2,1fr); }
+  .ab-certs-grid { grid-template-columns: 1fr; max-width: 420px; }
+  .ab-cert-featured { transform: none; }
+  .ab-cert-featured:hover { transform: translateY(-6px); }
+  .ab-stats-grid { grid-template-columns: repeat(2,1fr); }
+  .ab-stat:nth-child(2) { border-right: none; }
+  .ab-stat:nth-child(3) { border-top: 1px solid var(--ab-border); }
+  .ab-proc-arrow { display: none; }
+  .ab-process-grid { gap: 16px; }
+  .ab-proc-step { max-width: 100%; min-width: 150px; }
+  .ab-story { padding: 72px 0; }
+}
+@media (max-width: 640px) {
+  .ab-hero { min-height: 88vh; }
+  .ab-hero-pills { gap: 7px; }
+  .ab-pill { font-size: .65rem; padding: 6px 12px; }
+  .ab-values-grid { grid-template-columns: 1fr; }
+  .ab-mv-card { padding: 32px 24px; }
+  .ab-story-float { position: relative; bottom: auto; right: auto; margin-top: 16px; display: inline-block; }
+  .ab-story-text { padding-left: 0; }
+  .ab-mv-section, .ab-values, .ab-process, .ab-certs { padding: 60px 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ab-hero-bg, .ab-hero-scroll { animation: none !important; transition: none !important; }
 }
 </style>
+
+<script>
+(function(){
+  /* Smooth scroll for hero scroll button */
+  var scrollBtn = document.querySelector('.ab-hero-scroll');
+  if (scrollBtn) {
+    scrollBtn.addEventListener('click', function(e){
+      e.preventDefault();
+      var target = document.getElementById('ab-story');
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
+  /* Animated counters */
+  var stats = document.querySelectorAll('.ab-stat');
+  if (!stats.length || !('IntersectionObserver' in window)) return;
+
+  var animated = false;
+  var observer = new IntersectionObserver(function(entries){
+    if (animated) return;
+    var visible = entries.some(function(e){ return e.isIntersecting; });
+    if (!visible) return;
+    animated = true;
+    observer.disconnect();
+
+    stats.forEach(function(stat){
+      var target = parseInt(stat.getAttribute('data-target'), 10);
+      var suffix = stat.getAttribute('data-suffix') || '';
+      var el = stat.querySelector('.ab-stat-num');
+      if (!el || isNaN(target)) return;
+      var duration = 1400;
+      var start = performance.now();
+      function tick(now){
+        var elapsed = now - start;
+        var progress = Math.min(elapsed / duration, 1);
+        var ease = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(ease * target) + suffix;
+        if (progress < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+  }, { threshold: 0.4 });
+
+  observer.observe(stats[0]);
+})();
+</script>
 
 <?php get_footer(); ?>

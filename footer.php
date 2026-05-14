@@ -66,8 +66,9 @@
     <div class="footer-bottom">
       <p>© <?php echo date('Y'); ?> Hombisilu by SGR Manufacturing &amp; Trading. All Rights Reserved. 🇮🇳</p>
       <div class="footer-links">
+        <a href="<?php echo home_url('/terms-and-conditions'); ?>">Terms &amp; Conditions</a>
         <a href="<?php echo home_url('/privacy-policy'); ?>">Privacy Policy</a>
-        <a href="<?php echo home_url('/refund_returns'); ?>">Refund Policy</a>
+        <a href="<?php echo home_url('/refund-policy'); ?>">Refund Policy</a>
         <a href="<?php echo home_url('/faqs'); ?>">FAQs</a>
       </div>
       <p style="margin-top:10px;font-size:.75rem;color:rgba(255,255,255,.4);">Website designed by <a href="https://printigly.in" target="_blank" rel="noopener" style="color:rgba(255,255,255,.6);text-decoration:underline;">Printigly</a></p>

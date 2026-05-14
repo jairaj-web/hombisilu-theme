@@ -12,7 +12,7 @@
 
 <!-- Announcement Bar -->
 <div class="announcement-bar">
-  🚚 Free Shipping on Orders Above ₹499 &nbsp;|&nbsp; 100% Natural &nbsp;|&nbsp; FSSAI Certified
+  🌿 100% Natural &nbsp;|&nbsp; FSSAI Certified &nbsp;|&nbsp; Pan-India Delivery
 </div>
 
 <!-- Site Header -->
@@ -22,8 +22,7 @@
     <!-- Brand -->
     <div class="site-brand">
       <a href="<?php echo home_url('/'); ?>">
-        <span class="brand-name">Hombisilu</span>
-        <span class="brand-tagline">Golden Sunshine — Taste the Tradition</span>
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" alt="Hombisilu" class="site-logo" width="160" height="80" loading="eager">
       </a>
     </div>
 
