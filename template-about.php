@@ -606,12 +606,11 @@ $img = get_stylesheet_directory_uri() . '/assets/images/';
 
 .ab-val-card {
   width: 100%; max-width: 260px;
-  aspect-ratio: 1 / 1;
-  border-radius: 50%;
+  border-radius: 22px;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   text-align: center;
-  padding: 32px 28px;
+  padding: 36px 28px 32px;
   position: relative; overflow: hidden;
   cursor: default;
   /* Gradient border trick */
@@ -625,11 +624,11 @@ $img = get_stylesheet_directory_uri() . '/assets/images/';
 /* Gradient fill overlay on hover */
 .ab-val-card::before {
   content: '';
-  position: absolute; inset: 0; border-radius: 50%;
+  position: absolute; inset: 0; border-radius: 19px;
   background: linear-gradient(160deg, #4A0E1A 0%, #6B2737 55%, #C9A055 100%);
   opacity: 0; transition: opacity .38s;
 }
-.ab-val-card:hover { transform: scale(1.08); box-shadow: 0 24px 64px rgba(74,14,26,.24); }
+.ab-val-card:hover { transform: translateY(-10px); box-shadow: 0 24px 64px rgba(74,14,26,.24); }
 .ab-val-card:hover::before { opacity: 1; }
 
 /* Number badge */
@@ -645,7 +644,7 @@ $img = get_stylesheet_directory_uri() . '/assets/images/';
 
 /* Icon circle */
 .ab-val-icon {
-  width: 58px; height: 58px; border-radius: 50%;
+  width: 58px; height: 58px; border-radius: 14px;
   background: rgba(201,160,85,.12);
   border: 1.5px solid rgba(201,160,85,.32);
   display: flex; align-items: center; justify-content: center;
@@ -851,7 +850,7 @@ $img = get_stylesheet_directory_uri() . '/assets/images/';
   .ab-mv-section, .ab-values, .ab-process, .ab-certs { padding: 60px 0; }
   .ab-val-grid { grid-template-columns: repeat(2, 1fr); gap: 20px 16px; max-width: 480px; }
   .ab-val-card { max-width: 200px; padding: 24px 16px; }
-  .ab-val-card:hover { transform: scale(1.04); }
+  .ab-val-card:hover { transform: translateY(-5px); }
 }
 @media (prefers-reduced-motion: reduce) {
   .ab-hero-bg, .ab-hero-scroll { animation: none !important; transition: none !important; }
