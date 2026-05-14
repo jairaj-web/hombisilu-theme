@@ -174,78 +174,90 @@ $img = get_stylesheet_directory_uri() . '/assets/images/';
     <h2 class="ab-h2" style="text-align:center;margin-bottom:8px;">Our Core Values</h2>
     <p class="ab-section-sub">The principles that guide every product we make</p>
 
-    <div class="ab-val-list">
+    <div class="ab-val-grid">
 
-      <div class="ab-val-row">
-        <div class="ab-val-num">01</div>
-        <div class="ab-val-icon-wrap">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <div class="ab-val-card">
+        <div class="ab-val-card-header">
+          <span class="ab-val-num">01</span>
+          <div class="ab-val-icon-wrap">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
         </div>
-        <div class="ab-val-body">
+        <div class="ab-val-card-body">
+          <span class="ab-val-tag">Heritage</span>
           <h4>Authenticity</h4>
           <p>Every recipe honours its origins, made the way it has always been made — no shortcuts, no substitutes.</p>
         </div>
-        <div class="ab-val-tag">Heritage</div>
       </div>
 
-      <div class="ab-val-row">
-        <div class="ab-val-num">02</div>
-        <div class="ab-val-icon-wrap">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      <div class="ab-val-card">
+        <div class="ab-val-card-header">
+          <span class="ab-val-num">02</span>
+          <div class="ab-val-icon-wrap">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
         </div>
-        <div class="ab-val-body">
+        <div class="ab-val-card-body">
+          <span class="ab-val-tag">Natural</span>
           <h4>Purity</h4>
           <p>No artificial additives, ever. What you see on the label is exactly what goes into the jar.</p>
         </div>
-        <div class="ab-val-tag">Natural</div>
       </div>
 
-      <div class="ab-val-row">
-        <div class="ab-val-num">03</div>
-        <div class="ab-val-icon-wrap">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+      <div class="ab-val-card">
+        <div class="ab-val-card-header">
+          <span class="ab-val-num">03</span>
+          <div class="ab-val-icon-wrap">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
         </div>
-        <div class="ab-val-body">
+        <div class="ab-val-card-body">
+          <span class="ab-val-tag">Honest</span>
           <h4>Integrity</h4>
           <p>Transparent ingredients, honest sourcing, and fair relationships with our farming community.</p>
         </div>
-        <div class="ab-val-tag">Honest</div>
       </div>
 
-      <div class="ab-val-row">
-        <div class="ab-val-num">04</div>
-        <div class="ab-val-icon-wrap">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+      <div class="ab-val-card">
+        <div class="ab-val-card-header">
+          <span class="ab-val-num">04</span>
+          <div class="ab-val-icon-wrap">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          </div>
         </div>
-        <div class="ab-val-body">
+        <div class="ab-val-card-body">
+          <span class="ab-val-tag">Wellness</span>
           <h4>Nourishment</h4>
           <p>Every product is designed to support your health and wellbeing, not just your palate.</p>
         </div>
-        <div class="ab-val-tag">Wellness</div>
       </div>
 
-      <div class="ab-val-row">
-        <div class="ab-val-num">05</div>
-        <div class="ab-val-icon-wrap">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+      <div class="ab-val-card">
+        <div class="ab-val-card-header">
+          <span class="ab-val-num">05</span>
+          <div class="ab-val-icon-wrap">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+          </div>
         </div>
-        <div class="ab-val-body">
+        <div class="ab-val-card-body">
+          <span class="ab-val-tag">Legacy</span>
           <h4>Heritage</h4>
           <p>We are guardians of South India's culinary legacy, one recipe at a time.</p>
         </div>
-        <div class="ab-val-tag">Legacy</div>
       </div>
 
-      <div class="ab-val-row">
-        <div class="ab-val-num">06</div>
-        <div class="ab-val-icon-wrap">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <div class="ab-val-card">
+        <div class="ab-val-card-header">
+          <span class="ab-val-num">06</span>
+          <div class="ab-val-icon-wrap">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
         </div>
-        <div class="ab-val-body">
+        <div class="ab-val-card-body">
+          <span class="ab-val-tag">Local</span>
           <h4>Community</h4>
           <p>Supporting local farmers, artisans, and food makers who keep these traditions alive.</p>
         </div>
-        <div class="ab-val-tag">Local</div>
       </div>
 
     </div>
@@ -605,76 +617,94 @@ $img = get_stylesheet_directory_uri() . '/assets/images/';
 }
 
 /* ── VALUES ───────────────────────────────────── */
-.ab-values { padding: 88px 0; background: #fff; }
+.ab-values { padding: 88px 0; background: var(--ab-cream); }
 
-.ab-val-list {
-  max-width: 860px; margin: 0 auto;
-  display: flex; flex-direction: column; gap: 0;
+.ab-val-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  max-width: 1020px;
+  margin: 0 auto;
 }
-.ab-val-row {
-  display: flex; align-items: center; gap: 24px;
-  padding: 28px 32px;
-  border-radius: 16px;
-  position: relative;
-  transition: background .25s, box-shadow .25s, transform .25s;
+.ab-val-card {
+  border-radius: 22px;
+  overflow: hidden;
+  background: #fff;
+  border: 1.5px solid rgba(201,160,85,.22);
+  box-shadow: 0 4px 22px rgba(74,14,26,.07);
+  transition: transform .32s, box-shadow .32s, border-color .32s;
   cursor: default;
 }
-.ab-val-row:not(:last-child) {
-  border-bottom: 1px solid var(--ab-border);
+.ab-val-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 24px 64px rgba(74,14,26,.16);
+  border-color: rgba(201,160,85,.55);
 }
-.ab-val-row:hover {
-  background: var(--ab-cream);
-  box-shadow: 0 6px 28px rgba(74,14,26,.07);
-  transform: translateX(6px);
+.ab-val-card-header {
+  background: linear-gradient(160deg, #4A0E1A 0%, #6B2737 55%, #C9A055 100%);
+  padding: 28px 26px 24px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+.ab-val-card-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='20' cy='20' r='1.5'/%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
 }
 .ab-val-num {
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 2.4rem; font-weight: 700; line-height: 1;
-  color: transparent;
-  -webkit-text-stroke: 2px var(--ab-maroon);
-  min-width: 56px; text-align: center; flex-shrink: 0;
-  opacity: .35;
-  transition: opacity .25s, -webkit-text-stroke-color .25s;
+  font-size: 4.2rem; font-weight: 700; line-height: 1;
+  color: rgba(255,255,255,.13);
+  position: relative; z-index: 1;
+  transition: color .3s;
+  user-select: none;
 }
-.ab-val-row:hover .ab-val-num {
-  opacity: 1;
-  -webkit-text-stroke-color: var(--ab-gold);
-}
+.ab-val-card:hover .ab-val-num { color: rgba(255,255,255,.22); }
 .ab-val-icon-wrap {
-  width: 56px; height: 56px; border-radius: 14px; flex-shrink: 0;
-  background: linear-gradient(135deg, rgba(201,160,85,.12), rgba(107,39,55,.07));
-  border: 1.5px solid rgba(201,160,85,.22);
+  width: 52px; height: 52px; border-radius: 14px;
+  background: rgba(255,255,255,.15);
+  border: 1px solid rgba(255,255,255,.25);
   display: flex; align-items: center; justify-content: center;
-  color: var(--ab-maroon);
-  transition: background .25s, border-color .25s, transform .25s;
+  color: #F5C842;
+  position: relative; z-index: 1;
+  transition: background .3s, transform .3s;
+  flex-shrink: 0;
 }
-.ab-val-row:hover .ab-val-icon-wrap {
-  background: linear-gradient(135deg, rgba(201,160,85,.22), rgba(107,39,55,.14));
-  border-color: rgba(201,160,85,.5);
-  transform: scale(1.08);
+.ab-val-card:hover .ab-val-icon-wrap {
+  background: rgba(255,255,255,.22);
+  transform: scale(1.08) rotate(-4deg);
 }
-.ab-val-body { flex: 1; min-width: 0; }
-.ab-val-body h4 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1.08rem; color: var(--ab-maroon);
-  margin-bottom: 5px; font-weight: 700;
-}
-.ab-val-body p {
-  font-size: .86rem; color: var(--ab-muted); line-height: 1.7; margin: 0;
+.ab-val-card-body {
+  padding: 22px 26px 28px;
 }
 .ab-val-tag {
-  flex-shrink: 0;
-  padding: 5px 14px; border-radius: 20px;
-  font-size: .65rem; font-weight: 700; letter-spacing: 1.5px;
+  display: inline-block;
+  padding: 4px 12px; border-radius: 20px;
+  font-size: .63rem; font-weight: 700; letter-spacing: 1.8px;
   text-transform: uppercase;
-  background: rgba(201,160,85,.12);
-  border: 1px solid rgba(201,160,85,.3);
+  background: rgba(201,160,85,.1);
+  border: 1px solid rgba(201,160,85,.28);
   color: var(--ab-maroon);
-  transition: background .25s, border-color .25s, color .25s;
+  margin-bottom: 10px;
+  transition: background .25s, color .25s, border-color .25s;
 }
-.ab-val-row:hover .ab-val-tag {
-  background: var(--ab-maroon); color: #fff;
+.ab-val-card:hover .ab-val-tag {
+  background: var(--ab-maroon);
+  color: #fff;
   border-color: var(--ab-maroon);
+}
+.ab-val-card-body h4 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.15rem; color: var(--ab-maroon);
+  font-weight: 700; margin-bottom: 10px; line-height: 1.2;
+}
+.ab-val-card-body p {
+  font-size: .85rem; color: var(--ab-muted);
+  line-height: 1.75; margin: 0;
 }
 
 /* ── PROCESS ──────────────────────────────────── */
@@ -813,6 +843,7 @@ $img = get_stylesheet_directory_uri() . '/assets/images/';
   .ab-story-img { aspect-ratio: 16/9; }
   .ab-story-float { bottom: -16px; right: 16px; }
   .ab-mv-grid { grid-template-columns: 1fr; }
+  .ab-val-grid { grid-template-columns: repeat(2, 1fr); }
   .ab-certs-grid { grid-template-columns: 1fr; max-width: 420px; }
   .ab-cert-featured { transform: none; }
   .ab-cert-featured:hover { transform: translateY(-6px); }
@@ -823,8 +854,6 @@ $img = get_stylesheet_directory_uri() . '/assets/images/';
   .ab-process-grid { gap: 16px; }
   .ab-proc-step { max-width: 100%; min-width: 150px; }
   .ab-story { padding: 72px 0; }
-  .ab-val-row { padding: 22px 20px; gap: 16px; }
-  .ab-val-num { font-size: 2rem; min-width: 44px; }
 }
 @media (max-width: 640px) {
   .ab-hero { min-height: 88vh; }
@@ -834,10 +863,8 @@ $img = get_stylesheet_directory_uri() . '/assets/images/';
   .ab-story-float { position: relative; bottom: auto; right: auto; margin-top: 16px; display: inline-block; }
   .ab-story-text { padding-left: 0; }
   .ab-mv-section, .ab-values, .ab-process, .ab-certs { padding: 60px 0; }
-  .ab-val-row { flex-wrap: wrap; padding: 20px 16px; gap: 12px; }
-  .ab-val-num { min-width: auto; font-size: 1.7rem; }
-  .ab-val-tag { width: 100%; text-align: center; margin-top: 4px; }
-  .ab-val-row:hover { transform: none; }
+  .ab-val-grid { grid-template-columns: 1fr; max-width: 400px; }
+  .ab-val-card:hover { transform: translateY(-5px); }
 }
 @media (prefers-reduced-motion: reduce) {
   .ab-hero-bg, .ab-hero-scroll { animation: none !important; transition: none !important; }
