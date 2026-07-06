@@ -96,6 +96,16 @@ get_header();
         ?>
         <h1 class="wc-title"><?php the_title(); ?></h1>
 
+        <?php $avg_rating = $product->get_average_rating(); $rating_count = $product->get_rating_count(); ?>
+        <div class="wc-rating-row">
+          <span class="wc-rating-stars" aria-label="Rated <?php echo esc_attr($avg_rating); ?> out of 5">
+            <?php for ($s = 1; $s <= 5; $s++) : ?>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="<?php echo $s <= round($avg_rating) ? '#C9A055' : 'none'; ?>" stroke="#C9A055" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <?php endfor; ?>
+          </span>
+          <a href="#wc-reviews" class="wc-rating-count"><?php echo $rating_count; ?> review<?php echo $rating_count === 1 ? '' : 's'; ?></a>
+        </div>
+
         <div class="wc-price"><?php echo $product->get_price_html(); ?></div>
 
         <?php if ($product->get_short_description()) : ?>
@@ -172,6 +182,22 @@ get_header();
     </div>
   </section>
   <?php endif; ?>
+
+  <!-- Reviews -->
+  <section class="wc-desc-section" id="wc-reviews">
+    <div class="wc-desc-inner">
+      <h2 class="wc-desc-heading">Customer Reviews</h2>
+      <div class="wc-desc-content">
+        <?php
+        if (comments_open() || get_comments_number()) {
+          comments_template();
+        } else {
+          echo '<p style="color:#888;">No reviews yet.</p>';
+        }
+        ?>
+      </div>
+    </div>
+  </section>
 
   <!-- Related Products -->
   <?php

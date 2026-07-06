@@ -5,14 +5,22 @@ get_header();
 $paged    = get_query_var('page') ? (int) get_query_var('page') : (get_query_var('paged') ? (int) get_query_var('paged') : 1);
 $cat_slug = get_query_var('product_cat');
 
-$args = [
+$sort = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
+$orderby_map = [
+  'date'        => ['orderby' => 'date',  'order' => 'DESC'],
+  'price'       => ['orderby' => 'meta_value_num', 'order' => 'ASC', 'meta_key' => '_price'],
+  'price-desc'  => ['orderby' => 'meta_value_num', 'order' => 'DESC', 'meta_key' => '_price'],
+  'rating'      => ['orderby' => 'meta_value_num', 'order' => 'DESC', 'meta_key' => '_wc_average_rating'],
+  'title'       => ['orderby' => 'title', 'order' => 'ASC'],
+];
+if (!isset($orderby_map[$sort])) $sort = 'date';
+
+$args = array_merge([
   'post_type'      => 'product',
   'post_status'    => 'publish',
   'posts_per_page' => 12,
   'paged'          => $paged,
-  'orderby'        => 'date',
-  'order'          => 'DESC',
-];
+], $orderby_map[$sort]);
 if ($cat_slug) {
   $args['tax_query'] = [[
     'taxonomy' => 'product_cat',
@@ -28,6 +36,15 @@ $shop_query = new WP_Query($args);
   <!-- Shop Hero -->
   <div class="shop-hero">
     <div class="container">
+      <nav class="shop-breadcrumb" aria-label="Breadcrumb">
+        <a href="<?php echo esc_url(home_url('/')); ?>">Home</a>
+        <span>/</span>
+        <a href="<?php echo esc_url(get_permalink(wc_get_page_id('shop'))); ?>">Shop</a>
+        <?php if ($cat_slug) : ?>
+          <span>/</span>
+          <span aria-current="page"><?php echo single_term_title('', false); ?></span>
+        <?php endif; ?>
+      </nav>
       <span style="display:inline-block;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);padding:5px 16px;border-radius:20px;font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;">
         100% Natural &bull; No Preservatives &bull; FSSAI Certified
       </span>
@@ -58,10 +75,22 @@ $shop_query = new WP_Query($args);
         <?php endforeach; ?>
       </div>
 
-      <!-- Results count -->
-      <p class="results-count">
-        Showing <?php echo $shop_query->post_count; ?> of <?php echo $shop_query->found_posts; ?> products
-      </p>
+      <!-- Results count + Sort -->
+      <div class="shop-toolbar">
+        <p class="results-count">
+          Showing <?php echo $shop_query->post_count; ?> of <?php echo $shop_query->found_posts; ?> products
+        </p>
+        <form class="shop-sort" method="get" onchange="this.submit()">
+          <label for="shop-sort-select">Sort by</label>
+          <select name="orderby" id="shop-sort-select">
+            <option value="date" <?php selected($sort, 'date'); ?>>Latest</option>
+            <option value="price" <?php selected($sort, 'price'); ?>>Price: Low to High</option>
+            <option value="price-desc" <?php selected($sort, 'price-desc'); ?>>Price: High to Low</option>
+            <option value="rating" <?php selected($sort, 'rating'); ?>>Avg. Rating</option>
+            <option value="title" <?php selected($sort, 'title'); ?>>Name: A-Z</option>
+          </select>
+        </form>
+      </div>
 
       <!-- Product Grid -->
       <?php if ($shop_query->have_posts()) : ?>
@@ -77,6 +106,13 @@ $shop_query = new WP_Query($args);
           <a href="<?php echo esc_url($permalink); ?>" class="product-card-link">
 
             <div class="product-img-wrap">
+              <?php if ($product->is_on_sale()) :
+                $regular = (float) $product->get_regular_price();
+                $sale    = (float) $product->get_sale_price();
+                $pct     = $regular > 0 ? round((($regular - $sale) / $regular) * 100) : 0;
+                if ($pct > 0) : ?>
+                <span class="product-sale-badge">-<?php echo esc_html($pct); ?>%</span>
+              <?php endif; endif; ?>
               <?php if (has_post_thumbnail()) : ?>
                 <?php the_post_thumbnail('medium', ['loading' => 'lazy']); ?>
               <?php else : ?>
@@ -95,6 +131,12 @@ $shop_query = new WP_Query($args);
               }
               ?>
               <h3><?php the_title(); ?></h3>
+              <?php $rating = $product->get_average_rating(); ?>
+              <div class="product-card-stars" aria-label="Rated <?php echo esc_attr($rating); ?> out of 5">
+                <?php for ($s = 1; $s <= 5; $s++) : ?>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="<?php echo $s <= round($rating) ? '#C9A055' : 'none'; ?>" stroke="#C9A055" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <?php endfor; ?>
+              </div>
               <div class="product-price"><?php echo $product->get_price_html(); ?></div>
             </div>
 

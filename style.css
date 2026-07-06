@@ -917,7 +917,31 @@ ul { list-style:none; }
   background:var(--primary);
   color:#fff;
 }
-.results-count { color:var(--muted); font-size:.88rem; margin-bottom:28px; text-align:center; }
+.shop-breadcrumb { font-size:.8rem; margin-bottom:16px; }
+.shop-breadcrumb a { color:rgba(255,255,255,.8); }
+.shop-breadcrumb a:hover { color:#fff; }
+.shop-breadcrumb span { color:rgba(255,255,255,.55); margin:0 6px; }
+.shop-breadcrumb [aria-current] { color:#fff; }
+
+.shop-toolbar {
+  display:flex; align-items:center; justify-content:space-between;
+  flex-wrap:wrap; gap:12px; margin-bottom:28px;
+}
+.results-count { color:var(--muted); font-size:.88rem; margin:0; }
+.shop-sort { display:flex; align-items:center; gap:8px; }
+.shop-sort label { font-size:.82rem; color:var(--muted); font-weight:600; }
+.shop-sort select {
+  border:1.5px solid var(--border); border-radius:10px; padding:8px 14px;
+  font-size:.85rem; color:var(--text); background:#fff; cursor:pointer;
+}
+.shop-sort select:focus { outline:none; border-color:var(--primary); }
+
+.product-sale-badge {
+  position:absolute; top:10px; left:10px; z-index:1;
+  background:var(--secondary); color:#4A0E1A;
+  font-size:.7rem; font-weight:800; padding:4px 10px; border-radius:20px;
+}
+.product-card-stars { display:flex; gap:2px; margin:4px 0 8px; }
 
 /* Product grid */
 .products-grid {
@@ -935,6 +959,7 @@ ul { list-style:none; }
 }
 .product-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); }
 .product-img-wrap {
+  position:relative;
   aspect-ratio:1;
   overflow:hidden;
   background:linear-gradient(135deg, var(--light), var(--light-2));
@@ -1009,6 +1034,9 @@ ul { list-style:none; }
 
 .wc-cat-tag { color:var(--secondary); font-size:.8rem; font-weight:700; text-transform:uppercase; letter-spacing:2px; margin-bottom:10px; }
 .wc-title { font-family:var(--font-serif); font-size:clamp(1.6rem,3vw,2.4rem); color:var(--dark); margin-bottom:16px; line-height:1.2; }
+.wc-rating-row { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+.wc-rating-stars { display:flex; gap:2px; }
+.wc-rating-count { font-size:.82rem; color:var(--muted); text-decoration:underline; }
 .wc-price { font-size:2rem; font-weight:800; color:var(--primary); margin-bottom:20px; }
 .wc-short-desc { color:#555; font-size:1rem; line-height:1.7; margin-bottom:28px; padding-bottom:28px; border-bottom:1px solid var(--border); }
 .wc-atc-wrap { margin-bottom:28px; }
