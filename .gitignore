@@ -1,2 +1,6 @@
 # Added by code-review-graph
 .code-review-graph/
+
+# Local Claude Code config (machine-specific)
+.claude/
+.mcp.json
