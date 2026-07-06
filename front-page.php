@@ -43,7 +43,7 @@
 
     <div class="hero-media">
       <div class="hero-media-circle">
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/hero-bg.jpg" alt="Hombisilu authentic South Indian foods" class="hero-media-img">
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/hero-pickle.jpg" alt="Hombisilu authentic South Indian pickle" class="hero-media-img">
       </div>
       <a href="/shop" class="hero-buy-badge">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
