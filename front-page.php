@@ -1,81 +1,70 @@
 <?php get_header(); ?>
 
-<!-- HERO SECTION — UNTOUCHED -->
-<section class="hero">
+<!-- HERO SECTION — Foodking-style split layout -->
+<section class="hero hero-split">
+  <div class="hero-inner hero-grid">
 
-  <!-- Background Slides -->
-  <div class="hero-slides" aria-hidden="true">
-    <div class="hero-slide active" style="background-image:url('/wp-content/themes/hombisilu-theme/assets/images/hero-bg.jpg');"></div>
-    <div class="hero-slide" style="background-image:url('/wp-content/themes/hombisilu-theme/assets/images/hero-candied.jpg');"></div>
-    <div class="hero-slide" style="background-image:url('/wp-content/themes/hombisilu-theme/assets/images/hero-bg-karnataka.jpg');"></div>
-  </div>
-
-  <!-- Slide Dots -->
-  <div class="hero-dots" aria-hidden="true">
-    <span class="hero-dot active"></span>
-    <span class="hero-dot"></span>
-    <span class="hero-dot"></span>
-  </div>
-
-  <div class="hero-inner">
-    <span class="hero-badge">
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:4px;"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
-      100% Natural | FSSAI Certified
-    </span>
-    <h1 class="hero-title">Taste the Tradition.<br>Savour the Difference.</h1>
-    <p class="hero-subtitle">Premium South Indian Foods — Crafted with Heritage, Rooted in Purity.</p>
-    <p class="hero-desc">From the fragrant hills of Karnataka to your kitchen table, Hombisilu brings you authentic, handcrafted South Indian foods made without compromise. Every product honours centuries-old recipes using the finest natural ingredients — no artificial colours, no preservatives, no shortcuts.</p>
-    <div class="hero-btns">
-      <a href="/shop" class="btn-primary">Explore Our Collection</a>
-      <a href="/about-us" class="btn-outline">Discover Our Story</a>
+    <div class="hero-content">
+      <span class="hero-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:4px;"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+        100% Natural | FSSAI Certified
+      </span>
+      <h1 class="hero-title">Taste the<br>Tradition.<br><span>Savour the Difference.</span></h1>
+      <p class="hero-desc">From the fragrant hills of Karnataka to your kitchen table, Hombisilu brings you authentic, handcrafted South Indian foods made without compromise — no artificial colours, no preservatives, no shortcuts.</p>
+      <div class="hero-btns">
+        <a href="/shop" class="btn-primary">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Order Now
+        </a>
+        <a href="/about-us" class="btn-outline">Discover Our Story</a>
+      </div>
+      <div class="hero-trust">
+        <span class="trust-item">
+          <span class="trust-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          </span>
+          No Preservatives
+        </span>
+        <span class="trust-item">
+          <span class="trust-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </span>
+          Pan-India Delivery
+        </span>
+      </div>
     </div>
-    <div class="hero-trust">
-      <span class="trust-item">
-        <span class="trust-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        </span>
-        No Preservatives
-      </span>
-      <span class="trust-item">
-        <span class="trust-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-        </span>
-        FSSAI Certified
-      </span>
-      <span class="trust-item">
-        <span class="trust-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
-        </span>
-        100% Natural
-      </span>
-      <span class="trust-item">
-        <span class="trust-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-        </span>
-        Pan-India Delivery
-      </span>
+
+    <div class="hero-media">
+      <img src="<?php echo get_template_directory_uri(); ?>/assets/images/hero-bg.jpg" alt="Hombisilu authentic South Indian foods" class="hero-media-img">
+      <div class="hero-float-badge">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B2737" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        <span class="hero-float-label">FSSAI</span>
+        <span class="hero-float-price">Certified</span>
+      </div>
     </div>
+
   </div>
-
-  <script>
-  (function(){
-    var slides = document.querySelectorAll('.hero-slide');
-    var dots   = document.querySelectorAll('.hero-dot');
-    if (!slides.length) return;
-    var cur = 0;
-    function goTo(n) {
-      slides[cur].classList.remove('active');
-      dots[cur].classList.remove('active');
-      cur = (n + slides.length) % slides.length;
-      slides[cur].classList.add('active');
-      dots[cur].classList.add('active');
-    }
-    dots.forEach(function(d, i){ d.addEventListener('click', function(){ goTo(i); }); });
-    setInterval(function(){ goTo(cur + 1); }, 5000);
-  })();
-  </script>
-
 </section>
+
+<!-- ══════════════════════════════════════════
+     CONTACT INFO BAR
+══════════════════════════════════════════ -->
+<div class="hp-infobar">
+  <div class="hp-container hp-infobar-inner">
+    <div class="hp-infobar-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <span>#12, Somashetti Hall, Chikkabanavara, Bengaluru</span>
+    </div>
+    <div class="hp-infobar-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.902.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.908.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      <a href="tel:+916362616933">+91 6362616933</a>
+    </div>
+    <div class="hp-infobar-item">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span>Mon–Sat: 9AM–6PM &nbsp;|&nbsp; Sun: 10AM–4PM</span>
+    </div>
+  </div>
+</div>
 
 <!-- ══════════════════════════════════════════
      MARQUEE STRIP
@@ -90,6 +79,36 @@
     ?>
   </div>
 </div>
+
+<!-- ══════════════════════════════════════════
+     OUR STORY / WELCOME
+══════════════════════════════════════════ -->
+<section class="hp-section hp-section--white">
+  <div class="hp-container hp-story-grid">
+    <div class="hp-story-img">
+      <img src="<?php echo get_template_directory_uri(); ?>/assets/images/about-story.jpg" alt="Hombisilu heritage kitchen" loading="lazy">
+      <div class="hp-story-badge">
+        <strong>15+</strong>
+        <span>Years of Heritage</span>
+      </div>
+    </div>
+    <div class="hp-story-content">
+      <span class="hp-eyebrow">Our Story</span>
+      <h2 class="hp-h2">Crafted with Love, Rooted in Karnataka</h2>
+      <p class="hp-story-text">Hombisilu began with a simple idea — bring the authentic taste of South Indian tradition to every home, without shortcuts. Every jar of chutney powder, every pickle, every drop of honey is made the way our grandmothers made it: patiently, naturally, and with real ingredients sourced from Karnataka's own farms.</p>
+      <p class="hp-story-quote">"We don't just sell food — we bottle memories of home." <span>— Founder, Hombisilu</span></p>
+      <div class="hp-story-stats">
+        <div class="hp-story-stat"><strong>26</strong><span>Products</span></div>
+        <div class="hp-story-stat"><strong>9</strong><span>Categories</span></div>
+        <div class="hp-story-stat"><strong>1000+</strong><span>Happy Families</span></div>
+      </div>
+      <a href="/about-us/" class="hp-btn-primary">
+        Discover Our Story
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
 
 <!-- ══════════════════════════════════════════
      CATEGORIES
@@ -228,6 +247,96 @@
 </section>
 
 <!-- ══════════════════════════════════════════
+     DEAL OF THE DAY
+══════════════════════════════════════════ -->
+<section class="hp-section hp-section--cream">
+  <div class="hp-container">
+    <?php
+    $deal_ids = function_exists('wc_get_product_ids_on_sale') ? wc_get_product_ids_on_sale() : [];
+    $deal_query = new WP_Query([
+      'post_type'      => 'product',
+      'post_status'    => 'publish',
+      'posts_per_page' => 1,
+      'post__in'       => !empty($deal_ids) ? $deal_ids : [0],
+      'orderby'        => !empty($deal_ids) ? 'post__in' : 'date',
+    ]);
+    if (!$deal_query->have_posts()) {
+      $deal_query = new WP_Query(['post_type'=>'product','post_status'=>'publish','posts_per_page'=>1,'orderby'=>'date','order'=>'ASC']);
+    }
+    if ($deal_query->have_posts()) : $deal_query->the_post();
+      $deal_prod = function_exists('wc_get_product') ? wc_get_product(get_the_ID()) : null;
+    ?>
+    <div class="hp-deal-card">
+      <div class="hp-deal-img">
+        <?php if (has_post_thumbnail()) : the_post_thumbnail('large', ['class'=>'hp-deal-img-el']); else: ?>
+          <div class="hp-prod-img-placeholder" style="aspect-ratio:1;">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#C9A055" stroke-width="1.2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/></svg>
+          </div>
+        <?php endif; ?>
+      </div>
+      <div class="hp-deal-content">
+        <span class="hp-eyebrow">Deal Of The Day</span>
+        <h2 class="hp-h2"><?php the_title(); ?></h2>
+        <p class="hp-story-text"><?php echo wp_trim_words(get_the_excerpt() ?: $deal_prod->get_short_description(), 26); ?></p>
+        <div class="hp-deal-price"><?php echo $deal_prod ? $deal_prod->get_price_html() : ''; ?></div>
+        <a href="<?php echo $deal_prod ? esc_url($deal_prod->add_to_cart_url()) : esc_url(get_the_permalink()); ?>" class="hp-btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+          Order Now
+        </a>
+      </div>
+    </div>
+    <?php wp_reset_postdata(); endif; ?>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     HOT DEALS
+══════════════════════════════════════════ -->
+<section class="hp-section hp-section--white">
+  <div class="hp-container">
+    <div class="hp-section-head">
+      <span class="hp-eyebrow">Limited Time</span>
+      <h2 class="hp-h2">Hot Deals This Week</h2>
+      <p class="hp-sub">Grab these favourites before they're gone</p>
+    </div>
+    <div class="hp-hotdeals-grid">
+      <?php
+      $hot_badges = ['Hot','New','-15%','Hot'];
+      $hot_query = new WP_Query([
+        'post_type'      => 'product',
+        'post_status'    => 'publish',
+        'posts_per_page' => 4,
+        'orderby'        => 'rand',
+      ]);
+      if ($hot_query->have_posts()) :
+        $hi = 0;
+        while ($hot_query->have_posts()) : $hot_query->the_post();
+        $hot_prod = function_exists('wc_get_product') ? wc_get_product(get_the_ID()) : null;
+      ?>
+      <a href="<?php the_permalink(); ?>" class="hp-hotdeal-card">
+        <div class="hp-hotdeal-img-wrap">
+          <?php if (has_post_thumbnail()) : the_post_thumbnail('medium', ['class'=>'hp-prod-img']); else: ?>
+            <div class="hp-prod-img-placeholder">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#C9A055" stroke-width="1.2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/></svg>
+            </div>
+          <?php endif; ?>
+          <span class="hp-hotdeal-badge"><?php echo esc_html($hot_badges[$hi % count($hot_badges)]); ?></span>
+        </div>
+        <div class="hp-hotdeal-body">
+          <h4><?php the_title(); ?></h4>
+          <span class="hp-hotdeal-link">Order Now
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+      <?php $hi++; endwhile; wp_reset_postdata(); else: ?>
+        <p style="text-align:center;color:#888;grid-column:1/-1;padding:40px 0;">Deals loading...</p>
+      <?php endif; ?>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
      OUR PROMISE
 ══════════════════════════════════════════ -->
 <section class="hp-section hp-promise-section">
@@ -358,10 +467,75 @@
 </section>
 
 <!-- ══════════════════════════════════════════
+     NEWS & BLOG
+══════════════════════════════════════════ -->
+<section class="hp-section hp-section--cream">
+  <div class="hp-container">
+    <div class="hp-section-head">
+      <span class="hp-eyebrow">Stories &amp; Tips</span>
+      <h2 class="hp-h2">News &amp; Blog</h2>
+      <p class="hp-sub">Recipes, wellness tips and stories from the Hombisilu kitchen</p>
+    </div>
+    <div class="hp-blog-grid">
+      <?php
+      $blog_query = new WP_Query([
+        'post_type'      => 'post',
+        'post_status'    => 'publish',
+        'posts_per_page' => 3,
+      ]);
+      if ($blog_query->have_posts()) :
+        while ($blog_query->have_posts()) : $blog_query->the_post();
+        $cats = get_the_category();
+      ?>
+      <a href="<?php the_permalink(); ?>" class="hp-blog-card">
+        <div class="hp-blog-img-wrap">
+          <?php if (has_post_thumbnail()) : the_post_thumbnail('medium', ['class'=>'hp-prod-img']); else: ?>
+            <div class="hp-prod-img-placeholder">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#C9A055" stroke-width="1.2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/></svg>
+            </div>
+          <?php endif; ?>
+        </div>
+        <div class="hp-blog-body">
+          <div class="hp-blog-meta">
+            <span class="hp-blog-cat"><?php echo !empty($cats) ? esc_html($cats[0]->name) : 'Wellness'; ?></span>
+            <span class="hp-blog-date"><?php the_time('j M Y'); ?></span>
+          </div>
+          <h4><?php the_title(); ?></h4>
+          <span class="hp-blog-readmore">Read More
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </span>
+        </div>
+      </a>
+      <?php endwhile; wp_reset_postdata(); else: ?>
+        <p style="text-align:center;color:#888;grid-column:1/-1;padding:40px 0;">Stories coming soon...</p>
+      <?php endif; ?>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
      NEWSLETTER
 ══════════════════════════════════════════ -->
 <section class="hp-newsletter">
+  <div class="hp-container hp-gallery-grid">
+    <?php
+    $gal_query = new WP_Query([
+      'post_type'      => 'product',
+      'post_status'    => 'publish',
+      'posts_per_page' => 8,
+      'orderby'        => 'rand',
+      'meta_query'     => [['key' => '_thumbnail_id', 'compare' => 'EXISTS']],
+    ]);
+    if ($gal_query->have_posts()) :
+      while ($gal_query->have_posts()) : $gal_query->the_post();
+    ?>
+    <a href="<?php the_permalink(); ?>" class="hp-gallery-item">
+      <?php the_post_thumbnail('thumbnail'); ?>
+    </a>
+    <?php endwhile; wp_reset_postdata(); endif; ?>
+  </div>
   <div class="hp-newsletter-inner">
+
     <div class="hp-newsletter-icon">
       <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
     </div>
@@ -409,6 +583,49 @@
   --hp-border:    #E8DDD0;
   --hp-text:      #3A2A20;
   --hp-muted:     #7A6A60;
+}
+
+/* ── HERO — Foodking-style split layout ───── */
+.hero.hero-split {
+  background: linear-gradient(135deg, var(--hp-maroon) 0%, var(--hp-maroon-dk) 100%);
+  padding: 64px 24px; text-align: left; overflow: hidden;
+}
+.hero.hero-split::before { display: none; }
+.hero-grid {
+  display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px;
+  align-items: center; max-width: 1200px; margin: 0 auto;
+}
+.hero-content { text-align: left; }
+.hero.hero-split .hero-badge {
+  background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.25);
+  box-shadow: none;
+}
+.hero.hero-split .hero-title {
+  font-family: var(--font-sans, Arial, sans-serif);
+  font-weight: 800; text-transform: uppercase; letter-spacing: -1px;
+  font-size: clamp(2.4rem, 5vw, 4rem); line-height: 1.04;
+}
+.hero.hero-split .hero-title span { color: var(--hp-gold-lt); font-style: normal; display: block; }
+.hero.hero-split .hero-desc { text-align: left; margin: 0 0 32px; max-width: 520px; }
+.hero.hero-split .hero-btns { justify-content: flex-start; margin-bottom: 34px; }
+.hero.hero-split .hero-trust { justify-content: flex-start; }
+.hero-media { position: relative; }
+.hero-media-img {
+  width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 28px;
+  box-shadow: 0 30px 70px rgba(0,0,0,.35); display: block;
+}
+.hero-float-badge {
+  position: absolute; top: 22px; right: 22px; background: #fff;
+  border-radius: 16px; padding: 14px 18px; text-align: center;
+  box-shadow: 0 14px 34px rgba(0,0,0,.28); display: flex; flex-direction: column; align-items: center; gap: 2px;
+}
+.hero-float-label { font-size: .6rem; text-transform: uppercase; letter-spacing: 1px; color: var(--hp-muted); font-weight: 700; }
+.hero-float-price { font-family: 'Playfair Display', Georgia, serif; font-size: 1rem; font-weight: 800; color: var(--hp-maroon); }
+@media (max-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+  .hero-content, .hero.hero-split .hero-desc { text-align: center; margin-left: auto; margin-right: auto; }
+  .hero.hero-split .hero-btns, .hero.hero-split .hero-trust { justify-content: center; }
+  .hero-media-img { aspect-ratio: 16/10; }
 }
 
 .hp-container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
@@ -692,10 +909,123 @@
 }
 .hp-btn-gold-outline:hover { background: rgba(201,160,85,.2); border-color: var(--hp-gold-lt); color: var(--hp-gold-lt) !important; transform: translateY(-2px); }
 
+/* ── CONTACT INFO BAR ─────────────────────── */
+.hp-infobar { background: var(--hp-maroon-dk); border-bottom: 1px solid rgba(255,255,255,.08); }
+.hp-infobar-inner {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: 12px 40px; padding: 14px 24px;
+}
+.hp-infobar-item {
+  display: flex; align-items: center; gap: 9px;
+  color: rgba(255,255,255,.8); font-size: .82rem; font-weight: 500;
+}
+.hp-infobar-item svg { color: var(--hp-gold); flex-shrink: 0; }
+.hp-infobar-item a { color: rgba(255,255,255,.85); text-decoration: none; }
+.hp-infobar-item a:hover { color: var(--hp-gold-lt); }
+
+/* ── OUR STORY ────────────────────────────── */
+.hp-story-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;
+}
+.hp-story-img { position: relative; }
+.hp-story-img img {
+  width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 22px;
+  box-shadow: 0 20px 56px rgba(107,39,55,.16);
+}
+.hp-story-badge {
+  position: absolute; bottom: -22px; right: -22px;
+  background: var(--hp-maroon); color: #fff; border-radius: 16px;
+  padding: 18px 24px; text-align: center; box-shadow: 0 10px 30px rgba(74,14,26,.35);
+}
+.hp-story-badge strong { display: block; font-family: 'Playfair Display', Georgia, serif; font-size: 1.6rem; color: var(--hp-gold-lt); }
+.hp-story-badge span { font-size: .68rem; letter-spacing: .5px; text-transform: uppercase; color: rgba(255,255,255,.8); }
+.hp-story-content { text-align: left; }
+.hp-story-content .hp-h2 { text-align: left; }
+.hp-story-text { color: var(--hp-muted); font-size: .96rem; line-height: 1.8; margin-bottom: 18px; }
+.hp-story-quote {
+  font-style: italic; color: var(--hp-maroon); font-size: 1rem;
+  border-left: 3px solid var(--hp-gold); padding-left: 16px; margin-bottom: 28px;
+}
+.hp-story-quote span { display: block; font-style: normal; font-size: .78rem; color: var(--hp-muted); margin-top: 6px; }
+.hp-story-stats { display: flex; gap: 32px; margin-bottom: 32px; }
+.hp-story-stat strong { display: block; font-family: 'Playfair Display', Georgia, serif; font-size: 1.7rem; color: var(--hp-maroon); }
+.hp-story-stat span { font-size: .74rem; color: var(--hp-muted); text-transform: uppercase; letter-spacing: .5px; }
+
+/* ── DEAL OF THE DAY ──────────────────────── */
+.hp-deal-card {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: stretch;
+  background: #fff; border-radius: 22px; overflow: hidden;
+  border: 1.5px solid var(--hp-border); box-shadow: 0 16px 48px rgba(107,39,55,.1);
+}
+.hp-deal-img { position: relative; overflow: hidden; aspect-ratio: 1; background: var(--hp-cream); }
+.hp-deal-img-el, .hp-deal-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hp-deal-content { padding: 48px; display: flex; flex-direction: column; justify-content: center; text-align: left; }
+.hp-deal-content .hp-h2 { text-align: left; }
+.hp-deal-price { font-size: 1.7rem; font-weight: 800; color: var(--hp-maroon); margin: 6px 0 24px; }
+.hp-deal-price ins { text-decoration: none; }
+.hp-deal-price del { opacity: .5; font-size: .7em; margin-right: 8px; }
+
+/* ── HOT DEALS ────────────────────────────── */
+.hp-hotdeals-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+.hp-hotdeal-card {
+  display: block; background: #fff; border: 1.5px solid var(--hp-border);
+  border-radius: 16px; overflow: hidden; text-align: center;
+  transition: transform .3s, box-shadow .3s;
+}
+.hp-hotdeal-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(107,39,55,.14); }
+.hp-hotdeal-img-wrap { position: relative; aspect-ratio: 1; background: var(--hp-cream); overflow: hidden; }
+.hp-hotdeal-badge {
+  position: absolute; top: 10px; left: 10px; background: var(--hp-gold-lt);
+  color: var(--hp-maroon-dk); font-size: .62rem; font-weight: 800; letter-spacing: .5px;
+  text-transform: uppercase; padding: 4px 9px; border-radius: 20px;
+}
+.hp-hotdeal-body { padding: 16px; }
+.hp-hotdeal-body h4 { font-family: 'Playfair Display', Georgia, serif; font-size: .95rem; color: var(--hp-text); margin-bottom: 8px; }
+.hp-hotdeal-link {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: .74rem; font-weight: 700; color: var(--hp-maroon);
+  text-transform: uppercase; letter-spacing: .5px;
+}
+
+/* ── BLOG / NEWS ──────────────────────────── */
+.hp-blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+.hp-blog-card {
+  display: block; background: #fff; border: 1.5px solid var(--hp-border);
+  border-radius: 18px; overflow: hidden; transition: transform .3s, box-shadow .3s;
+}
+.hp-blog-card:hover { transform: translateY(-6px); box-shadow: 0 16px 44px rgba(107,39,55,.12); }
+.hp-blog-img-wrap { aspect-ratio: 16/10; background: var(--hp-cream); overflow: hidden; }
+.hp-blog-body { padding: 22px; text-align: left; }
+.hp-blog-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.hp-blog-cat {
+  font-size: .68rem; font-weight: 700; color: var(--hp-maroon); text-transform: uppercase;
+  letter-spacing: .5px; background: rgba(201,160,85,.15); padding: 3px 10px; border-radius: 20px;
+}
+.hp-blog-date { font-size: .74rem; color: var(--hp-muted); }
+.hp-blog-body h4 { font-family: 'Playfair Display', Georgia, serif; font-size: 1.05rem; color: var(--hp-text); margin-bottom: 12px; line-height: 1.4; }
+.hp-blog-readmore { display: inline-flex; align-items: center; gap: 6px; font-size: .78rem; font-weight: 700; color: var(--hp-gold); text-transform: uppercase; letter-spacing: 1px; }
+
+/* ── PHOTO GALLERY (above newsletter) ─────── */
+.hp-gallery-grid {
+  display: grid; grid-template-columns: repeat(8, 1fr); gap: 10px;
+  margin-bottom: 40px;
+}
+.hp-gallery-item {
+  display: block; aspect-ratio: 1; border-radius: 10px; overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0,0,0,.08);
+}
+.hp-gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .35s; }
+.hp-gallery-item:hover img { transform: scale(1.1); }
+
 /* ── RESPONSIVE ───────────────────────────── */
 @media (max-width: 1024px) {
   .hp-promise-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .hp-products-grid { grid-template-columns: repeat(2, 1fr); }
+  .hp-hotdeals-grid { grid-template-columns: repeat(2, 1fr); }
+  .hp-blog-grid { grid-template-columns: 1fr; }
+  .hp-gallery-grid { grid-template-columns: repeat(4, 1fr); }
+  .hp-story-grid { grid-template-columns: 1fr; gap: 40px; }
+  .hp-deal-card { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
   .hp-cats-grid { grid-template-columns: repeat(2, 1fr); }
@@ -703,11 +1033,16 @@
   .hp-testi-featured { transform: none; }
   .hp-promise-grid { grid-template-columns: repeat(2, 1fr); }
   .hp-section { padding: 64px 0; }
+  .hp-infobar-inner { flex-direction: column; align-items: flex-start; gap: 8px; padding: 12px 24px; }
+  .hp-deal-content { padding: 32px 26px; }
 }
 @media (max-width: 540px) {
   .hp-cats-grid { grid-template-columns: 1fr; }
   .hp-products-grid { grid-template-columns: 1fr; }
   .hp-promise-grid { grid-template-columns: 1fr; }
+  .hp-hotdeals-grid { grid-template-columns: 1fr; }
+  .hp-gallery-grid { grid-template-columns: repeat(3, 1fr); }
+  .hp-story-stats { gap: 20px; flex-wrap: wrap; }
   .hp-nl-form { flex-direction: column; border-radius: 16px; }
   .hp-nl-btn { border-radius: 0 0 14px 14px; }
   .hp-cta-btns { flex-direction: column; align-items: center; }
