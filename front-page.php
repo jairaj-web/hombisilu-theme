@@ -1,7 +1,13 @@
 <?php get_header(); ?>
 
-<!-- HERO SECTION — Foodking-style split layout -->
+<!-- HERO SECTION — Foodking home-03 style: flat bg, giant headline, floating circular product, doodles -->
 <section class="hero hero-split">
+
+  <!-- Hand-drawn doodle accents -->
+  <svg class="hero-doodle hero-doodle--pepper" width="70" height="70" viewBox="0 0 70 70" fill="none" stroke="rgba(255,255,255,.28)" stroke-width="1.6" stroke-linecap="round"><path d="M35 10c-3 5-10 6-14 12-5 8-2 20 8 24 9 3 18-3 20-12 2-8-3-16-8-19-3-2-4-3-6-5z"/><path d="M33 8c1 3 2 5 4 6"/></svg>
+  <svg class="hero-doodle hero-doodle--chili" width="60" height="60" viewBox="0 0 60 60" fill="none" stroke="rgba(255,255,255,.24)" stroke-width="1.6" stroke-linecap="round"><path d="M10 12c8-2 14 2 15 10 1 10-6 24-18 30 14-2 26-14 27-26 1-9-6-16-15-16-3 0-6 1-9 2z"/></svg>
+  <svg class="hero-doodle hero-doodle--leaf" width="50" height="50" viewBox="0 0 50 50" fill="none" stroke="rgba(255,255,255,.22)" stroke-width="1.6" stroke-linecap="round"><path d="M8 40C6 20 22 6 42 8c0 20-16 34-34 32z"/><path d="M10 38C18 26 26 18 40 10"/></svg>
+
   <div class="hero-inner hero-grid">
 
     <div class="hero-content">
@@ -10,7 +16,8 @@
         100% Natural | FSSAI Certified
       </span>
       <h1 class="hero-title">Taste the<br>Tradition.<br><span>Savour the Difference.</span></h1>
-      <p class="hero-desc">From the fragrant hills of Karnataka to your kitchen table, Hombisilu brings you authentic, handcrafted South Indian foods made without compromise — no artificial colours, no preservatives, no shortcuts.</p>
+      <p class="hero-price-line">Starting at <strong>₹149</strong> &nbsp;•&nbsp; Free delivery above ₹499</p>
+      <p class="hero-desc">From the fragrant hills of Karnataka to your kitchen table — authentic, handcrafted South Indian foods made without compromise. No artificial colours, no preservatives, no shortcuts.</p>
       <div class="hero-btns">
         <a href="/shop" class="btn-primary">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
@@ -35,7 +42,13 @@
     </div>
 
     <div class="hero-media">
-      <img src="<?php echo get_template_directory_uri(); ?>/assets/images/hero-bg.jpg" alt="Hombisilu authentic South Indian foods" class="hero-media-img">
+      <div class="hero-media-circle">
+        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/hero-bg.jpg" alt="Hombisilu authentic South Indian foods" class="hero-media-img">
+      </div>
+      <a href="/shop" class="hero-buy-badge">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        Buy Now
+      </a>
       <div class="hero-float-badge">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B2737" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
         <span class="hero-float-label">FSSAI</span>
@@ -585,15 +598,20 @@
   --hp-muted:     #7A6A60;
 }
 
-/* ── HERO — Foodking-style split layout ───── */
+/* ── HERO — Foodking home-03 style ────────── */
 .hero.hero-split {
   background: linear-gradient(135deg, var(--hp-maroon) 0%, var(--hp-maroon-dk) 100%);
-  padding: 64px 24px; text-align: left; overflow: hidden;
+  padding: 72px 24px; text-align: left; overflow: hidden; position: relative;
 }
 .hero.hero-split::before { display: none; }
+.hero-doodle { position: absolute; z-index: 0; pointer-events: none; }
+.hero-doodle--pepper { top: 8%; left: 40%; }
+.hero-doodle--chili { top: 12%; right: 6%; }
+.hero-doodle--leaf { bottom: 10%; left: 6%; }
 .hero-grid {
   display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px;
   align-items: center; max-width: 1200px; margin: 0 auto;
+  position: relative; z-index: 1;
 }
 .hero-content { text-align: left; }
 .hero.hero-split .hero-badge {
@@ -602,30 +620,47 @@
 }
 .hero.hero-split .hero-title {
   font-family: var(--font-sans, Arial, sans-serif);
-  font-weight: 800; text-transform: uppercase; letter-spacing: -1px;
-  font-size: clamp(2.4rem, 5vw, 4rem); line-height: 1.04;
+  font-weight: 900; text-transform: uppercase; letter-spacing: -1.5px;
+  font-size: clamp(2.8rem, 6vw, 4.6rem); line-height: 1;
 }
 .hero.hero-split .hero-title span { color: var(--hp-gold-lt); font-style: normal; display: block; }
-.hero.hero-split .hero-desc { text-align: left; margin: 0 0 32px; max-width: 520px; }
+.hero-price-line {
+  color: rgba(255,255,255,.85); font-size: .95rem; font-weight: 600;
+  margin: 18px 0 10px;
+}
+.hero-price-line strong { color: var(--hp-gold-lt); font-size: 1.15rem; }
+.hero.hero-split .hero-desc { text-align: left; margin: 0 0 32px; max-width: 480px; color: rgba(255,255,255,.7); }
 .hero.hero-split .hero-btns { justify-content: flex-start; margin-bottom: 34px; }
 .hero.hero-split .hero-trust { justify-content: flex-start; }
-.hero-media { position: relative; }
-.hero-media-img {
-  width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 28px;
-  box-shadow: 0 30px 70px rgba(0,0,0,.35); display: block;
+.hero-media { position: relative; display: flex; align-items: center; justify-content: center; }
+.hero-media-circle {
+  width: 100%; max-width: 460px; aspect-ratio: 1; border-radius: 50%;
+  overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,.4), 0 0 0 10px rgba(255,255,255,.06);
 }
+.hero-media-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-buy-badge {
+  position: absolute; top: 50%; right: 4%; transform: translateY(-50%);
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #3E9F52; color: #fff !important; text-decoration: none;
+  padding: 14px 26px; border-radius: 40px; font-weight: 800; font-size: .95rem;
+  box-shadow: 0 14px 34px rgba(0,0,0,.35); transition: transform .25s;
+}
+.hero-buy-badge:hover { transform: translateY(-50%) scale(1.05); }
 .hero-float-badge {
-  position: absolute; top: 22px; right: 22px; background: #fff;
+  position: absolute; top: 6%; right: 8%; background: #fff;
   border-radius: 16px; padding: 14px 18px; text-align: center;
   box-shadow: 0 14px 34px rgba(0,0,0,.28); display: flex; flex-direction: column; align-items: center; gap: 2px;
 }
 .hero-float-label { font-size: .6rem; text-transform: uppercase; letter-spacing: 1px; color: var(--hp-muted); font-weight: 700; }
 .hero-float-price { font-family: 'Playfair Display', Georgia, serif; font-size: 1rem; font-weight: 800; color: var(--hp-maroon); }
 @media (max-width: 900px) {
-  .hero-grid { grid-template-columns: 1fr; gap: 36px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 44px; }
   .hero-content, .hero.hero-split .hero-desc { text-align: center; margin-left: auto; margin-right: auto; }
   .hero.hero-split .hero-btns, .hero.hero-split .hero-trust { justify-content: center; }
-  .hero-media-img { aspect-ratio: 16/10; }
+  .hero-media { flex-direction: column; }
+  .hero-media-circle { max-width: 340px; }
+  .hero-buy-badge { position: static; transform: none; margin-top: 20px; }
+  .hero-float-badge { top: -14px; right: 8px; }
 }
 
 .hp-container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
