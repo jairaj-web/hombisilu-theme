@@ -42,9 +42,7 @@
     </div>
 
     <div class="hero-media">
-      <div class="hero-media-circle">
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/hero-pickle.jpg" alt="Hombisilu authentic South Indian pickle" class="hero-media-img">
-      </div>
+      <img src="<?php echo get_template_directory_uri(); ?>/assets/images/hero-pickle-cutout.png" alt="Hombisilu authentic South Indian pickle" class="hero-cutout-img">
       <a href="/shop" class="hero-buy-badge">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         Buy Now
@@ -633,11 +631,10 @@
 .hero.hero-split .hero-btns { justify-content: flex-start; margin-bottom: 34px; }
 .hero.hero-split .hero-trust { justify-content: flex-start; }
 .hero-media { position: relative; display: flex; align-items: center; justify-content: center; }
-.hero-media-circle {
-  width: 100%; max-width: 460px; aspect-ratio: 1; border-radius: 50%;
-  overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,.4), 0 0 0 10px rgba(255,255,255,.06);
+.hero-cutout-img {
+  width: 100%; max-width: 520px; height: auto; display: block;
+  filter: drop-shadow(0 30px 40px rgba(0,0,0,.45));
 }
-.hero-media-img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .hero-buy-badge {
   position: absolute; top: 50%; right: 4%; transform: translateY(-50%);
   display: inline-flex; align-items: center; gap: 8px;
@@ -658,7 +655,7 @@
   .hero-content, .hero.hero-split .hero-desc { text-align: center; margin-left: auto; margin-right: auto; }
   .hero.hero-split .hero-btns, .hero.hero-split .hero-trust { justify-content: center; }
   .hero-media { flex-direction: column; }
-  .hero-media-circle { max-width: 340px; }
+  .hero-cutout-img { max-width: 340px; }
   .hero-buy-badge { position: static; transform: none; margin-top: 20px; }
   .hero-float-badge { top: -14px; right: 8px; }
 }
