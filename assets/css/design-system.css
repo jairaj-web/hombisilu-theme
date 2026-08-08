@@ -649,15 +649,18 @@
   color: var(--ds-gold);
   font-weight: 700;
 }
-/* Reserve two lines' worth of height regardless of actual title length, so
-   the stars/price/button block starts at the same Y on every card in a row
-   whether the title is one line or two. */
+/* Clamped to 2 lines so a rare long title can't blow out card height, but
+   NOT height-reserved to always occupy 2 lines — that traded ragged card
+   alignment for a worse problem: a visible dead-space gap under every
+   short, one-line title. The single-line category fix above already
+   removes most of the row-to-row misalignment; what's left (a few px of
+   stars/price drift depending on whether a title wraps) is unnoticeable
+   and far better than an empty gap on every short-titled card. */
 .ds-prod-title {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
-  min-height: calc(1rem * 1.35 * 2);
   font-size: 1rem;
   font-weight: 700;
   line-height: 1.35;
