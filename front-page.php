@@ -21,68 +21,88 @@ $shop = hb_shop_url();
 ?>
 
 <!-- ═══════════ 1. HERO SLIDER ═══════════ -->
-<section class="bb-hero" aria-roledescription="carousel" aria-label="Featured">
+<section class="bb-hero" aria-roledescription="carousel" aria-label="Featured products">
+
+  <!-- blurred produce accents, purely decorative -->
+  <span class="bb-hero-blob bb-hero-blob--a" aria-hidden="true"></span>
+  <span class="bb-hero-blob bb-hero-blob--b" aria-hidden="true"></span>
+
+  <!-- products peeking in from the edges, as in the reference -->
+  <img class="bb-hero-peek bb-hero-peek--l" src="<?php echo esc_url( $tpl ); ?>/assets/images/cut-orange.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+  <img class="bb-hero-peek bb-hero-peek--r" src="<?php echo esc_url( $tpl ); ?>/assets/images/cut-laddu.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
+
   <div class="bb-hero-track" id="bb-hero-track">
     <?php
     $slides = [
       [
         'welcome' => 'Welcome to Hombisilu',
-        'title'   => 'Authentic <em>Pickles</em> from Karnataka',
-        'text'    => 'Hand-cut, sun-cured and packed the way our grandmothers did it. No artificial colours, no preservatives, no shortcuts.',
+        'title'   => 'Java Plum <em>Jamun Bar</em>',
         'price'   => '149',
-        'img'     => 'hero-pickle',
+        'cut'     => 'cut-jamun',
+        'alt'     => 'Hombisilu Java Plum Jamun Bar pack',
       ],
       [
-        'welcome' => 'Freshly Roasted',
-        'title'   => 'Premium <em>Filter Coffee</em> Blends',
-        'text'    => 'Estate-grown beans roasted in small batches and ground for the perfect South Indian decoction every morning.',
-        'price'   => '199',
-        'img'     => 'hero-bg',
+        'welcome' => 'Pure &amp; Unfiltered',
+        'title'   => 'Pure Forest Honey <em>straight from the hive</em>',
+        'price'   => '399',
+        'cut'     => 'cut-honey',
+        'alt'     => 'Hombisilu Pure Honey Jenu Tuppa pack',
       ],
       [
         'welcome' => 'Heritage Recipes',
-        'title'   => 'Chutney Powders &amp; <em>Masalas</em>',
-        'text'    => 'Seven distinct varieties, stone-ground in small batches from spices sourced direct from Karnataka farms.',
-        'price'   => '129',
-        'img'     => 'hero-candied',
+        'title'   => 'Gond Dry Fruit <em>Laddu</em>',
+        'price'   => '299',
+        'cut'     => 'cut-laddu',
+        'alt'     => 'Hombisilu Gond Laddu pack',
       ],
     ];
     foreach ( $slides as $i => $s ) : ?>
       <article class="bb-slide" aria-label="Slide <?php echo (int) $i + 1; ?> of <?php echo count( $slides ); ?>">
-        <img class="bb-slide-bg"
-             src="<?php echo esc_url( $tpl . '/assets/images/' . $s['img'] . '.webp' ); ?>"
-             srcset="<?php echo esc_url( $tpl . '/assets/images/' . $s['img'] . '-900.webp' ); ?> 900w,
-                     <?php echo esc_url( $tpl . '/assets/images/' . $s['img'] . '.webp' ); ?> 1600w"
-             sizes="100vw"
-             alt=""
-             width="1600" height="900"
-             <?php echo 0 === $i ? 'fetchpriority="high"' : 'loading="lazy"'; ?>
-             decoding="async">
-        <div class="ds-wrap">
-          <div class="bb-slide-inner">
-            <span class="bb-slide-welcome"><?php echo hb_icon( 'leaf', 14 ); ?> <?php echo esc_html( $s['welcome'] ); ?></span>
-            <h<?php echo 0 === $i ? '1' : '2'; ?> class="bb-slide-title"><?php echo $s['title']; ?></h<?php echo 0 === $i ? '1' : '2'; ?>>
-            <p class="bb-slide-text"><?php echo esc_html( $s['text'] ); ?></p>
-            <span class="bb-slide-price">Starting at <strong>&#8377;<?php echo esc_html( $s['price'] ); ?></strong></span>
-            <div class="bb-slide-actions">
-              <a href="<?php echo esc_url( $shop ); ?>" class="ds-btn ds-btn--gold"><?php echo hb_icon( 'bag', 17 ); ?> Shop Now</a>
-              <a href="<?php echo esc_url( home_url( '/about-us/' ) ); ?>" class="ds-btn ds-btn--ghost-light">Our Story <?php echo hb_icon( 'arrow', 16 ); ?></a>
-            </div>
+        <div class="ds-wrap bb-slide-grid">
+
+          <div class="bb-slide-copy">
+            <span class="bb-slide-welcome"><?php echo hb_icon( 'leaf', 14 ); ?> <?php echo $s['welcome']; ?></span>
+            <?php if ( 0 === $i ) : ?>
+              <h1 class="bb-slide-title"><?php echo $s['title']; ?></h1>
+            <?php else : ?>
+              <h2 class="bb-slide-title"><?php echo $s['title']; ?></h2>
+            <?php endif; ?>
           </div>
+
+          <div class="bb-slide-stage">
+            <img class="bb-slide-cut"
+                 src="<?php echo esc_url( $tpl . '/assets/images/' . $s['cut'] . '.webp' ); ?>"
+                 srcset="<?php echo esc_url( $tpl . '/assets/images/' . $s['cut'] . '-500.webp' ); ?> 348w,
+                         <?php echo esc_url( $tpl . '/assets/images/' . $s['cut'] . '.webp' ); ?> 696w"
+                 sizes="(max-width:760px) 60vw, 340px"
+                 alt="<?php echo esc_attr( $s['alt'] ); ?>"
+                 <?php echo 0 === $i ? 'fetchpriority="high"' : 'loading="lazy"'; ?> decoding="async">
+          </div>
+
+          <div class="bb-slide-offer">
+            <span class="bb-slide-only">Only</span>
+            <span class="bb-slide-amount">&#8377;<?php echo esc_html( $s['price'] ); ?></span>
+            <a href="<?php echo esc_url( $shop ); ?>" class="bb-shop-tag">Shop Now</a>
+          </div>
+
         </div>
       </article>
     <?php endforeach; ?>
   </div>
 
-  <div class="bb-hero-controls">
-    <button class="bb-arrow bb-arrow--prev" data-hero="prev" aria-label="Previous slide"><?php echo hb_icon( 'arrow', 18 ); ?></button>
-    <div class="bb-hero-dots" id="bb-hero-dots" role="tablist" aria-label="Choose slide">
-      <?php foreach ( $slides as $i => $s ) : ?>
-        <button class="bb-hero-dot<?php echo 0 === $i ? ' is-active' : ''; ?>" data-slide="<?php echo (int) $i; ?>" role="tab" aria-label="Slide <?php echo (int) $i + 1; ?>" aria-selected="<?php echo 0 === $i ? 'true' : 'false'; ?>"></button>
-      <?php endforeach; ?>
-    </div>
-    <button class="bb-arrow" data-hero="next" aria-label="Next slide"><?php echo hb_icon( 'arrow', 18 ); ?></button>
+  <button class="bb-hero-nav bb-hero-nav--prev" data-hero="prev" aria-label="Previous slide"><?php echo hb_icon( 'arrow', 26 ); ?></button>
+  <button class="bb-hero-nav bb-hero-nav--next" data-hero="next" aria-label="Next slide"><?php echo hb_icon( 'arrow', 26 ); ?></button>
+
+  <div class="bb-hero-dots" id="bb-hero-dots" role="tablist" aria-label="Choose slide">
+    <?php foreach ( $slides as $i => $s ) : ?>
+      <button class="bb-hero-dot<?php echo 0 === $i ? ' is-active' : ''; ?>" data-slide="<?php echo (int) $i; ?>" role="tab" aria-label="Slide <?php echo (int) $i + 1; ?>" aria-selected="<?php echo 0 === $i ? 'true' : 'false'; ?>"></button>
+    <?php endforeach; ?>
   </div>
+
+  <!-- scalloped divider into the next section -->
+  <svg class="bb-hero-wave" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <path d="M0,60 V28 Q25,0 50,28 T100,28 T150,28 T200,28 T250,28 T300,28 T350,28 T400,28 T450,28 T500,28 T550,28 T600,28 T650,28 T700,28 T750,28 T800,28 T850,28 T900,28 T950,28 T1000,28 T1050,28 T1100,28 T1150,28 T1200,28 V60 Z" fill="#fff"/>
+  </svg>
 </section>
 
 <!-- ═══════════ 2. CATEGORY CIRCLES ═══════════ -->

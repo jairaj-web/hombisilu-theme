@@ -72,13 +72,50 @@
 @media (min-width: 1180px) { .bb-rail > * { width: calc(25%    - var(--ds-s3) * .75); } }
 @media (prefers-reduced-motion: reduce) { .bb-rail { scroll-behavior: auto; } }
 
-/* ── 1. HERO SLIDER ───────────────────────────────────────── */
-.bb-hero { position: relative; overflow: hidden; background: var(--bb-dark); }
+/* ── 1. HERO SLIDER ───────────────────────────────────────
+   Flat brand-colour field with the product as a floating
+   cut-out, edge arrows and a scalloped divider — the
+   composition used by the Barab reference.
+   ─────────────────────────────────────────────────────────── */
+.bb-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--bb-dark);
+  padding-bottom: 60px;   /* room for the wave */
+}
+
+/* Soft blurred colour pools so the flat field is not dead */
+.bb-hero-blob {
+  position: absolute;
+  z-index: 0;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+}
+.bb-hero-blob--a { top: -12%; left: -6%;  width: 46vw; aspect-ratio: 1; background: rgba(46,107,62,.55); }
+.bb-hero-blob--b { bottom: -18%; right: -8%; width: 42vw; aspect-ratio: 1; background: rgba(201,147,43,.22); }
+
+/* Products peeking in from both edges */
+.bb-hero-peek {
+  position: absolute;
+  bottom: -2%;
+  z-index: 1;
+  width: clamp(90px, 10vw, 165px);
+  height: auto;
+  opacity: .55;
+  filter: drop-shadow(0 18px 34px rgba(0,0,0,.45)) blur(.4px);
+  pointer-events: none;
+}
+/* Held tight to the edges so they never crowd the price block */
+.bb-hero-peek--l { left: -3.5%;  transform: rotate(-13deg); }
+.bb-hero-peek--r { right: -3.5%; transform: rotate(12deg); }
+@media (max-width: 1280px) { .bb-hero-peek { display: none; } }
 
 .bb-hero-track {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 100%;
+  position: relative;
+  z-index: 2;
+  display: flex;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
@@ -88,37 +125,36 @@
 @media (prefers-reduced-motion: reduce) { .bb-hero-track { scroll-behavior: auto; } }
 
 .bb-slide {
-  position: relative;
-  scroll-snap-align: start;
-  display: grid;
-  place-items: center;
-  min-height: clamp(420px, 62vh, 660px);
-  padding-block: var(--ds-s5);
-  isolation: isolate;
-}
-.bb-slide-bg {
-  position: absolute;
-  inset: 0;
-  z-index: -2;
+  flex: 0 0 100%;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  scroll-snap-align: start;
+  padding-block: clamp(1.5rem, 1rem + 3vw, 3.5rem) clamp(1rem, .5rem + 2vw, 2.5rem);
 }
-.bb-slide::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background:
-    radial-gradient(700px 420px at 22% 50%, rgba(20,53,33,.86), transparent 72%),
-    linear-gradient(90deg, rgba(20,53,33,.9) 0%, rgba(20,53,33,.55) 55%, rgba(20,53,33,.35) 100%);
+/* Stacked layout puts the CTA where the dots sit, so reserve room for them. */
+@media (max-width: 760px) { .bb-slide { padding-bottom: 5.5rem; } }
+/* Keep the price block clear of the fixed WhatsApp button. */
+@media (min-width: 1100px) { .bb-slide-offer { padding-right: 76px; } }
+
+/* copy on top, product centre, price to the right */
+.bb-slide-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "copy  copy"
+    "stage offer";
+  align-items: end;
+  gap: clamp(1rem, .5rem + 2vw, 2.5rem);
 }
 @media (max-width: 760px) {
-  .bb-slide::after { background: linear-gradient(180deg, rgba(20,53,33,.7), rgba(20,53,33,.92)); }
+  .bb-slide-grid {
+    grid-template-columns: 1fr;
+    grid-template-areas: "copy" "stage" "offer";
+    justify-items: center;
+    text-align: center;
+  }
 }
 
-.bb-slide-inner { width: 100%; max-width: 640px; margin-right: auto; color: #fff; }
-@media (max-width: 760px) { .bb-slide-inner { margin-inline: auto; text-align: center; } }
+.bb-slide-copy { grid-area: copy; text-align: center; color: #fff; }
 
 .bb-slide-welcome {
   display: inline-flex;
@@ -126,76 +162,148 @@
   gap: .5rem;
   font-size: var(--ds-micro);
   font-weight: 800;
-  letter-spacing: .22em;
+  letter-spacing: .26em;
   text-transform: uppercase;
   color: var(--bb-warm-lt);
   margin-bottom: var(--ds-s2);
 }
 .bb-slide-title {
   font-family: var(--font-serif);
-  font-size: clamp(2.3rem, 1.4rem + 4.2vw, 4.6rem);
+  font-size: clamp(2.2rem, 1.1rem + 5.2vw, 5.4rem);
   font-weight: 700;
-  line-height: 1;
+  line-height: .95;
   letter-spacing: -.03em;
+  text-transform: uppercase;
+  color: #fff;
   text-wrap: balance;
+  max-width: 18ch;
+  margin-inline: auto;
 }
-.bb-slide-title em { font-style: italic; color: var(--bb-warm-lt); }
-.bb-slide-text {
-  margin-top: var(--ds-s3);
-  max-width: 46ch;
-  font-size: var(--ds-lead);
-  line-height: 1.7;
-  color: rgba(255,255,255,.78);
-}
-@media (max-width: 760px) { .bb-slide-text { margin-inline: auto; } }
-
-.bb-slide-price {
-  display: inline-flex;
-  align-items: baseline;
-  gap: .5rem;
-  margin-top: var(--ds-s3);
-  padding: .5rem 1.1rem;
-  border-radius: var(--ds-r-pill);
-  background: rgba(240,194,68,.15);
-  border: 1px solid rgba(240,194,68,.35);
-  font-size: var(--ds-small);
-  font-weight: 700;
+.bb-slide-title em {
+  display: block;
+  font-family: var(--font-serif);
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: -.02em;
+  font-size: .58em;
   color: var(--bb-warm-lt);
 }
-.bb-slide-price strong { font-family: var(--font-serif); font-size: 1.5rem; color: #fff; }
-.bb-slide-actions { display: flex; flex-wrap: wrap; gap: var(--ds-s2); margin-top: var(--ds-s4); }
-@media (max-width: 760px) { .bb-slide-actions { justify-content: center; } }
 
-/* Slider controls */
-.bb-hero-controls {
+/* Centre product */
+.bb-slide-stage { grid-area: stage; display: grid; place-items: end center; }
+.bb-slide-cut {
+  width: clamp(190px, 30vw, 360px);
+  height: auto;
+  filter: drop-shadow(0 30px 50px rgba(0,0,0,.5));
+  animation: bb-float 7s ease-in-out infinite;
+}
+@keyframes bb-float {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50%      { transform: translateY(-16px) rotate(1deg); }
+}
+@media (prefers-reduced-motion: reduce) { .bb-slide-cut { animation: none; } }
+
+/* Price + CTA block */
+.bb-slide-offer {
+  grid-area: offer;
+  display: grid;
+  justify-items: center;
+  gap: .35rem;
+  padding-bottom: clamp(.5rem, 2vw, 2rem);
+  color: #fff;
+}
+.bb-slide-only {
+  font-size: clamp(.9rem, .8rem + .4vw, 1.25rem);
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.75);
+}
+.bb-slide-amount {
+  font-family: var(--font-serif);
+  font-size: clamp(2.6rem, 1.6rem + 4vw, 5rem);
+  font-weight: 700;
+  line-height: .9;
+  color: #fff;
+}
+
+/* Angled tag button, echoing the reference's cut-corner CTA */
+.bb-shop-tag {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: .75rem;
+  padding: .9rem 2rem;
+  min-height: 48px;
+  background: linear-gradient(135deg, var(--bb-warm-lt), var(--bb-warm));
+  color: #24170A;
+  font-size: .92rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  clip-path: polygon(6% 0, 100% 0, 94% 100%, 0 100%);
+  transition: transform var(--ds-fast), filter var(--ds-base);
+}
+.bb-shop-tag:hover { transform: translateY(-2px); filter: brightness(1.06); }
+.bb-shop-tag:active { transform: translateY(0); }
+
+/* Big outlined arrows pinned to the edges */
+.bb-hero-nav {
+  position: absolute;
+  top: 50%;
+  z-index: 4;
+  transform: translateY(-50%);
+  width: clamp(48px, 5vw, 74px);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border: 2px solid rgba(255,255,255,.5);
+  border-radius: 50%;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color var(--ds-fast), border-color var(--ds-fast), color var(--ds-fast);
+}
+.bb-hero-nav:hover { background: #fff; border-color: #fff; color: var(--bb-dark); }
+.bb-hero-nav--prev { left: clamp(.5rem, 2vw, 3rem); }
+.bb-hero-nav--prev svg { transform: rotate(180deg); }
+.bb-hero-nav--next { right: clamp(.5rem, 2vw, 3rem); }
+@media (max-width: 620px) { .bb-hero-nav { display: none; } }
+
+.bb-hero-dots {
   position: absolute;
   left: 50%;
-  bottom: var(--ds-s3);
+  bottom: 74px;
+  z-index: 4;
   transform: translateX(-50%);
-  z-index: 3;
   display: flex;
-  align-items: center;
-  gap: .75rem;
+  gap: .4rem;
 }
-.bb-hero-controls .bb-arrow {
-  background: rgba(255,255,255,.12);
-  border-color: rgba(255,255,255,.3);
-  color: #fff;
-  backdrop-filter: blur(8px);
-}
-.bb-hero-controls .bb-arrow:hover { background: #fff; color: var(--ds-forest); }
-.bb-hero-dots { display: flex; gap: .4rem; }
 .bb-hero-dot {
   width: 9px;
   height: 9px;
   padding: 0;
   border: none;
   border-radius: 50%;
-  background: rgba(255,255,255,.35);
+  background: rgba(255,255,255,.4);
   cursor: pointer;
   transition: width var(--ds-base), background-color var(--ds-base);
 }
-.bb-hero-dot.is-active { width: 26px; border-radius: var(--ds-r-pill); background: var(--bb-warm-lt); }
+.bb-hero-dot.is-active { width: 28px; border-radius: var(--ds-r-pill); background: var(--bb-warm-lt); }
+
+/* Scalloped divider */
+.bb-hero-wave {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  z-index: 3;
+  width: 100%;
+  height: 60px;
+  display: block;
+  pointer-events: none;
+}
 
 /* ── 2. CATEGORY CIRCLES ──────────────────────────────────── */
 .bb-cats { display: flex; gap: var(--ds-s3); overflow-x: auto; scrollbar-width: none; padding-bottom: .5rem; }
