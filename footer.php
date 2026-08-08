@@ -3,10 +3,10 @@
   <!-- Value strip -->
   <div class="ds-footer-strip">
     <div class="ds-wrap ds-footer-strip-inner">
-      <div class="ds-footer-value"><?php echo hb_icon( 'truck', 22 ); ?><div><strong>Pan-India Delivery</strong><span>Free above &#8377;499</span></div></div>
-      <div class="ds-footer-value"><?php echo hb_icon( 'shield', 22 ); ?><div><strong>FSSAI Certified</strong><span>11225332000490</span></div></div>
-      <div class="ds-footer-value"><?php echo hb_icon( 'leaf', 22 ); ?><div><strong>100&#37; Natural</strong><span>No preservatives</span></div></div>
-      <div class="ds-footer-value"><?php echo hb_icon( 'chat', 22 ); ?><div><strong>Talk to Us</strong><span>Mon–Sat 9AM–6PM</span></div></div>
+      <div class="ds-footer-value"><span class="ds-footer-value-icon"><?php echo hb_icon( 'truck', 20 ); ?></span><div><strong>Pan-India Delivery</strong><span>Free above &#8377;499</span></div></div>
+      <div class="ds-footer-value"><span class="ds-footer-value-icon"><?php echo hb_icon( 'shield', 20 ); ?></span><div><strong>FSSAI Certified</strong><span>11225332000490</span></div></div>
+      <div class="ds-footer-value"><span class="ds-footer-value-icon"><?php echo hb_icon( 'leaf', 20 ); ?></span><div><strong>100&#37; Natural</strong><span>No preservatives</span></div></div>
+      <div class="ds-footer-value"><span class="ds-footer-value-icon"><?php echo hb_icon( 'chat', 20 ); ?></span><div><strong>Talk to Us</strong><span>Mon–Sat 9AM–6PM</span></div></div>
     </div>
   </div>
 

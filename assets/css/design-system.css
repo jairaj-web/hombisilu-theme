@@ -1214,24 +1214,48 @@ img.ds-logo {
 
 /* ── 19. FOOTER ───────────────────────────────────────────── */
 .ds-footer {
-  background: var(--ds-forest-deep);
+  position: relative;
+  background:
+    radial-gradient(900px 420px at 12% 0%, rgba(201,147,43,.10), transparent 60%),
+    radial-gradient(700px 500px at 100% 100%, rgba(0,0,0,.22), transparent 60%),
+    var(--ds-forest-deep);
   color: rgba(255,255,255,.72);
   font-size: var(--ds-body);
 }
+/* Thin gold seam at the very top edge — the one line that says "considered
+   design" rather than "background color stops here". */
+.ds-footer::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--ds-gold-lt) 25%, var(--ds-gold) 50%, var(--ds-gold-lt) 75%, transparent);
+  opacity: .7;
+}
 
-.ds-footer-strip { background: rgba(255,255,255,.05); border-bottom: 1px solid rgba(255,255,255,.08); }
+.ds-footer-strip { background: rgba(255,255,255,.04); border-bottom: 1px solid rgba(255,255,255,.08); }
 .ds-footer-strip-inner {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
   gap: var(--ds-s3);
   padding-block: var(--ds-s3);
 }
-.ds-footer-value { display: flex; align-items: center; gap: .75rem; }
-.ds-footer-value svg { flex: none; color: var(--ds-gold-lt); }
+.ds-footer-value { display: flex; align-items: center; gap: .85rem; }
+.ds-footer-value-icon {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(240,194,68,.12);
+  color: var(--ds-gold-lt);
+}
 .ds-footer-value strong { display: block; color: #fff; font-size: .92rem; font-weight: 650; }
 .ds-footer-value span { display: block; font-size: var(--ds-small); color: rgba(255,255,255,.55); }
 
 .ds-footer-main {
+  position: relative;
   display: grid;
   grid-template-columns: 1.6fr 1fr 1fr 1.3fr;
   gap: var(--ds-s4);
@@ -1240,9 +1264,15 @@ img.ds-logo {
 @media (max-width: 1000px) { .ds-footer-main { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px)  { .ds-footer-main { grid-template-columns: 1fr; gap: var(--ds-s3); } }
 
-.ds-footer-brand p { margin: var(--ds-s2) 0; line-height: 1.75; max-width: 40ch; }
-.ds-footer-brand .ds-wordmark-name { color: #fff; }
+/* Faint vertical seams between columns, desktop only — reads as a
+   considered grid rather than four blocks floating in open space. */
+@media (min-width: 1001px) {
+  .ds-footer-main > * + * { border-left: 1px solid rgba(255,255,255,.07); padding-left: var(--ds-s4); }
+}
+
+.ds-footer-brand .ds-wordmark-name { color: #fff; font-size: clamp(1.5rem, 2.6vw, 1.9rem); letter-spacing: -.01em; }
 .ds-footer-brand .ds-wordmark-tag { color: var(--ds-gold-lt); }
+.ds-footer-brand p { margin: var(--ds-s2) 0; line-height: 1.75; max-width: 40ch; }
 .ds-footer-social { display: flex; flex-wrap: wrap; gap: .65rem; margin-top: var(--ds-s3); }
 
 .ds-footer-icon {
@@ -1254,6 +1284,7 @@ img.ds-logo {
   background: rgba(255,255,255,.08);
   border: 1px solid rgba(255,255,255,.16);
   color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,.18);
   transition: background-color var(--ds-base), border-color var(--ds-base),
               transform var(--ds-fast), box-shadow var(--ds-base), color var(--ds-fast);
 }
@@ -1266,33 +1297,72 @@ img.ds-logo {
 .ds-footer-icon--phone:hover { background: var(--ds-gold); border-color: var(--ds-gold); color: #24170A; }
 
 .ds-footer-col h3 {
+  position: relative;
+  display: inline-block;
   font-size: var(--ds-micro);
   text-transform: uppercase;
   letter-spacing: .16em;
   color: var(--ds-gold-lt);
   font-weight: 800;
-  margin-bottom: var(--ds-s2);
+  margin-bottom: var(--ds-s3);
+  padding-bottom: .6rem;
 }
-.ds-footer-col ul { display: grid; gap: .55rem; }
-.ds-footer-col a { color: rgba(255,255,255,.72); font-size: .9rem; transition: color var(--ds-fast), padding-left var(--ds-fast); }
-.ds-footer-col a:hover { color: #fff; padding-left: 4px; }
+/* Short accent rule under each column heading instead of relying on colour
+   contrast alone to separate "heading" from "list". */
+.ds-footer-col h3::after {
+  content: "";
+  position: absolute;
+  left: 0; bottom: 0;
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--ds-gold), transparent);
+}
+.ds-footer-col ul { display: grid; gap: .6rem; }
+.ds-footer-col a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: rgba(255,255,255,.72);
+  font-size: .9rem;
+  transition: color var(--ds-fast), padding-left var(--ds-fast);
+}
+.ds-footer-col a::before {
+  content: "";
+  width: 0;
+  height: 1px;
+  margin-right: 0;
+  background: var(--ds-gold-lt);
+  transition: width var(--ds-fast), margin-right var(--ds-fast);
+}
+.ds-footer-col a:hover { color: #fff; padding-left: 2px; }
+.ds-footer-col a:hover::before { width: 10px; margin-right: 6px; }
 
 .ds-footer-contact li { display: flex; gap: .6rem; align-items: flex-start; line-height: 1.6; font-size: .9rem; }
 .ds-footer-contact svg { flex: none; margin-top: 3px; color: var(--ds-gold-lt); }
 
 .ds-footer-bottom {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: var(--ds-s2);
   padding-block: var(--ds-s3);
-  border-top: 1px solid rgba(255,255,255,.1);
   font-size: var(--ds-small);
   color: rgba(255,255,255,.5);
 }
+/* Gradient hairline instead of a flat 1px border — matches the top seam and
+   fades at the edges rather than cutting hard across the full width. */
+.ds-footer-bottom::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.16) 15%, rgba(255,255,255,.16) 85%, transparent);
+}
 .ds-footer-legal { display: flex; flex-wrap: wrap; gap: var(--ds-s2); }
-.ds-footer-legal a { color: rgba(255,255,255,.6); }
+.ds-footer-legal a { color: rgba(255,255,255,.6); transition: color var(--ds-fast); }
 .ds-footer-legal a:hover { color: var(--ds-gold-lt); }
 .ds-footer-credit { width: 100%; font-size: var(--ds-micro); color: rgba(255,255,255,.38); }
 .ds-footer-credit a { color: rgba(255,255,255,.55); text-decoration: underline; }
