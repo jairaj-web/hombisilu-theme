@@ -896,15 +896,8 @@ html:not(.js) .js-reveal { opacity: 1; transform: none; }
   font-size: var(--ds-micro);
   font-weight: 600;
   letter-spacing: .06em;
-  overflow: hidden;
-  /* No trailing timing-function keyword here — --ds-base/--ds-fast already
-     bake one in, and appending another makes the whole shorthand invalid
-     at computed-value time (transition silently no-ops). */
-  transition: max-height var(--ds-base), padding var(--ds-base), opacity var(--ds-fast);
 }
-.ds-announce.is-collapsing { opacity: 0; }
 .ds-announce-inner {
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -917,28 +910,6 @@ html:not(.js) .js-reveal { opacity: 1; transform: none; }
   /* Keep one clear promise rather than three cramped ones */
   .ds-announce-items > *:nth-child(n+3) { display: none; }
 }
-
-.ds-announce-close {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 22px;
-  height: 22px;
-  display: grid;
-  place-items: center;
-  padding: 0;
-  border: none;
-  border-radius: 50%;
-  background: rgba(255,255,255,.12);
-  color: rgba(255,255,255,.8);
-  font-size: .6rem;
-  line-height: 1;
-  cursor: pointer;
-  transition: background-color var(--ds-fast), color var(--ds-fast);
-}
-.ds-announce-close:hover { background: rgba(255,255,255,.24); color: #fff; }
-@media (max-width: 480px) { .ds-announce-close { display: none; } }
 
 .ds-header {
   background: rgba(255,255,255,.82);
