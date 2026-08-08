@@ -114,8 +114,8 @@
 }
 
 .hh-feature-icon {
-  width: 56px;
-  height: 56px;
+  width: 52px;
+  height: 52px;
   flex: none;
   display: grid;
   place-items: center;
@@ -125,7 +125,7 @@
 }
 
 .hh-feature-title {
-  font-size: 1.02rem;
+  font-size: 1rem;
   font-weight: 700;
   color: var(--ds-forest);
   line-height: 1.3;

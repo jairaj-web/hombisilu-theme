@@ -40,10 +40,10 @@ $shop = hb_shop_url();
       if ( $terms && ! is_wp_error( $terms ) ) :
         foreach ( $terms as $term ) :
           $icon = isset( $cat_icons[ $term->slug ] ) ? $cat_icons[ $term->slug ] : 'leaf';
-          $desc = $term->description ? $term->description : sprintf( '%d items in this category.', (int) $term->count );
+          $desc = $term->description ? $term->description : sprintf( '%d item%s in this category.', (int) $term->count, 1 === (int) $term->count ? '' : 's' );
       ?>
         <a class="hs-cat-card" href="<?php echo esc_url( get_term_link( $term ) ); ?>">
-          <span class="hs-cat-icon" aria-hidden="true"><?php echo hb_icon( $icon, 30 ); ?></span>
+          <span class="hs-cat-icon" aria-hidden="true"><?php echo hb_icon( $icon, 26 ); ?></span>
           <h3 class="hs-cat-name"><?php echo esc_html( $term->name ); ?></h3>
           <p class="hs-cat-desc"><?php echo esc_html( wp_trim_words( $desc, 14 ) ); ?></p>
           <span class="ds-link hs-cat-link">Shop Now <?php echo hb_icon( 'arrow', 14 ); ?></span>

@@ -140,7 +140,7 @@
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background: rgba(107,30,40,.07);
+  background: rgba(107,30,40,.08);
   color: var(--ds-forest);
   margin-bottom: .2rem;
 }
@@ -154,6 +154,7 @@
 .hs-stat-label {
   font-size: var(--ds-small);
   font-weight: 650;
+  line-height: 1.6;
   letter-spacing: .04em;
   text-transform: uppercase;
   color: var(--ds-muted);

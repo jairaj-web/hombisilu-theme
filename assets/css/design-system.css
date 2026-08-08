@@ -634,7 +634,7 @@
 
 .ds-prod-body { display: flex; flex-direction: column; gap: .5rem; padding: var(--ds-s3); flex: 1; }
 .ds-prod-cat { font-size: var(--ds-micro); text-transform: uppercase; letter-spacing: .12em; color: var(--ds-gold); font-weight: 700; }
-.ds-prod-title { font-size: .98rem; font-weight: 650; line-height: 1.35; color: var(--ds-ink); }
+.ds-prod-title { font-size: 1rem; font-weight: 700; line-height: 1.35; color: var(--ds-ink); }
 .ds-prod-title a:hover { color: var(--ds-forest); }
 .ds-prod-stars { display: flex; gap: 2px; color: var(--ds-gold); }
 .ds-prod-price {
@@ -772,7 +772,7 @@
   color: #fff;
   font-weight: 700;
 }
-.ds-testi-name { font-size: .92rem; font-weight: 650; color: var(--ds-ink); }
+.ds-testi-name { font-size: 1rem; font-weight: 700; color: var(--ds-ink); }
 .ds-testi-loc  { font-size: var(--ds-micro); color: var(--ds-muted); letter-spacing: .06em; text-transform: uppercase; font-weight: 600; }
 
 /* Featured variant */

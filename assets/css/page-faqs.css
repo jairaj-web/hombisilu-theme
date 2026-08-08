@@ -55,6 +55,7 @@
   display: inline-flex;
   align-items: center;
   gap: .45rem;
+  min-height: 44px;
   padding: .6rem 1.15rem;
   border-radius: var(--ds-r-pill);
   border: 1.5px solid var(--ds-line);
@@ -83,14 +84,12 @@
   border-bottom: 2px solid var(--ds-line);
 }
 .fq-group-icon {
-  width: 3rem;
-  height: 3rem;
-  border-radius: var(--ds-r-md);
-  background: linear-gradient(135deg, rgba(201,147,43,.15), rgba(26,61,46,.08));
-  border: 1.5px solid rgba(201,147,43,.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(107,30,40,.08);
+  display: grid;
+  place-items: center;
   color: var(--ds-forest);
   flex-shrink: 0;
 }
@@ -184,13 +183,12 @@
   margin-top: var(--ds-s3);
 }
 .fq-cta-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 4rem;
-  height: 4rem;
-  border-radius: var(--ds-r-lg);
-  background: rgba(255,255,255,.15);
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.12);
   color: var(--ds-gold-lt);
   margin: 0 auto var(--ds-s3);
 }

@@ -15,12 +15,12 @@
   background: var(--ds-white);
   border: 1px solid var(--ds-line);
   border-radius: var(--ds-r-lg);
-  padding: var(--ds-s4);
+  padding: var(--ds-s4) var(--ds-s3);
   box-shadow: var(--ds-e1);
   transition: transform var(--ds-base), box-shadow var(--ds-base), border-color var(--ds-base);
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .ht-testi:hover {
     transform: translateY(-4px);
     box-shadow: var(--ds-e2);
@@ -67,7 +67,8 @@
   flex-wrap: wrap;
   gap: .5rem;
   font-weight: 700;
-  font-size: .95rem;
+  font-size: 1rem;
+  line-height: 1.3;
   color: var(--ds-ink);
   padding-top: var(--ds-s1);
   border-top: 1px solid var(--ds-line);

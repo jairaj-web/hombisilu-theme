@@ -19,11 +19,14 @@
 /* Contact / Grievance Officer card, placed after the prose body */
 .lp-contact {
   margin-top: var(--ds-s5);
-  padding: var(--ds-s4);
+  padding: var(--ds-s4) var(--ds-s3);
+  box-shadow: var(--ds-e1);
 }
 .lp-contact h3 {
   font-family: var(--font-serif);
-  font-size: var(--ds-h3);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.3;
   color: var(--ds-forest);
   margin-bottom: var(--ds-s3);
 }
@@ -52,5 +55,13 @@
 }
 .lp-contact-list a { color: var(--ds-forest); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 .lp-contact-list a:hover { color: var(--ds-gold); }
+
+/* WhatsApp is an icon+text link (not a plain inline text link) — give it a
+   real tap target on touch devices per the 44px minimum. */
+.lp-contact-list a[href^="https://wa.me"] {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
 
 .lp-wa-icon { vertical-align: -3px; margin-right: .3em; }

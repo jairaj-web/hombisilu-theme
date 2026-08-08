@@ -27,23 +27,25 @@
   cursor: default;
 }
 a.pc-quick { cursor: pointer; }
-a.pc-quick:hover, a.pc-quick:focus-visible {
-  background: rgba(255,255,255,.18);
-  transform: translateY(-3px);
+a.pc-quick:focus-visible { background: rgba(255,255,255,.18); }
+@media (hover: hover) and (pointer: fine) {
+  a.pc-quick:hover { background: rgba(255,255,255,.18); transform: translateY(-3px); }
 }
 .pc-quick--wa { border-color: rgba(37,211,102,.4); }
-.pc-quick--wa:hover, .pc-quick--wa:focus-visible { background: rgba(37,211,102,.18); }
+.pc-quick--wa:focus-visible { background: rgba(37,211,102,.18); }
+@media (hover: hover) and (pointer: fine) {
+  .pc-quick--wa:hover { background: rgba(37,211,102,.18); }
+}
 .pc-quick-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: var(--ds-r-md);
-  background: rgba(255,255,255,.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.12);
+  display: grid;
+  place-items: center;
   flex-shrink: 0;
 }
-.pc-quick--wa .pc-quick-icon { background: rgba(37,211,102,.22); color: #25D366; }
+.pc-quick--wa .pc-quick-icon { background: rgba(37,211,102,.16); color: #25D366; }
 .pc-quick-text { display: flex; flex-direction: column; gap: 2px; }
 .pc-quick-label {
   font-size: var(--ds-micro);
@@ -69,29 +71,29 @@ a.pc-quick:hover, a.pc-quick:focus-visible {
   display: flex;
   align-items: flex-start;
   gap: 1rem;
-  padding: 1.1rem 1.2rem;
+  padding: var(--ds-s4) var(--ds-s3);
+  box-shadow: var(--ds-e1);
 }
 .pc-info-icon {
-  width: 46px;
-  height: 46px;
-  border-radius: var(--ds-r-md);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
   flex-shrink: 0;
-  background: linear-gradient(135deg, rgba(201,147,43,.15), rgba(107,30,40,.08));
-  border: 1.5px solid rgba(201,147,43,.25);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: rgba(107,30,40,.08);
+  display: grid;
+  place-items: center;
   color: var(--ds-forest);
 }
 .pc-info-item h3 {
-  font-size: var(--ds-small);
+  font-size: 1rem;
   font-weight: 700;
+  line-height: 1.3;
   color: var(--ds-forest);
   margin-bottom: .3rem;
   text-transform: uppercase;
   letter-spacing: .04em;
 }
-.pc-info-item p { font-size: var(--ds-body); color: var(--ds-muted); line-height: 1.6; }
+.pc-info-item p { font-size: var(--ds-small); color: var(--ds-muted); line-height: 1.6; }
 .pc-info-item a { color: var(--ds-forest); font-weight: 600; }
 .pc-info-item a:hover, .pc-info-item a:focus-visible { color: var(--ds-gold); }
 
@@ -100,21 +102,21 @@ a.pc-quick:hover, a.pc-quick:focus-visible {
   align-items: center;
   gap: 1rem;
   border-left: 4px solid var(--ds-gold);
-  padding: 1.1rem 1.25rem;
+  padding: var(--ds-s4) var(--ds-s3);
   margin-bottom: var(--ds-s3);
+  box-shadow: var(--ds-e1);
 }
 .pc-cert-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: var(--ds-r-md);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
   flex-shrink: 0;
-  background: rgba(201,147,43,.14);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: rgba(201,147,43,.10);
+  display: grid;
+  place-items: center;
   color: var(--ds-forest);
 }
-.pc-cert-title { font-weight: 700; color: var(--ds-forest); font-size: var(--ds-body); margin-bottom: .2rem; }
+.pc-cert-title { font-weight: 700; color: var(--ds-forest); font-size: 1rem; line-height: 1.3; margin-bottom: .2rem; }
 .pc-cert-num { font-size: var(--ds-small); color: var(--ds-muted); }
 
 .pc-wa-btn {

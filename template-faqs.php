@@ -53,7 +53,7 @@ get_header(); ?>
       <!-- General -->
       <section class="fq-group" id="cat-general">
         <div class="fq-group-head">
-          <span class="fq-group-icon"><?php echo hb_icon( 'grid', 22 ); ?></span>
+          <span class="fq-group-icon"><?php echo hb_icon( 'grid', 25 ); ?></span>
           <h2>General</h2>
         </div>
         <div class="fq-accordion">
@@ -84,7 +84,7 @@ get_header(); ?>
       <!-- Products & Quality -->
       <section class="fq-group" id="cat-products">
         <div class="fq-group-head">
-          <span class="fq-group-icon"><?php echo hb_icon( 'leaf', 22 ); ?></span>
+          <span class="fq-group-icon"><?php echo hb_icon( 'leaf', 25 ); ?></span>
           <h2>Products &amp; Quality</h2>
         </div>
         <div class="fq-accordion">
@@ -164,7 +164,7 @@ get_header(); ?>
       <!-- Ordering & Payment -->
       <section class="fq-group" id="cat-ordering">
         <div class="fq-group-head">
-          <span class="fq-group-icon"><?php echo hb_icon( 'bag', 22 ); ?></span>
+          <span class="fq-group-icon"><?php echo hb_icon( 'bag', 25 ); ?></span>
           <h2>Ordering &amp; Payment</h2>
         </div>
         <div class="fq-accordion">
@@ -209,7 +209,7 @@ get_header(); ?>
       <!-- Shipping & Delivery -->
       <section class="fq-group" id="cat-shipping">
         <div class="fq-group-head">
-          <span class="fq-group-icon"><?php echo hb_icon( 'truck', 22 ); ?></span>
+          <span class="fq-group-icon"><?php echo hb_icon( 'truck', 25 ); ?></span>
           <h2>Shipping &amp; Delivery</h2>
         </div>
         <div class="fq-accordion">
@@ -244,7 +244,7 @@ get_header(); ?>
       <!-- Returns & Refunds -->
       <section class="fq-group" id="cat-returns">
         <div class="fq-group-head">
-          <span class="fq-group-icon"><?php echo hb_icon( 'clock', 22 ); ?></span>
+          <span class="fq-group-icon"><?php echo hb_icon( 'clock', 25 ); ?></span>
           <h2>Returns &amp; Refunds</h2>
         </div>
         <div class="fq-accordion">
@@ -275,7 +275,7 @@ get_header(); ?>
       <!-- Policies -->
       <section class="fq-group" id="cat-policies">
         <div class="fq-group-head">
-          <span class="fq-group-icon"><?php echo hb_icon( 'book', 22 ); ?></span>
+          <span class="fq-group-icon"><?php echo hb_icon( 'book', 25 ); ?></span>
           <h2>Policies</h2>
         </div>
         <div class="fq-accordion">
@@ -318,7 +318,7 @@ get_header(); ?>
 
     <!-- CTA -->
     <div class="fq-cta">
-      <span class="fq-cta-icon"><?php echo hb_icon( 'chat', 28 ); ?></span>
+      <span class="fq-cta-icon"><?php echo hb_icon( 'chat', 25 ); ?></span>
       <h2 class="fq-cta-title">Still Have Questions?</h2>
       <p class="fq-cta-sub">Our team is just a message away — we typically respond within 24 hours.</p>
       <div class="fq-cta-btns">

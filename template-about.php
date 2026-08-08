@@ -127,7 +127,7 @@ $shop_url = hb_shop_url();
     <div class="ds-grid ds-grid--2">
 
       <div class="ds-card ab-mv-card">
-        <div class="ab-mv-icon"><?php echo hb_icon( 'sprout', 28 ); ?></div>
+        <div class="ab-mv-icon"><?php echo hb_icon( 'sprout', 26 ); ?></div>
         <h3 class="ab-mv-title">Our Mission</h3>
         <p>To bring authentic, nourishing, and heritage-inspired South Indian foods to every home — without compromise on purity, quality, or tradition.</p>
         <ul class="ab-mv-list">
@@ -138,7 +138,7 @@ $shop_url = hb_shop_url();
       </div>
 
       <div class="ds-card ab-mv-card">
-        <div class="ab-mv-icon"><?php echo hb_icon( 'book', 28 ); ?></div>
+        <div class="ab-mv-icon"><?php echo hb_icon( 'book', 26 ); ?></div>
         <h3 class="ab-mv-title">Our Vision</h3>
         <p>To become India's most trusted name in traditional South Indian food products — bridging generations through flavour and purpose.</p>
         <ul class="ab-mv-list">
@@ -276,7 +276,7 @@ $shop_url = hb_shop_url();
     <div class="ds-grid ds-grid--3">
 
       <div class="ds-card ab-cert-card">
-        <div class="ab-cert-icon"><?php echo hb_icon( 'shield', 30 ); ?></div>
+        <div class="ab-cert-icon"><?php echo hb_icon( 'shield', 26 ); ?></div>
         <div class="ab-cert-title">FSSAI Licensed</div>
         <span class="ab-cert-num">11225332000490</span>
         <p class="ab-cert-desc">Certified by the Food Safety and Standards Authority of India</p>
@@ -284,14 +284,14 @@ $shop_url = hb_shop_url();
 
       <div class="ds-card ab-cert-card ab-cert-card--featured">
         <span class="ab-cert-badge">Primary</span>
-        <div class="ab-cert-icon"><?php echo hb_icon( 'check', 30 ); ?></div>
+        <div class="ab-cert-icon"><?php echo hb_icon( 'check', 26 ); ?></div>
         <div class="ab-cert-title">100% Natural</div>
         <span class="ab-cert-num">Zero Preservatives</span>
         <p class="ab-cert-desc">No artificial colours, flavours, or preservatives in any product</p>
       </div>
 
       <div class="ds-card ab-cert-card">
-        <div class="ab-cert-icon"><?php echo hb_icon( 'pin', 30 ); ?></div>
+        <div class="ab-cert-icon"><?php echo hb_icon( 'pin', 26 ); ?></div>
         <div class="ab-cert-title">Product of India</div>
         <span class="ab-cert-num">Made in Bengaluru</span>
         <p class="ab-cert-desc">Proudly manufactured in Karnataka, supporting local farmers</p>

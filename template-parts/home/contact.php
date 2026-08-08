@@ -30,28 +30,28 @@ $shop = hb_shop_url();
         <h3 class="hc-info-title">Our Details</h3>
         <ul class="hc-info-list">
           <li>
-            <span class="hc-info-icon"><?php echo hb_icon( 'pin', 20 ); ?></span>
+            <span class="hc-info-icon"><?php echo hb_icon( 'pin', 24 ); ?></span>
             <span>
               <strong>Address</strong>
               <span>#12, Somashetti Hall, Chikkabanavara,<br>Bengaluru &ndash; 560090</span>
             </span>
           </li>
           <li>
-            <span class="hc-info-icon"><?php echo hb_icon( 'phone', 20 ); ?></span>
+            <span class="hc-info-icon"><?php echo hb_icon( 'phone', 24 ); ?></span>
             <span>
               <strong>Phone</strong>
               <a href="tel:+916362616933">+91 6362616933</a>
             </span>
           </li>
           <li>
-            <span class="hc-info-icon"><?php echo hb_icon( 'mail', 20 ); ?></span>
+            <span class="hc-info-icon"><?php echo hb_icon( 'mail', 24 ); ?></span>
             <span>
               <strong>Email</strong>
               <a href="mailto:hombisilufooods@gmail.com">hombisilufooods@gmail.com</a>
             </span>
           </li>
           <li>
-            <span class="hc-info-icon"><?php echo hb_icon( 'clock', 20 ); ?></span>
+            <span class="hc-info-icon"><?php echo hb_icon( 'clock', 24 ); ?></span>
             <span>
               <strong>Hours</strong>
               <span>Mon&ndash;Sat: 9AM&ndash;6PM &middot; Sun: 10AM&ndash;4PM</span>
