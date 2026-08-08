@@ -14,13 +14,16 @@
 <div class="ds-header-stack" id="header-stack">
 
   <!-- Announcement -->
-  <div class="ds-announce">
+  <div class="ds-announce" id="announce-bar">
     <div class="ds-wrap ds-announce-inner">
-      <span><?php echo hb_icon( 'leaf', 14 ); ?> 100&#37; Natural</span>
-      <span class="ds-announce-dot" aria-hidden="true">&#10022;</span>
-      <span><?php echo hb_icon( 'shield', 14 ); ?> FSSAI Certified</span>
-      <span class="ds-announce-dot" aria-hidden="true">&#10022;</span>
-      <span><?php echo hb_icon( 'truck', 14 ); ?> Pan-India Delivery</span>
+      <div class="ds-announce-items">
+        <span><?php echo hb_icon( 'leaf', 14 ); ?> 100&#37; Natural</span>
+        <span class="ds-announce-dot" aria-hidden="true">&#10022;</span>
+        <span><?php echo hb_icon( 'shield', 14 ); ?> FSSAI Certified</span>
+        <span class="ds-announce-dot" aria-hidden="true">&#10022;</span>
+        <span><?php echo hb_icon( 'truck', 14 ); ?> Pan-India Delivery</span>
+      </div>
+      <button class="ds-announce-close" id="announce-close" aria-label="Dismiss announcement">&#x2715;</button>
     </div>
   </div>
 
@@ -70,7 +73,7 @@
           </a>
         <?php endif; ?>
 
-        <a href="<?php echo esc_url( hb_shop_url() ); ?>" class="ds-btn ds-btn--primary ds-header-cta">Shop Now</a>
+        <a href="<?php echo esc_url( hb_shop_url() ); ?>" class="ds-btn ds-btn--primary ds-header-cta">Shop Now <?php echo hb_icon( 'arrow', 14 ); ?></a>
 
         <button class="ds-burger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav">
           <span></span><span></span><span></span>
@@ -125,7 +128,34 @@
   var scrim   = document.getElementById('mobile-nav-overlay');
   var closeEl = document.getElementById('mobile-close');
   var header  = document.getElementById('site-header');
+  var announce      = document.getElementById('announce-bar');
+  var announceClose = document.getElementById('announce-close');
   var lastFocus = null;
+
+  /* Dismissible announcement bar — collapses with a height transition and
+     stays dismissed for the tab session so it doesn't reappear on every
+     internal navigation. */
+  if (announce && announceClose) {
+    if (sessionStorage.getItem('hbAnnounceDismissed') === '1') {
+      announce.style.display = 'none';
+    }
+    announceClose.addEventListener('click', function () {
+      announce.style.maxHeight = announce.offsetHeight + 'px';
+      requestAnimationFrame(function () {
+        announce.classList.add('is-collapsing');
+        announce.style.maxHeight = '0px';
+      });
+      /* Several properties transition at once (max-height, padding, opacity)
+         — wait for max-height specifically so a faster property finishing
+         first doesn't cut the collapse short. */
+      announce.addEventListener('transitionend', function onEnd(e) {
+        if (e.propertyName !== 'max-height') return;
+        announce.removeEventListener('transitionend', onEnd);
+        announce.style.display = 'none';
+      });
+      try { sessionStorage.setItem('hbAnnounceDismissed', '1'); } catch (e) {}
+    });
+  }
 
   function openNav() {
     lastFocus = document.activeElement;

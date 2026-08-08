@@ -891,32 +891,60 @@ html:not(.js) .js-reveal { opacity: 1; transform: none; }
 }
 
 .ds-announce {
-  background: var(--ds-forest-deep);
-  color: rgba(255,255,255,.9);
+  background: linear-gradient(90deg, var(--ds-forest-deep), var(--ds-forest) 55%, var(--ds-forest-deep));
+  color: rgba(255,255,255,.92);
   font-size: var(--ds-micro);
   font-weight: 600;
   letter-spacing: .06em;
+  overflow: hidden;
+  /* No trailing timing-function keyword here — --ds-base/--ds-fast already
+     bake one in, and appending another makes the whole shorthand invalid
+     at computed-value time (transition silently no-ops). */
+  transition: max-height var(--ds-base), padding var(--ds-base), opacity var(--ds-fast);
 }
+.ds-announce.is-collapsing { opacity: 0; }
 .ds-announce-inner {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: .75rem;
   padding-block: .6rem;
-  flex-wrap: wrap;
 }
-.ds-announce-inner span { display: inline-flex; align-items: center; gap: .35rem; }
+.ds-announce-items { display: flex; align-items: center; justify-content: center; gap: .75rem; flex-wrap: wrap; }
+.ds-announce-items span { display: inline-flex; align-items: center; gap: .35rem; }
 .ds-announce-dot { color: var(--ds-gold-lt); }
 @media (max-width: 620px) {
   /* Keep one clear promise rather than three cramped ones */
-  .ds-announce-inner > *:nth-child(n+3) { display: none; }
+  .ds-announce-items > *:nth-child(n+3) { display: none; }
 }
 
+.ds-announce-close {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,.12);
+  color: rgba(255,255,255,.8);
+  font-size: .6rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color var(--ds-fast), color var(--ds-fast);
+}
+.ds-announce-close:hover { background: rgba(255,255,255,.24); color: #fff; }
+@media (max-width: 480px) { .ds-announce-close { display: none; } }
+
 .ds-header {
-  background: rgba(255,255,255,.88);
-  backdrop-filter: saturate(180%) blur(14px);
-  -webkit-backdrop-filter: saturate(180%) blur(14px);
-  border-bottom: 1px solid var(--ds-line);
+  background: rgba(255,255,255,.82);
+  backdrop-filter: saturate(180%) blur(16px);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  box-shadow: 0 1px 0 rgba(20,53,33,.06);
   transition: box-shadow var(--ds-base), background-color var(--ds-base);
 }
 .ds-header.is-scrolled { box-shadow: var(--ds-e2); background: rgba(255,255,255,.96); }
@@ -978,36 +1006,27 @@ img.ds-logo {
   margin-top: 2px;
 }
 
-/* Nav */
+/* Nav — pill chips rather than an underline, so the current/hover state
+   reads as a single contained shape instead of a line hugging the text. */
 .ds-nav { min-width: 0; }
-.ds-nav ul { display: flex; align-items: center; flex-wrap: nowrap; gap: clamp(.6rem, 1.4vw, 1.75rem); }
+.ds-nav ul { display: flex; align-items: center; flex-wrap: nowrap; gap: clamp(.15rem, .5vw, .4rem); }
 .ds-nav a {
   position: relative;
   display: block;
-  padding: .4rem 0;
+  padding: .5rem .95rem;
+  border-radius: var(--ds-r-pill);
   font-size: .9rem;
   font-weight: 600;
   color: var(--ds-ink-2);
   white-space: nowrap;   /* "About Us" must not break onto two lines */
-  transition: color var(--ds-fast);
+  transition: color var(--ds-fast), background-color var(--ds-base);
 }
-.ds-nav a::after {
-  content: "";
-  position: absolute;
-  left: 0; right: 0; bottom: -2px;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--ds-gold);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform var(--ds-base);
-}
-.ds-nav a:hover { color: var(--ds-forest); }
-.ds-nav a:hover::after,
-.ds-nav .current-menu-item > a::after,
-.ds-nav .current_page_item > a::after { transform: scaleX(1); }
+.ds-nav a:hover { color: var(--ds-forest); background: rgba(31,77,46,.06); }
 .ds-nav .current-menu-item > a,
-.ds-nav .current_page_item > a { color: var(--ds-forest); }
+.ds-nav .current_page_item > a {
+  color: var(--ds-forest);
+  background: rgba(31,77,46,.09);
+}
 
 /* Sub-menus */
 .ds-nav li { position: relative; }
@@ -1048,27 +1067,38 @@ img.ds-logo {
   background: #fff;
   color: var(--ds-forest);
   cursor: pointer;
-  transition: background-color var(--ds-fast), border-color var(--ds-fast), transform var(--ds-fast);
+  box-shadow: var(--ds-e1);
+  transition: background-color var(--ds-fast), border-color var(--ds-fast),
+              box-shadow var(--ds-base), transform var(--ds-fast);
 }
-.ds-icon-btn:hover { background: var(--ds-cream); border-color: var(--ds-gold); }
-.ds-icon-btn:active { transform: scale(.94); }
+.ds-icon-btn:hover { background: var(--ds-cream); border-color: var(--ds-gold); box-shadow: var(--ds-e2); transform: translateY(-1px); }
+.ds-icon-btn:active { transform: scale(.94) translateY(0); }
 
 .ds-cart-count {
   position: absolute;
-  top: -2px; right: -2px;
+  top: -3px; right: -3px;
   min-width: 20px;
   height: 20px;
   padding: 0 5px;
   display: grid;
   place-items: center;
   border-radius: var(--ds-r-pill);
-  background: var(--ds-gold);
+  background: linear-gradient(135deg, var(--ds-gold-lt), var(--ds-gold));
   color: #24170A;
   font-size: .66rem;
   font-weight: 800;
+  box-shadow: 0 2px 6px rgba(201,147,43,.5), 0 0 0 2px #fff;
+  animation: ds-cart-pop .3s var(--ease-spring, ease-out);
 }
+@keyframes ds-cart-pop {
+  from { transform: scale(0); }
+  to   { transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) { .ds-cart-count { animation: none; } }
 
-.ds-header-cta { padding: .7rem 1.25rem; min-height: 44px; font-size: .86rem; }
+.ds-header-cta { padding: .7rem 1.25rem; min-height: 44px; font-size: .86rem; gap: .4rem; }
+.ds-header-cta svg { transition: transform var(--ds-base); }
+.ds-header-cta:hover svg { transform: translateX(3px); }
 
 /* Burger */
 .ds-burger {
@@ -1079,9 +1109,12 @@ img.ds-logo {
   border: 1px solid var(--ds-line);
   border-radius: 50%;
   background: #fff;
+  box-shadow: var(--ds-e1);
   cursor: pointer;
   position: relative;
+  transition: box-shadow var(--ds-base), border-color var(--ds-fast);
 }
+.ds-burger:hover { border-color: var(--ds-gold); box-shadow: var(--ds-e2); }
 .ds-burger span {
   position: absolute;
   left: 13px;
