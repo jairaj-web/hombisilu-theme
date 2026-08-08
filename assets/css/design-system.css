@@ -1241,15 +1241,27 @@ img.ds-logo {
   padding-block: var(--ds-s3);
 }
 .ds-footer-value { display: flex; align-items: center; gap: .85rem; }
-.ds-footer-value-icon {
+/* Solid gold medallion, not a faint tint — a pale stroke icon on a barely-
+   there background read as muddy/washed-out against the dark footer. Same
+   gold-gradient + dark-icon pairing already used for .ds-btn--gold and the
+   cart-count badge, so it reads as an intentional accent, not a fourth
+   one-off treatment. */
+/* Qualified with the parent class (.ds-footer-value .ds-footer-value-icon,
+   not just .ds-footer-value-icon) because it needs to outrank the older,
+   more specific ".ds-footer-value span" rule below, which was silently
+   winning against this element (it's a <span> too) and overriding both its
+   color and its display:grid centering — the icon rendered top-left inside
+   the badge in the wrong color instead of centred in dark-on-gold. */
+.ds-footer-value .ds-footer-value-icon {
   flex: none;
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: rgba(240,194,68,.12);
-  color: var(--ds-gold-lt);
+  background: linear-gradient(135deg, var(--ds-gold-lt), var(--ds-gold));
+  color: #24170A;
+  box-shadow: 0 3px 10px rgba(201,147,43,.35), 0 0 0 1px rgba(255,255,255,.12) inset;
 }
 .ds-footer-value strong { display: block; color: #fff; font-size: .92rem; font-weight: 650; }
 .ds-footer-value span { display: block; font-size: var(--ds-small); color: rgba(255,255,255,.55); }
