@@ -1,199 +1,213 @@
 <?php
-defined('ABSPATH') || exit;
+/**
+ * Shop archive — rebuilt on the ds-* design system.
+ * Query, sorting and pagination behaviour are unchanged from the previous
+ * template; only the markup and presentation are new.
+ */
+defined( 'ABSPATH' ) || exit;
 get_header();
 
-$paged    = get_query_var('page') ? (int) get_query_var('page') : (get_query_var('paged') ? (int) get_query_var('paged') : 1);
-$cat_slug = get_query_var('product_cat');
+$paged    = get_query_var( 'page' ) ? (int) get_query_var( 'page' ) : ( get_query_var( 'paged' ) ? (int) get_query_var( 'paged' ) : 1 );
+$cat_slug = get_query_var( 'product_cat' );
+$shop_url = hb_shop_url();
 
-$sort = isset($_GET['orderby']) ? sanitize_text_field($_GET['orderby']) : 'date';
+$sort        = isset( $_GET['orderby'] ) ? sanitize_text_field( wp_unslash( $_GET['orderby'] ) ) : 'date';
 $orderby_map = [
-  'date'        => ['orderby' => 'date',  'order' => 'DESC'],
-  'price'       => ['orderby' => 'meta_value_num', 'order' => 'ASC', 'meta_key' => '_price'],
-  'price-desc'  => ['orderby' => 'meta_value_num', 'order' => 'DESC', 'meta_key' => '_price'],
-  'rating'      => ['orderby' => 'meta_value_num', 'order' => 'DESC', 'meta_key' => '_wc_average_rating'],
-  'title'       => ['orderby' => 'title', 'order' => 'ASC'],
+  'date'       => [ 'orderby' => 'date', 'order' => 'DESC' ],
+  'price'      => [ 'orderby' => 'meta_value_num', 'order' => 'ASC',  'meta_key' => '_price' ],
+  'price-desc' => [ 'orderby' => 'meta_value_num', 'order' => 'DESC', 'meta_key' => '_price' ],
+  'rating'     => [ 'orderby' => 'meta_value_num', 'order' => 'DESC', 'meta_key' => '_wc_average_rating' ],
+  'title'      => [ 'orderby' => 'title', 'order' => 'ASC' ],
 ];
-if (!isset($orderby_map[$sort])) $sort = 'date';
+if ( ! isset( $orderby_map[ $sort ] ) ) {
+  $sort = 'date';
+}
 
-$args = array_merge([
+$args = array_merge( [
   'post_type'      => 'product',
   'post_status'    => 'publish',
   'posts_per_page' => 12,
   'paged'          => $paged,
-], $orderby_map[$sort]);
-if ($cat_slug) {
-  $args['tax_query'] = [[
+], $orderby_map[ $sort ] );
+
+if ( $cat_slug ) {
+  $args['tax_query'] = [ [
     'taxonomy' => 'product_cat',
     'field'    => 'slug',
     'terms'    => $cat_slug,
-  ]];
+  ] ];
 }
-$shop_query = new WP_Query($args);
+
+$shop_query = new WP_Query( $args );
+$page_title = $cat_slug ? single_term_title( '', false ) : 'Our Shop';
 ?>
 
-<main class="wc-shop-page">
+<main class="ds-shop">
 
-  <!-- Shop Hero -->
-  <div class="shop-hero">
-    <div class="container">
-      <nav class="shop-breadcrumb" aria-label="Breadcrumb">
-        <a href="<?php echo esc_url(home_url('/')); ?>">Home</a>
-        <span>/</span>
-        <a href="<?php echo esc_url(get_permalink(wc_get_page_id('shop'))); ?>">Shop</a>
-        <?php if ($cat_slug) : ?>
-          <span>/</span>
-          <span aria-current="page"><?php echo single_term_title('', false); ?></span>
+  <!-- ═══ PAGE HEAD ═══ -->
+  <section class="ds-pagehead">
+    <div class="ds-wrap">
+      <nav class="ds-crumbs" aria-label="Breadcrumb">
+        <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
+        <?php echo hb_icon( 'chev', 12 ); ?>
+        <a href="<?php echo esc_url( $shop_url ); ?>">Shop</a>
+        <?php if ( $cat_slug ) : ?>
+          <?php echo hb_icon( 'chev', 12 ); ?>
+          <span aria-current="page"><?php echo esc_html( $page_title ); ?></span>
         <?php endif; ?>
       </nav>
-      <span style="display:inline-block;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);padding:5px 16px;border-radius:20px;font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;">
-        100% Natural &bull; No Preservatives &bull; FSSAI Certified
-      </span>
-      <h1 style="font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.8rem,4vw,3rem);margin-bottom:0;font-weight:700;">
-        <?php echo $cat_slug ? single_term_title('', false) : 'Our Shop'; ?>
-      </h1>
+
+      <span class="ds-eyebrow">100% Natural &middot; No Preservatives &middot; FSSAI Certified</span>
+      <h1 class="ds-pagehead-title"><?php echo esc_html( $page_title ); ?></h1>
+      <?php if ( $cat_slug && term_description() ) : ?>
+        <div class="ds-sub"><?php echo wp_kses_post( term_description() ); ?></div>
+      <?php endif; ?>
     </div>
-  </div>
+  </section>
 
-  <div class="shop-body">
-    <div class="container" style="max-width:1200px;margin:0 auto;">
+  <section class="ds-section ds-section--tight ds-section--cream">
+    <div class="ds-wrap">
 
-      <!-- Category Filter -->
-      <div class="cat-filter-bar">
-        <a href="<?php echo esc_url(get_permalink(wc_get_page_id('shop'))); ?>"
-           class="cat-filter-pill <?php echo !$cat_slug ? 'active' : ''; ?>">
-          All Products
-        </a>
+      <!-- ═══ CATEGORY FILTER ═══ -->
+      <div class="ds-filterbar" role="navigation" aria-label="Product categories">
+        <a href="<?php echo esc_url( $shop_url ); ?>" class="ds-filter<?php echo ! $cat_slug ? ' is-active' : ''; ?>">All Products</a>
         <?php
-        $cats = get_terms(['taxonomy' => 'product_cat', 'hide_empty' => true, 'exclude' => [15]]);
-        foreach ($cats as $cat) :
-          $is_active = ($cat_slug === $cat->slug);
-        ?>
-        <a href="<?php echo esc_url(get_term_link($cat)); ?>"
-           class="cat-filter-pill <?php echo $is_active ? 'active' : ''; ?>">
-          <?php echo esc_html($cat->name); ?>
-        </a>
-        <?php endforeach; ?>
+        $cats = get_terms( [ 'taxonomy' => 'product_cat', 'hide_empty' => true, 'exclude' => [ 15 ] ] );
+        if ( $cats && ! is_wp_error( $cats ) ) :
+          foreach ( $cats as $cat ) : ?>
+            <a href="<?php echo esc_url( get_term_link( $cat ) ); ?>" class="ds-filter<?php echo ( $cat_slug === $cat->slug ) ? ' is-active' : ''; ?>">
+              <?php echo esc_html( $cat->name ); ?>
+              <span class="ds-filter-count"><?php echo (int) $cat->count; ?></span>
+            </a>
+          <?php endforeach;
+        endif; ?>
       </div>
 
-      <!-- Results count + Sort -->
-      <div class="shop-toolbar">
-        <p class="results-count">
-          Showing <?php echo $shop_query->post_count; ?> of <?php echo $shop_query->found_posts; ?> products
+      <!-- ═══ TOOLBAR ═══ -->
+      <div class="ds-toolbar">
+        <p class="ds-toolbar-count">
+          Showing <strong><?php echo (int) $shop_query->post_count; ?></strong> of
+          <strong><?php echo (int) $shop_query->found_posts; ?></strong> products
         </p>
-        <form class="shop-sort" method="get" onchange="this.submit()">
+        <form class="ds-sort" method="get">
           <label for="shop-sort-select">Sort by</label>
-          <select name="orderby" id="shop-sort-select">
-            <option value="date" <?php selected($sort, 'date'); ?>>Latest</option>
-            <option value="price" <?php selected($sort, 'price'); ?>>Price: Low to High</option>
-            <option value="price-desc" <?php selected($sort, 'price-desc'); ?>>Price: High to Low</option>
-            <option value="rating" <?php selected($sort, 'rating'); ?>>Avg. Rating</option>
-            <option value="title" <?php selected($sort, 'title'); ?>>Name: A-Z</option>
+          <select name="orderby" id="shop-sort-select" onchange="this.form.submit()">
+            <option value="date"       <?php selected( $sort, 'date' ); ?>>Latest</option>
+            <option value="price"      <?php selected( $sort, 'price' ); ?>>Price: Low to High</option>
+            <option value="price-desc" <?php selected( $sort, 'price-desc' ); ?>>Price: High to Low</option>
+            <option value="rating"     <?php selected( $sort, 'rating' ); ?>>Avg. Rating</option>
+            <option value="title"      <?php selected( $sort, 'title' ); ?>>Name: A–Z</option>
           </select>
+          <noscript><button type="submit" class="ds-btn ds-btn--outline">Apply</button></noscript>
         </form>
       </div>
 
-      <!-- Product Grid -->
-      <?php if ($shop_query->have_posts()) : ?>
-      <div class="products-grid">
-        <?php while ($shop_query->have_posts()) : $shop_query->the_post();
-          $product = wc_get_product(get_the_ID());
-          if (!$product) continue;
-          $permalink = get_permalink();
-        ?>
-        <div class="product-card">
+      <!-- ═══ GRID ═══ -->
+      <?php if ( $shop_query->have_posts() ) : ?>
+        <div class="ds-grid ds-grid--4">
+          <?php
+          $card_index = 0;
+          while ( $shop_query->have_posts() ) : $shop_query->the_post();
+            $product = wc_get_product( get_the_ID() );
+            if ( ! $product ) { continue; }
 
-          <!-- Entire top area is one big link to product page -->
-          <a href="<?php echo esc_url($permalink); ?>" class="product-card-link">
+            $permalink = get_permalink();
+            $rating    = (float) $product->get_average_rating();
+            $terms     = get_the_terms( get_the_ID(), 'product_cat' );
+            $cat_name  = '';
+            if ( $terms && ! is_wp_error( $terms ) ) {
+              $visible = array_values( array_filter( $terms, function ( $t ) { return 15 != $t->term_id; } ) );
+              if ( ! empty( $visible ) ) { $cat_name = $visible[0]->name; }
+            }
+          ?>
+          <article class="ds-prod">
+            <a href="<?php echo esc_url( $permalink ); ?>" class="ds-prod-img" aria-label="<?php the_title_attribute(); ?>">
+              <?php if ( has_post_thumbnail() ) :
+                // First row is above the fold on every viewport — lazy-loading it
+                // would push the LCP back by a full round-trip.
+                the_post_thumbnail( 'medium', [
+                  'loading'       => $card_index < 4 ? 'eager' : 'lazy',
+                  'decoding'      => 'async',
+                  'fetchpriority' => 0 === $card_index ? 'high' : 'auto',
+                ] );
+              else : ?>
+                <span class="ds-ph"><?php echo hb_icon( 'leaf', 44 ); ?></span>
+              <?php endif; ?>
 
-            <div class="product-img-wrap">
-              <?php if ($product->is_on_sale()) :
+              <?php
+              if ( $product->is_on_sale() ) {
                 $regular = (float) $product->get_regular_price();
                 $sale    = (float) $product->get_sale_price();
-                $pct     = $regular > 0 ? round((($regular - $sale) / $regular) * 100) : 0;
-                if ($pct > 0) : ?>
-                <span class="product-sale-badge">-<?php echo esc_html($pct); ?>%</span>
-              <?php endif; endif; ?>
-              <?php if (has_post_thumbnail()) :
-                // The first row is above the fold on every viewport — lazy-loading
-                // it would push the LCP back by a full round-trip.
-                $card_index = isset($card_index) ? $card_index + 1 : 0;
-                $eager      = $card_index < 4;
-                the_post_thumbnail('medium', [
-                  'loading'       => $eager ? 'eager' : 'lazy',
-                  'decoding'      => 'async',
-                  'fetchpriority' => $card_index === 0 ? 'high' : 'auto',
-                ]); ?>
-              <?php else : ?>
-                <span style="font-size:3.5rem;">🌿</span>
-              <?php endif; ?>
-            </div>
-
-            <div class="product-body">
-              <?php
-              $terms = get_the_terms(get_the_ID(), 'product_cat');
-              if ($terms && !is_wp_error($terms)) {
-                $visible = array_values(array_filter($terms, fn($t) => $t->term_id != 15));
-                if (!empty($visible)) {
-                  echo '<div class="product-cat-tag">' . esc_html($visible[0]->name) . '</div>';
+                $pct     = $regular > 0 ? round( ( ( $regular - $sale ) / $regular ) * 100 ) : 0;
+                if ( $pct > 0 ) {
+                  echo '<span class="ds-prod-flag ds-prod-flag--sale">-' . esc_html( $pct ) . '%</span>';
                 }
               }
+              if ( ! $product->is_in_stock() ) {
+                echo '<span class="ds-prod-flag ds-prod-flag--out">Sold out</span>';
+              }
               ?>
-              <h3><?php the_title(); ?></h3>
-              <?php $rating = $product->get_average_rating(); ?>
-              <div class="product-card-stars" aria-label="Rated <?php echo esc_attr($rating); ?> out of 5">
-                <?php for ($s = 1; $s <= 5; $s++) : ?>
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="<?php echo $s <= round($rating) ? '#C9A055' : 'none'; ?>" stroke="#C9A055" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </a>
+
+            <div class="ds-prod-body">
+              <?php if ( $cat_name ) : ?>
+                <span class="ds-prod-cat"><?php echo esc_html( $cat_name ); ?></span>
+              <?php endif; ?>
+
+              <h2 class="ds-prod-title"><a href="<?php echo esc_url( $permalink ); ?>"><?php the_title(); ?></a></h2>
+
+              <div class="ds-prod-stars" aria-label="Rated <?php echo esc_attr( $rating ); ?> out of 5">
+                <?php for ( $s = 1; $s <= 5; $s++ ) : ?>
+                  <span class="<?php echo $s <= round( $rating ) ? 'is-on' : 'is-off'; ?>"><?php echo hb_icon( 'star', 13 ); ?></span>
                 <?php endfor; ?>
               </div>
-              <div class="product-price"><?php echo $product->get_price_html(); ?></div>
+
+              <div class="ds-prod-price"><?php echo $product->get_price_html(); ?></div>
+
+              <a href="<?php echo esc_url( $product->add_to_cart_url() ); ?>"
+                 class="ds-btn ds-btn--primary ds-prod-cta add_to_cart_button ajax_add_to_cart"
+                 data-product_id="<?php echo (int) get_the_ID(); ?>"
+                 data-product_type="<?php echo esc_attr( $product->get_type() ); ?>"
+                 rel="nofollow">
+                <?php echo hb_icon( 'bag', 15 ); ?> Add to Cart
+              </a>
             </div>
-
-          </a><!-- /.product-card-link -->
-
-          <!-- Add to Cart — outside the link -->
-          <div class="product-card-action">
-            <a href="<?php echo esc_url($product->add_to_cart_url()); ?>"
-               class="btn-atc add_to_cart_button ajax_add_to_cart"
-               data-product_id="<?php echo get_the_ID(); ?>"
-               data-product_type="<?php echo esc_attr($product->get_type()); ?>"
-               rel="nofollow">
-              Add to Cart
-            </a>
-          </div>
-
+          </article>
+          <?php
+            $card_index++;
+          endwhile;
+          wp_reset_postdata();
+          ?>
         </div>
-        <?php endwhile; wp_reset_postdata(); ?>
-      </div>
 
-      <!-- Pagination -->
-      <?php if ($shop_query->max_num_pages > 1) : ?>
-      <div style="margin-top:52px;text-align:center;">
-        <?php
-        $shop_base = trailingslashit(get_permalink(wc_get_page_id('shop')));
-        echo paginate_links([
-          'base'      => $shop_base . '%_%',
-          'format'    => 'page/%#%/',
-          'total'     => $shop_query->max_num_pages,
-          'current'   => $paged,
-          'prev_text' => '&larr; Prev',
-          'next_text' => 'Next &rarr;',
-          'type'      => 'list',
-        ]);
-        ?>
-      </div>
-      <?php endif; ?>
+        <?php if ( $shop_query->max_num_pages > 1 ) : ?>
+        <nav class="ds-pagination" aria-label="Products pagination">
+          <?php
+          $shop_base = trailingslashit( $shop_url );
+          echo paginate_links( [
+            'base'      => $shop_base . '%_%',
+            'format'    => 'page/%#%/',
+            'total'     => $shop_query->max_num_pages,
+            'current'   => $paged,
+            'prev_text' => '&larr; Prev',
+            'next_text' => 'Next &rarr;',
+            'type'      => 'list',
+          ] );
+          ?>
+        </nav>
+        <?php endif; ?>
 
       <?php else : ?>
-      <div style="text-align:center;padding:72px 20px;">
-        <div style="font-size:3.5rem;margin-bottom:20px;">🌿</div>
-        <h3 style="font-family:'Playfair Display',Georgia,serif;color:#2E6B3E;font-size:1.5rem;margin-bottom:12px;">No products found</h3>
-        <p style="color:#7A7A7A;margin-bottom:28px;">Try browsing all categories or check back soon.</p>
-        <a href="<?php echo esc_url(get_permalink(wc_get_page_id('shop'))); ?>" class="btn-primary">View All Products</a>
-      </div>
+        <div class="ds-empty">
+          <span class="ds-empty-icon"><?php echo hb_icon( 'leaf', 44 ); ?></span>
+          <h2 class="ds-title">No products found</h2>
+          <p class="ds-sub">Try browsing all categories or check back soon.</p>
+          <a href="<?php echo esc_url( $shop_url ); ?>" class="ds-btn ds-btn--primary">View All Products</a>
+        </div>
       <?php endif; ?>
 
     </div>
-  </div>
+  </section>
 </main>
 
 <?php get_footer(); ?>

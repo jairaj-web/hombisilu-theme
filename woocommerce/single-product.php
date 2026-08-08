@@ -1,238 +1,209 @@
 <?php
 /**
- * The Template for displaying all single products
+ * Single product — rebuilt on the ds-* design system.
+ * Gallery, add-to-cart, reviews and related-products behaviour are unchanged;
+ * only the markup and presentation are new.
  */
-defined('ABSPATH') || exit;
+defined( 'ABSPATH' ) || exit;
 get_header();
 ?>
 
-<main class="wc-single-product">
-<?php while (have_posts()) : the_post(); ?>
-<?php global $product; $product = wc_get_product(get_the_ID()); ?>
+<main class="ds-single">
+<?php while ( have_posts() ) : the_post(); ?>
+<?php
+global $product;
+$product = wc_get_product( get_the_ID() );
 
-  <!-- Breadcrumb -->
-  <div class="sp-breadcrumb" style="background:#F4F9F0;padding:14px 20px;border-bottom:1px solid #D6E8D8;font-size:.85rem;color:#888;overflow-x:auto;white-space:nowrap;">
-    <div class="container" style="max-width:1200px;margin:0 auto;">
-      <a href="<?php echo esc_url(home_url()); ?>" style="color:#2E6B3E;text-decoration:none;">Home</a>
-      <span style="margin:0 8px;">›</span>
-      <a href="<?php echo esc_url(get_permalink(wc_get_page_id('shop'))); ?>" style="color:#2E6B3E;text-decoration:none;">Shop</a>
-      <?php
-      $terms = get_the_terms(get_the_ID(), 'product_cat');
-      if ($terms && !is_wp_error($terms)) {
-        $term = array_filter($terms, fn($t) => $t->term_id != 15);
-        $term = array_values($term);
-        if (!empty($term)) {
-          echo '<span style="margin:0 8px;">›</span>';
-          echo '<a href="'.esc_url(get_term_link($term[0])).'" style="color:#2E6B3E;text-decoration:none;">'.esc_html($term[0]->name).'</a>';
-        }
-      }
-      ?>
-      <span style="margin:0 8px;">›</span>
-      <span style="color:#333;"><?php the_title(); ?></span>
+// Primary category (skipping the catch-all term 15) drives breadcrumb + tag.
+$terms    = get_the_terms( get_the_ID(), 'product_cat' );
+$prim_cat = null;
+if ( $terms && ! is_wp_error( $terms ) ) {
+  $visible = array_values( array_filter( $terms, function ( $t ) { return 15 != $t->term_id; } ) );
+  if ( ! empty( $visible ) ) { $prim_cat = $visible[0]; }
+}
+
+// Featured image first, then any gallery images, de-duplicated.
+$featured_id  = has_post_thumbnail() ? get_post_thumbnail_id() : null;
+$gallery_meta = get_post_meta( get_the_ID(), '_product_image_gallery', true );
+$extra_ids    = $gallery_meta ? array_map( 'intval', explode( ',', $gallery_meta ) ) : [];
+$gallery_ids  = [];
+if ( $featured_id ) { $gallery_ids[] = $featured_id; }
+foreach ( $extra_ids as $gid ) {
+  if ( ! in_array( $gid, $gallery_ids, true ) ) { $gallery_ids[] = $gid; }
+}
+
+$avg_rating   = (float) $product->get_average_rating();
+$rating_count = (int) $product->get_rating_count();
+?>
+
+  <!-- ═══ BREADCRUMB ═══ -->
+  <nav class="ds-crumbbar" aria-label="Breadcrumb">
+    <div class="ds-wrap ds-crumbs">
+      <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
+      <?php echo hb_icon( 'chev', 12 ); ?>
+      <a href="<?php echo esc_url( get_permalink( wc_get_page_id( 'shop' ) ) ); ?>">Shop</a>
+      <?php if ( $prim_cat ) : ?>
+        <?php echo hb_icon( 'chev', 12 ); ?>
+        <a href="<?php echo esc_url( get_term_link( $prim_cat ) ); ?>"><?php echo esc_html( $prim_cat->name ); ?></a>
+      <?php endif; ?>
+      <?php echo hb_icon( 'chev', 12 ); ?>
+      <span aria-current="page"><?php the_title(); ?></span>
     </div>
-  </div>
+  </nav>
 
-  <!-- Product Main Section -->
-  <section class="wc-main-section">
-    <div class="wc-product-layout container" style="max-width:1200px;margin:0 auto;">
+  <!-- ═══ PRODUCT ═══ -->
+  <section class="ds-section ds-section--tight ds-section--white">
+    <div class="ds-wrap ds-pdp">
 
-      <!-- Product Images -->
-      <div>
-        <?php
-        // Gallery images first (front of product), then featured image (back/nutritional)
-        $featured_id  = has_post_thumbnail() ? get_post_thumbnail_id() : null;
-        $gallery_meta = get_post_meta(get_the_ID(), '_product_image_gallery', true);
-        $extra_ids    = $gallery_meta ? array_map('intval', explode(',', $gallery_meta)) : [];
-        $gallery_ids  = [];
-        if ($featured_id) $gallery_ids[] = $featured_id;
-        foreach ($extra_ids as $id) {
-          if (!in_array($id, $gallery_ids)) $gallery_ids[] = $id;
-        }
-        ?>
-        <?php if (!empty($gallery_ids)) : ?>
-          <div class="wc-gallery-wrap">
-            <?php if (count($gallery_ids) > 1) : ?>
-            <div class="wc-gallery-thumbs">
-              <?php foreach ($gallery_ids as $gid) : ?>
-                <div class="wc-gallery-thumb <?php echo $gid === $gallery_ids[0] ? 'active' : ''; ?>" data-full="<?php echo esc_url(wp_get_attachment_url($gid)); ?>">
-                  <?php echo wp_get_attachment_image($gid, 'thumbnail', false, ['style'=>'width:64px;aspect-ratio:1;object-fit:cover;display:block;border-radius:8px;']); ?>
-                </div>
+      <!-- Gallery -->
+      <div class="ds-pdp-media">
+        <?php if ( ! empty( $gallery_ids ) ) : ?>
+          <div class="ds-pdp-stage" id="pdp-stage">
+            <?php
+            // Main image is the LCP element on this page — load it eagerly.
+            echo wp_get_attachment_image( $gallery_ids[0], 'large', false, [
+              'class'         => 'ds-pdp-main',
+              'loading'       => 'eager',
+              'fetchpriority' => 'high',
+              'decoding'      => 'async',
+            ] );
+            ?>
+            <?php if ( $product->is_on_sale() ) : ?>
+              <span class="ds-prod-flag ds-prod-flag--sale">Sale</span>
+            <?php endif; ?>
+          </div>
+
+          <?php if ( count( $gallery_ids ) > 1 ) : ?>
+            <div class="ds-pdp-thumbs" id="pdp-thumbs">
+              <?php foreach ( $gallery_ids as $i => $gid ) : ?>
+                <button type="button"
+                        class="ds-pdp-thumb<?php echo 0 === $i ? ' is-active' : ''; ?>"
+                        data-full="<?php echo esc_url( wp_get_attachment_image_url( $gid, 'large' ) ); ?>"
+                        aria-label="View image <?php echo (int) $i + 1; ?>">
+                  <?php echo wp_get_attachment_image( $gid, 'thumbnail', false, [ 'loading' => 'lazy', 'decoding' => 'async' ] ); ?>
+                </button>
               <?php endforeach; ?>
             </div>
-            <?php endif; ?>
-            <div class="wc-gallery-main">
-              <?php
-              // Main gallery image is the LCP element on this page — load it eagerly.
-              echo wp_get_attachment_image($gallery_ids[0], 'large', false, [
-                'class'         => 'wc-gallery-main-img',
-                'loading'       => 'eager',
-                'fetchpriority' => 'high',
-                'decoding'      => 'async',
-                'style'         => 'width:100%;max-height:420px;object-fit:contain;display:block;background:#F4F9F0;',
-              ]);
-              ?>
-            </div>
-          </div>
+          <?php endif; ?>
         <?php else : ?>
-          <div class="wc-img-wrap" style="aspect-ratio:1;background:linear-gradient(135deg,#F4F9F0,#E8F4EA);display:flex;align-items:center;justify-content:center;font-size:120px;">🌿</div>
+          <div class="ds-pdp-stage"><span class="ds-ph"><?php echo hb_icon( 'leaf', 88 ); ?></span></div>
         <?php endif; ?>
 
-        <div class="wc-trust-badges">
-          <div class="wc-trust-badge">
-            <div class="wc-trust-badge-icon">✅</div>
-            <p class="wc-trust-badge-text">FSSAI Certified</p>
-          </div>
-          <div class="wc-trust-badge">
-            <div class="wc-trust-badge-icon">🌿</div>
-            <p class="wc-trust-badge-text">100% Natural</p>
-          </div>
-          <div class="wc-trust-badge">
-            <div class="wc-trust-badge-icon">🚚</div>
-            <p class="wc-trust-badge-text">Free Shipping ₹499+</p>
-          </div>
-        </div>
+        <ul class="ds-pdp-trust">
+          <li><?php echo hb_icon( 'shield', 20 ); ?> FSSAI Certified</li>
+          <li><?php echo hb_icon( 'leaf', 20 ); ?> 100% Natural</li>
+          <li><?php echo hb_icon( 'truck', 20 ); ?> Free Shipping &#8377;499+</li>
+        </ul>
       </div>
 
-      <!-- Product Details -->
-      <div>
-        <?php
-        $terms = get_the_terms(get_the_ID(), 'product_cat');
-        if ($terms && !is_wp_error($terms)) {
-          $term = array_filter($terms, fn($t) => $t->term_id != 15);
-          $term = array_values($term);
-          if (!empty($term)) echo '<p class="wc-cat-tag">'.esc_html($term[0]->name).'</p>';
-        }
-        ?>
-        <h1 class="wc-title"><?php the_title(); ?></h1>
-
-        <?php $avg_rating = $product->get_average_rating(); $rating_count = $product->get_rating_count(); ?>
-        <div class="wc-rating-row">
-          <span class="wc-rating-stars" aria-label="Rated <?php echo esc_attr($avg_rating); ?> out of 5">
-            <?php for ($s = 1; $s <= 5; $s++) : ?>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="<?php echo $s <= round($avg_rating) ? '#C9A055' : 'none'; ?>" stroke="#C9A055" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            <?php endfor; ?>
-          </span>
-          <a href="#wc-reviews" class="wc-rating-count"><?php echo $rating_count; ?> review<?php echo $rating_count === 1 ? '' : 's'; ?></a>
-        </div>
-
-        <div class="wc-price"><?php echo $product->get_price_html(); ?></div>
-
-        <?php if ($product->get_short_description()) : ?>
-          <div class="wc-short-desc"><?php echo wp_kses_post($product->get_short_description()); ?></div>
+      <!-- Summary -->
+      <div class="ds-pdp-info">
+        <?php if ( $prim_cat ) : ?>
+          <a class="ds-prod-cat" href="<?php echo esc_url( get_term_link( $prim_cat ) ); ?>"><?php echo esc_html( $prim_cat->name ); ?></a>
         <?php endif; ?>
 
-        <div class="wc-atc-wrap">
+        <h1 class="ds-pdp-title"><?php the_title(); ?></h1>
+
+        <div class="ds-pdp-rating">
+          <span class="ds-prod-stars" aria-label="Rated <?php echo esc_attr( $avg_rating ); ?> out of 5">
+            <?php for ( $s = 1; $s <= 5; $s++ ) : ?>
+              <span class="<?php echo $s <= round( $avg_rating ) ? 'is-on' : 'is-off'; ?>"><?php echo hb_icon( 'star', 15 ); ?></span>
+            <?php endfor; ?>
+          </span>
+          <a href="#ds-reviews"><?php echo (int) $rating_count; ?> review<?php echo 1 === $rating_count ? '' : 's'; ?></a>
+          <span class="ds-chip<?php echo $product->is_in_stock() ? '' : ' ds-chip--out'; ?>">
+            <?php echo $product->is_in_stock() ? hb_icon( 'check', 14 ) . ' In stock' : 'Out of stock'; ?>
+          </span>
+        </div>
+
+        <div class="ds-pdp-price"><?php echo $product->get_price_html(); ?></div>
+
+        <?php if ( $product->get_short_description() ) : ?>
+          <div class="ds-pdp-excerpt"><?php echo wp_kses_post( $product->get_short_description() ); ?></div>
+        <?php endif; ?>
+
+        <div class="ds-pdp-cart">
           <?php woocommerce_template_single_add_to_cart(); ?>
         </div>
 
-        <div class="wc-meta-box">
-          <div class="wc-meta-row">
-            <span>🏷️</span>
-            <span><strong>SKU:</strong> <?php echo $product->get_sku() ?: 'HMB-'.get_the_ID(); ?></span>
-          </div>
-          <div class="wc-meta-row">
-            <span>🌱</span>
-            <span><strong>Type:</strong> 100% Vegetarian</span>
-          </div>
-          <div class="wc-meta-row">
-            <span>✅</span>
-            <span><strong>Certification:</strong> FSSAI No. 11225332000490</span>
-          </div>
-        </div>
+        <dl class="ds-pdp-meta">
+          <div><dt><?php echo hb_icon( 'tag', 16 ); ?> SKU</dt><dd><?php echo esc_html( $product->get_sku() ? $product->get_sku() : 'HMB-' . get_the_ID() ); ?></dd></div>
+          <div><dt><?php echo hb_icon( 'sprout', 16 ); ?> Type</dt><dd>100% Vegetarian</dd></div>
+          <div><dt><?php echo hb_icon( 'shield', 16 ); ?> Certification</dt><dd>FSSAI No. 11225332000490</dd></div>
+        </dl>
 
-        <div class="wc-share-wrap">
-          <span class="wc-share-label">Share:</span>
-          <a href="https://wa.me/?text=<?php echo urlencode(get_the_title().' - '.get_permalink()); ?>" target="_blank" rel="noopener" style="background:#25D366;color:#fff;padding:6px 14px;border-radius:6px;text-decoration:none;font-size:.8rem;font-weight:600;">WhatsApp</a>
+        <div class="ds-pdp-share">
+          <span>Share</span>
+          <a href="https://wa.me/?text=<?php echo rawurlencode( get_the_title() . ' - ' . get_permalink() ); ?>" target="_blank" rel="noopener" class="ds-btn ds-btn--outline ds-pdp-share-wa">
+            <?php echo hb_icon( 'chat', 15 ); ?> WhatsApp
+          </a>
         </div>
       </div>
 
     </div>
   </section>
 
-  <script>
-  (function(){
-    var thumbs = document.querySelectorAll('.wc-gallery-thumb');
-    if (!thumbs.length) return;
-    var wrap = document.querySelector('.wc-gallery-main');
-    function switchImg(el) {
-      var thumb = el.closest ? el.closest('.wc-gallery-thumb') : el;
-      if (!thumb) return;
-      thumbs.forEach(function(t){ t.classList.remove('active'); });
-      thumb.classList.add('active');
-      if (!wrap) return;
-      var newSrc = thumb.getAttribute('data-full');
-      var newImg = document.createElement('img');
-      newImg.className = 'wc-gallery-main-img';
-      newImg.src = newSrc;
-      newImg.style.cssText = 'width:100%;max-height:420px;object-fit:contain;display:block;background:#F4F9F0;';
-      var old = wrap.querySelector('img');
-      if (old) wrap.replaceChild(newImg, old);
-      else wrap.appendChild(newImg);
-    }
-    // Use event delegation on parent — catches clicks on child img too
-    var thumbsWrap = document.querySelector('.wc-gallery-thumbs');
-    if (thumbsWrap) {
-      thumbsWrap.addEventListener('pointerup', function(e) {
-        var thumb = e.target.closest ? e.target.closest('.wc-gallery-thumb') : null;
-        if (thumb) switchImg(thumb);
-      });
-    }
-  })();
-  </script>
-
-  <!-- Full Description -->
-  <?php if (get_the_content()) : ?>
-  <section class="wc-desc-section">
-    <div class="wc-desc-inner">
-      <h2 class="wc-desc-heading">Product Details</h2>
-      <div class="wc-desc-content">
-        <?php the_content(); ?>
+  <!-- ═══ DESCRIPTION ═══ -->
+  <?php if ( trim( get_the_content() ) ) : ?>
+  <section class="ds-section ds-section--tight ds-section--cream">
+    <div class="ds-wrap ds-wrap--narrow">
+      <div class="ds-head">
+        <span class="ds-eyebrow">Details</span>
+        <h2 class="ds-title">Product Details</h2>
       </div>
+      <div class="ds-prose"><?php the_content(); ?></div>
     </div>
   </section>
   <?php endif; ?>
 
-  <!-- Reviews -->
-  <section class="wc-desc-section" id="wc-reviews">
-    <div class="wc-desc-inner">
-      <h2 class="wc-desc-heading">Customer Reviews</h2>
-      <div class="wc-desc-content">
+  <!-- ═══ REVIEWS ═══ -->
+  <section class="ds-section ds-section--tight ds-section--white" id="ds-reviews">
+    <div class="ds-wrap ds-wrap--narrow">
+      <div class="ds-head">
+        <span class="ds-eyebrow">Feedback</span>
+        <h2 class="ds-title">Customer Reviews</h2>
+      </div>
+      <div class="ds-prose">
         <?php
-        if (comments_open() || get_comments_number()) {
+        if ( comments_open() || get_comments_number() ) {
           comments_template();
         } else {
-          echo '<p style="color:#888;">No reviews yet.</p>';
+          echo '<p class="ds-sub">No reviews yet.</p>';
         }
         ?>
       </div>
     </div>
   </section>
 
-  <!-- Related Products -->
+  <!-- ═══ RELATED ═══ -->
   <?php
-  $related = wc_get_related_products(get_the_ID(), 4);
-  if (!empty($related)) :
-  ?>
-  <section class="wc-related-section">
-    <div class="wc-related-inner">
-      <h2 class="wc-related-heading">You May Also Like</h2>
-      <div class="wc-related-grid">
-        <?php foreach ($related as $related_id) :
-          $related_product = wc_get_product($related_id);
-          if (!$related_product) continue;
+  $related = wc_get_related_products( get_the_ID(), 4 );
+  if ( ! empty( $related ) ) : ?>
+  <section class="ds-section ds-section--tight ds-section--cream">
+    <div class="ds-wrap">
+      <div class="ds-head ds-head--center">
+        <span class="ds-eyebrow">More to Explore</span>
+        <h2 class="ds-title">You May Also Like</h2>
+      </div>
+      <div class="ds-grid ds-grid--4">
+        <?php foreach ( $related as $related_id ) :
+          $rp = wc_get_product( $related_id );
+          if ( ! $rp ) { continue; }
+          $rp_link = get_permalink( $related_id );
         ?>
-        <div class="wc-related-card">
-          <a href="<?php echo esc_url(get_permalink($related_id)); ?>">
+        <article class="ds-prod">
+          <a href="<?php echo esc_url( $rp_link ); ?>" class="ds-prod-img" aria-label="<?php echo esc_attr( $rp->get_name() ); ?>">
             <?php
-            $img = get_the_post_thumbnail($related_id, 'medium', ['style'=>'width:100%;aspect-ratio:1;object-fit:cover;display:block;']);
-            echo $img ?: '<div style="aspect-ratio:1;background:linear-gradient(135deg,#F4F9F0,#E8F4EA);display:flex;align-items:center;justify-content:center;font-size:48px;">🌿</div>';
+            $thumb = get_the_post_thumbnail( $related_id, 'medium', [ 'loading' => 'lazy', 'decoding' => 'async' ] );
+            echo $thumb ? $thumb : '<span class="ds-ph">' . hb_icon( 'leaf', 40 ) . '</span>';
             ?>
           </a>
-          <div class="wc-related-card-body">
-            <h4><a href="<?php echo esc_url(get_permalink($related_id)); ?>"><?php echo esc_html($related_product->get_name()); ?></a></h4>
-            <div class="wc-related-price"><?php echo $related_product->get_price_html(); ?></div>
+          <div class="ds-prod-body">
+            <h3 class="ds-prod-title"><a href="<?php echo esc_url( $rp_link ); ?>"><?php echo esc_html( $rp->get_name() ); ?></a></h3>
+            <div class="ds-prod-price"><?php echo $rp->get_price_html(); ?></div>
+            <a href="<?php echo esc_url( $rp->add_to_cart_url() ); ?>" class="ds-btn ds-btn--outline ds-prod-cta" rel="nofollow"><?php echo hb_icon( 'bag', 15 ); ?> Add to Cart</a>
           </div>
-        </div>
+        </article>
         <?php endforeach; ?>
       </div>
     </div>
@@ -241,5 +212,35 @@ get_header();
 
 <?php endwhile; ?>
 </main>
+
+<script>
+(function () {
+  var thumbsWrap = document.getElementById('pdp-thumbs');
+  var stage      = document.getElementById('pdp-stage');
+  if (!thumbsWrap || !stage) return;
+
+  thumbsWrap.addEventListener('click', function (e) {
+    var thumb = e.target.closest('.ds-pdp-thumb');
+    if (!thumb) return;
+
+    var main = stage.querySelector('.ds-pdp-main');
+    var src  = thumb.getAttribute('data-full');
+    if (!main || !src || main.getAttribute('src') === src) return;
+
+    /* Cross-fade rather than swapping the node, so layout never jumps. */
+    main.style.opacity = '0';
+    var next = new Image();
+    next.onload = function () {
+      main.src = src;
+      main.removeAttribute('srcset');
+      main.style.opacity = '1';
+    };
+    next.src = src;
+
+    thumbsWrap.querySelectorAll('.ds-pdp-thumb').forEach(function (t) { t.classList.remove('is-active'); });
+    thumb.classList.add('is-active');
+  });
+})();
+</script>
 
 <?php get_footer(); ?>

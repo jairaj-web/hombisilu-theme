@@ -43,6 +43,14 @@ function hombisilu_scripts() {
         null
     );
     wp_enqueue_style( 'hombisilu-style', get_stylesheet_uri(), [ 'hombisilu-fonts' ], hombisilu_asset_version( 'style.css' ) );
+
+    // Design system loads after style.css so its tokens and components win.
+    wp_enqueue_style(
+        'hombisilu-ds',
+        HOMBISILU_URI . '/assets/css/design-system.css',
+        [ 'hombisilu-style' ],
+        hombisilu_asset_version( 'assets/css/design-system.css' )
+    );
 }
 add_action( 'wp_enqueue_scripts', 'hombisilu_scripts' );
 
@@ -50,6 +58,72 @@ function hombisilu_widgets() {
     register_sidebar( [ 'name' => 'Footer', 'id' => 'footer-1' ] );
 }
 add_action( 'widgets_init', 'hombisilu_widgets' );
+
+/* ───────────────────────────────────────────────────────────
+   TEMPLATE HELPERS
+   ─────────────────────────────────────────────────────────── */
+
+/**
+ * Inline SVG icon by name. Icons are inlined rather than shipped as a sprite
+ * or icon font so they inherit currentColor and cost no extra request.
+ */
+function hb_icon( $name, $size = 18 ) {
+    static $paths = [
+        'arrow'  => '<path d="M5 12h14M12 5l7 7-7 7"/>',
+        'bag'    => '<path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/>',
+        'leaf'   => '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>',
+        'check'  => '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>',
+        'truck'  => '<rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>',
+        'shield' => '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>',
+        'pin'    => '<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>',
+        'phone'  => '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.902.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.908.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>',
+        'mail'   => '<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>',
+        'clock'  => '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+        'coffee' => '<path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/>',
+        'flame'  => '<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>',
+        'jar'    => '<rect x="7" y="2" width="10" height="3" rx="1"/><path d="M5 5h14a1 1 0 0 1 1 1v2H4V6a1 1 0 0 1 1-1z"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><line x1="9" y1="12" x2="9" y2="17"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="15" y1="12" x2="15" y2="17"/>',
+        'drop'   => '<path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>',
+        'sprout' => '<path d="M12 22V12"/><path d="M5 12C5 6.5 8.5 2 12 2s7 4.5 7 10-3.5 10-7 10S5 17.5 5 12z"/><path d="M5 12h14"/>',
+        'book'   => '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
+        'heart'  => '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>',
+        'grid'   => '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>',
+        'tag'    => '<path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/>',
+        'star'   => '<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
+        'chev'   => '<polyline points="9 18 15 12 9 6"/>',
+        'search' => '<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>',
+        'plus'   => '<line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>',
+        'user'   => '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+        'chat'   => '<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>',
+    ];
+
+    $d = isset( $paths[ $name ] ) ? $paths[ $name ] : '';
+
+    // The star is a solid shape; everything else is a stroked outline.
+    $solid  = ( 'star' === $name );
+    $fill   = $solid ? 'currentColor' : 'none';
+    $stroke = $solid ? 'none' : 'currentColor';
+
+    return '<svg width="' . (int) $size . '" height="' . (int) $size . '" viewBox="0 0 24 24" fill="' . $fill . '" stroke="' . $stroke . '" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' . $d . '</svg>';
+}
+
+/**
+ * Shop URL that degrades gracefully if WooCommerce is ever deactivated,
+ * rather than fataling on an undefined wc_get_page_id().
+ */
+function hb_shop_url() {
+    if ( function_exists( 'wc_get_page_id' ) ) {
+        $url = get_permalink( wc_get_page_id( 'shop' ) );
+        if ( $url ) {
+            return $url;
+        }
+    }
+    return home_url( '/shop/' );
+}
+
+/** Five filled stars in currentColor. */
+function hb_stars( $size = 14 ) {
+    return str_repeat( hb_icon( 'star', $size ), 5 );
+}
 
 /* ───────────────────────────────────────────────────────────
    PERFORMANCE
