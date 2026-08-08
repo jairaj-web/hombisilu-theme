@@ -1,0 +1,208 @@
+/* ════════════════════════════════════════════
+   FAQ PAGE — accordion built on native <details>/<summary>
+════════════════════════════════════════════ */
+
+.fq-page { background: var(--ds-cream); }
+
+/* ── Page-head stat strip ─────────────────────────────────── */
+.fq-stats {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  background: rgba(255,255,255,.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: var(--ds-r-lg);
+  padding: var(--ds-s2) var(--ds-s4);
+  margin-top: var(--ds-s3);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.fq-stat { text-align: center; padding-inline: var(--ds-s3); }
+.fq-stat-num {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: var(--ds-h3);
+  font-weight: 700;
+  color: var(--ds-gold-lt);
+  line-height: 1;
+  margin-bottom: .25rem;
+}
+.fq-stat-lbl {
+  font-size: var(--ds-micro);
+  color: rgba(255,255,255,.7);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.fq-stat-div { width: 1px; height: 2.2rem; background: rgba(255,255,255,.2); }
+@media (max-width: 640px) {
+  .fq-stats { flex-direction: column; gap: var(--ds-s2); padding: var(--ds-s3) var(--ds-s4); }
+  .fq-stat-div { width: 3.5rem; height: 1px; }
+}
+
+/* ── Body ──────────────────────────────────────────────────── */
+.fq-body { padding-block: var(--ds-s6); }
+
+/* ── Category jump nav ────────────────────────────────────── */
+.fq-jumpnav {
+  display: flex;
+  gap: .6rem;
+  flex-wrap: wrap;
+  margin-bottom: var(--ds-s5);
+}
+.fq-jumplink {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  padding: .6rem 1.15rem;
+  border-radius: var(--ds-r-pill);
+  border: 1.5px solid var(--ds-line);
+  background: var(--ds-white);
+  color: var(--ds-ink);
+  font-size: var(--ds-small);
+  font-weight: 600;
+  transition: border-color var(--ds-fast), color var(--ds-fast), box-shadow var(--ds-fast);
+}
+.fq-jumplink:hover,
+.fq-jumplink:focus-visible {
+  border-color: var(--ds-gold);
+  color: var(--ds-forest);
+  box-shadow: var(--ds-e1);
+}
+.fq-jumplink svg { flex: none; }
+
+/* ── Category groups ──────────────────────────────────────── */
+.fq-group { margin-bottom: var(--ds-s5); scroll-margin-top: 1.5rem; }
+.fq-group-head {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-s2);
+  margin-bottom: var(--ds-s3);
+  padding-bottom: var(--ds-s2);
+  border-bottom: 2px solid var(--ds-line);
+}
+.fq-group-icon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--ds-r-md);
+  background: linear-gradient(135deg, rgba(201,147,43,.15), rgba(26,61,46,.08));
+  border: 1.5px solid rgba(201,147,43,.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ds-forest);
+  flex-shrink: 0;
+}
+.fq-group-head h2 {
+  font-family: var(--font-serif);
+  font-size: var(--ds-h3);
+  color: var(--ds-forest);
+  font-weight: 700;
+  margin: 0;
+}
+
+/* ── Accordion (native <details>/<summary>) ──────────────── */
+.fq-accordion { display: flex; flex-direction: column; gap: .6rem; }
+
+.fq-item {
+  background: var(--ds-white);
+  border: 1.5px solid var(--ds-line);
+  border-radius: var(--ds-r-lg);
+  overflow: hidden;
+  transition: border-color var(--ds-fast), box-shadow var(--ds-fast);
+}
+.fq-item[open] { border-color: var(--ds-forest); box-shadow: var(--ds-e2); }
+
+/* Alternating tint for readability across long lists */
+.fq-accordion .fq-item:nth-child(even) { background: var(--ds-cream); }
+.fq-item[open] { background: var(--ds-white); }
+
+.fq-q {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.1rem 1.35rem;
+  cursor: pointer;
+  font-size: var(--ds-body);
+  font-weight: 600;
+  color: var(--ds-ink);
+  transition: color var(--ds-fast), background var(--ds-fast);
+}
+.fq-q::-webkit-details-marker { display: none; }
+.fq-q::marker { content: ''; }
+
+.fq-q:hover { color: var(--ds-forest); background: var(--ds-cream); }
+.fq-item[open] > .fq-q { color: var(--ds-forest); background: rgba(26,61,46,.05); }
+
+.fq-q:focus-visible {
+  outline: 2px solid var(--ds-forest);
+  outline-offset: -2px;
+}
+
+.fq-chev {
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  background: rgba(201,147,43,.12);
+  border: 1.5px solid rgba(201,147,43,.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ds-forest);
+  flex-shrink: 0;
+  transition: background var(--ds-fast), border-color var(--ds-fast), transform var(--ds-base), color var(--ds-fast);
+}
+.fq-chev svg { transform: rotate(90deg); transition: transform var(--ds-base); }
+.fq-item[open] .fq-chev { background: var(--ds-forest); border-color: var(--ds-forest); color: #fff; }
+.fq-item[open] .fq-chev svg { transform: rotate(-90deg); }
+
+.fq-a {
+  padding: 0 1.35rem 1.25rem;
+  padding-top: 1rem;
+  font-size: var(--ds-small);
+  color: var(--ds-muted);
+  line-height: 1.8;
+  border-top: 1px solid var(--ds-line);
+}
+.fq-a a { color: var(--ds-forest); font-weight: 600; }
+.fq-a a:hover { color: var(--ds-gold); }
+.fq-a strong { color: var(--ds-ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  .fq-chev svg { transition: none; }
+}
+
+/* ── CTA ──────────────────────────────────────────────────── */
+.fq-cta {
+  background: linear-gradient(135deg, var(--ds-forest-deep) 0%, var(--ds-forest) 60%, var(--ds-forest-soft) 100%);
+  border-radius: var(--ds-r-xl);
+  padding: var(--ds-s5) var(--ds-s4);
+  text-align: center;
+  margin-top: var(--ds-s3);
+}
+.fq-cta-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: var(--ds-r-lg);
+  background: rgba(255,255,255,.15);
+  color: var(--ds-gold-lt);
+  margin: 0 auto var(--ds-s3);
+}
+.fq-cta-title {
+  font-family: var(--font-serif);
+  font-size: var(--ds-h2);
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: .6rem;
+}
+.fq-cta-sub { color: rgba(255,255,255,.75); font-size: var(--ds-body); margin-bottom: var(--ds-s4); }
+.fq-cta-btns { display: flex; gap: .9rem; justify-content: center; flex-wrap: wrap; }
+
+.fq-btn-wa { background: #25D366; color: #fff; }
+.fq-btn-wa:hover { background: #1fba59; color: #fff; }

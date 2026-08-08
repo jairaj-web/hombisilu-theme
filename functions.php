@@ -61,6 +61,25 @@ function hombisilu_scripts() {
             hombisilu_asset_version( 'assets/css/home-barab.css' )
         );
     }
+
+    // Per-page stylesheets, centralised here rather than self-enqueued from
+    // each template, so every theme stylesheet has exactly one place it's
+    // registered.
+    if ( is_page_template( 'template-about.php' ) ) {
+        wp_enqueue_style( 'hombisilu-page-about', HOMBISILU_URI . '/assets/css/page-about.css', [ 'hombisilu-ds' ], hombisilu_asset_version( 'assets/css/page-about.css' ) );
+    }
+    if ( is_page_template( 'template-contact.php' ) ) {
+        wp_enqueue_style( 'hombisilu-page-contact', HOMBISILU_URI . '/assets/css/page-contact.css', [ 'hombisilu-ds' ], hombisilu_asset_version( 'assets/css/page-contact.css' ) );
+    }
+    if ( is_page_template( 'template-faqs.php' ) ) {
+        wp_enqueue_style( 'hombisilu-page-faqs', HOMBISILU_URI . '/assets/css/page-faqs.css', [ 'hombisilu-ds' ], hombisilu_asset_version( 'assets/css/page-faqs.css' ) );
+    }
+    if ( is_page_template( [ 'template-privacy.php', 'template-terms.php', 'template-refund-policy.php' ] ) ) {
+        wp_enqueue_style( 'hombisilu-page-legal', HOMBISILU_URI . '/assets/css/page-legal.css', [ 'hombisilu-ds' ], hombisilu_asset_version( 'assets/css/page-legal.css' ) );
+    }
+    if ( function_exists( 'is_cart' ) && ( is_cart() || is_checkout() || is_account_page() ) ) {
+        wp_enqueue_style( 'hombisilu-page-account', HOMBISILU_URI . '/assets/css/page-account.css', [ 'hombisilu-ds' ], hombisilu_asset_version( 'assets/css/page-account.css' ) );
+    }
 }
 add_action( 'wp_enqueue_scripts', 'hombisilu_scripts' );
 

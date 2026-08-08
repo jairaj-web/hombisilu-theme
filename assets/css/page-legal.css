@@ -1,0 +1,56 @@
+/* ══════════════════════════════════════════════════════════
+   Legal pages — Privacy Policy, Terms & Conditions, Refund Policy
+   Shared layout: .ds-pagehead banner + .ds-prose body.
+   Relies on design-system.css tokens; only page-specific bits here.
+══════════════════════════════════════════════════════════ */
+
+.lp-page { background: var(--ds-cream); }
+
+/* Opening "electronic record" / platform-scope notice callout */
+.lp-notice {
+  background: rgba(31, 77, 46, .06);
+  border-left: 4px solid var(--ds-forest);
+  border-radius: 0 var(--ds-r-md) var(--ds-r-md) 0;
+  padding: var(--ds-s3);
+  font-weight: 500;
+  color: var(--ds-ink);
+}
+
+/* Contact / Grievance Officer card, placed after the prose body */
+.lp-contact {
+  margin-top: var(--ds-s5);
+  padding: var(--ds-s4);
+}
+.lp-contact h3 {
+  font-family: var(--font-serif);
+  font-size: var(--ds-h3);
+  color: var(--ds-forest);
+  margin-bottom: var(--ds-s3);
+}
+.lp-contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: .65rem;
+}
+.lp-contact-list li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3rem .6rem;
+  font-size: var(--ds-small);
+  color: var(--ds-ink-2);
+  line-height: 1.6;
+}
+.lp-contact-label {
+  min-width: 110px;
+  font-weight: 700;
+  color: var(--ds-muted);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  font-size: var(--ds-micro);
+}
+.lp-contact-list a { color: var(--ds-forest); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+.lp-contact-list a:hover { color: var(--ds-gold); }
+
+.lp-wa-icon { vertical-align: -3px; margin-right: .3em; }
