@@ -668,8 +668,19 @@
 }
 .ds-prod-title a:hover { color: var(--ds-forest); }
 .ds-prod-stars { display: flex; gap: 2px; color: var(--ds-gold); }
+/* No margin-top:auto here on purpose. That bottom-anchored the price+button
+   in an equal-height grid row, which sounds right but actually looks wrong:
+   the "leftover" height in a stretched row always lands as one lump gap
+   directly above whichever element has the auto margin, and how much
+   leftover space there is depends entirely on how many lines the title
+   above happened to wrap to. A 1-line-title card ended up with a 30px gap
+   before the price while a 2-line-title card sitting right next to it had
+   8px — different on every card, and bigger than any of the deliberate
+   gaps elsewhere. Letting price/button follow stars with the same normal
+   flex gap keeps spacing identical everywhere; the trade-off is that card
+   heights in a row can now differ by up to one text line, which is far
+   less visible than an uneven gap in the middle of the card. */
 .ds-prod-price {
-  margin-top: auto;
   font-family: var(--font-serif);
   font-size: 1.25rem;
   font-weight: 700;
