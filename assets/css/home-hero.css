@@ -137,14 +137,11 @@
   color: var(--ds-muted);
 }
 
-/* Five tiles: keep four-per-row at wide desktop widths, wrapping the
-   fifth to its own centred row rather than stretching every tile thin. */
-@media (min-width: 1100px) {
+/* All five tiles in one row from tablet-landscape up. Narrower than that,
+   auto-fit wraps them naturally (2-up, then 1-up) instead of orphaning the
+   fifth card into its own centred row. */
+@media (min-width: 900px) {
   .hh-features {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .hh-features .hh-feature-card:last-child {
-    grid-column: 2 / span 2;
+    grid-template-columns: repeat(5, 1fr);
   }
 }
