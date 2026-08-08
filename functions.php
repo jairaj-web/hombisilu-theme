@@ -51,6 +51,16 @@ function hombisilu_scripts() {
         [ 'hombisilu-style' ],
         hombisilu_asset_version( 'assets/css/design-system.css' )
     );
+
+    // Home layout is only needed on the front page.
+    if ( is_front_page() ) {
+        wp_enqueue_style(
+            'hombisilu-home',
+            HOMBISILU_URI . '/assets/css/home-barab.css',
+            [ 'hombisilu-ds' ],
+            hombisilu_asset_version( 'assets/css/home-barab.css' )
+        );
+    }
 }
 add_action( 'wp_enqueue_scripts', 'hombisilu_scripts' );
 
@@ -149,13 +159,14 @@ function hombisilu_preload_lcp() {
     if ( ! is_front_page() ) {
         return;
     }
-    $img = HOMBISILU_URI . '/assets/images/hero-pickle-cutout.webp';
-    $sm  = HOMBISILU_URI . '/assets/images/hero-pickle-cutout-600.webp';
+    // First hero slide background — matches the srcset in front-page.php.
+    $lg = HOMBISILU_URI . '/assets/images/hero-pickle.webp';
+    $sm = HOMBISILU_URI . '/assets/images/hero-pickle-900.webp';
     printf(
-        '<link rel="preload" as="image" href="%s" imagesrcset="%s 600w, %s 1000w" imagesizes="(max-width:768px) 80vw, 480px" fetchpriority="high">' . "\n",
-        esc_url( $img ),
+        '<link rel="preload" as="image" href="%s" imagesrcset="%s 900w, %s 1600w" imagesizes="100vw" fetchpriority="high">' . "\n",
+        esc_url( $lg ),
         esc_url( $sm ),
-        esc_url( $img )
+        esc_url( $lg )
     );
 }
 add_action( 'wp_head', 'hombisilu_preload_lcp', 2 );
