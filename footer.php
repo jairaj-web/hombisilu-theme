@@ -87,6 +87,37 @@
   </svg>
 </a>
 
+<script>
+(function() {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced || !('IntersectionObserver' in window)) return;
+
+  /* Tag the section-level blocks worth revealing. Done in JS so a
+     no-JS visitor never sees hidden content. */
+  var targets = document.querySelectorAll(
+    '.hp-section, .section, .hp-story-grid > *, .cat-card, .product-card, ' +
+    '.promise-item, .testi-card, .cta-section'
+  );
+  if (!targets.length) return;
+
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('is-visible');
+      io.unobserve(entry.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+
+  targets.forEach(function(el, i) {
+    /* Anything already on screen at load stays visible — no flash. */
+    if (el.getBoundingClientRect().top < window.innerHeight) return;
+    el.classList.add('js-reveal');
+    el.style.transitionDelay = Math.min(i % 4, 3) * 60 + 'ms';
+    io.observe(el);
+  });
+})();
+</script>
+
 <?php wp_footer(); ?>
 </body>
 </html>

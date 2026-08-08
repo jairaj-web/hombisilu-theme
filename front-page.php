@@ -42,7 +42,14 @@
     </div>
 
     <div class="hero-media">
-      <img src="<?php echo get_template_directory_uri(); ?>/assets/images/hero-pickle-cutout.png" alt="Hombisilu authentic South Indian pickle" class="hero-cutout-img">
+      <img src="<?php echo get_template_directory_uri(); ?>/assets/images/hero-pickle-cutout.webp"
+           srcset="<?php echo get_template_directory_uri(); ?>/assets/images/hero-pickle-cutout-600.webp 600w,
+                   <?php echo get_template_directory_uri(); ?>/assets/images/hero-pickle-cutout.webp 1000w"
+           sizes="(max-width:768px) 80vw, 480px"
+           width="1000" height="666"
+           alt="Hombisilu authentic South Indian pickle"
+           class="hero-cutout-img"
+           fetchpriority="high" decoding="async">
       <a href="/shop" class="hero-buy-badge">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
         Buy Now
@@ -97,7 +104,12 @@
 <section class="hp-section hp-section--white">
   <div class="hp-container hp-story-grid">
     <div class="hp-story-img">
-      <img src="<?php echo get_template_directory_uri(); ?>/assets/images/about-story.jpg" alt="Hombisilu heritage kitchen" loading="lazy">
+      <img src="<?php echo get_template_directory_uri(); ?>/assets/images/about-story.webp"
+           srcset="<?php echo get_template_directory_uri(); ?>/assets/images/about-story-500.webp 500w,
+                   <?php echo get_template_directory_uri(); ?>/assets/images/about-story.webp 800w"
+           sizes="(max-width:900px) 90vw, 460px"
+           width="800" height="1200"
+           alt="Hombisilu heritage kitchen" loading="lazy" decoding="async">
       <div class="hp-story-badge">
         <strong>15+</strong>
         <span>Years of Heritage</span>

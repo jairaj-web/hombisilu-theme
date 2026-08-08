@@ -2,10 +2,14 @@
 <html <?php language_attributes(); ?>>
 <head>
 <meta charset="<?php bloginfo('charset'); ?>">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#2E6B3E">
+<script>document.documentElement.className+=' js';</script>
 <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
+
+<a class="skip-link" href="#main-content">Skip to content</a>
 
 <!-- Sticky Header Wrap (announcement + nav stick together on desktop) -->
 <div class="sticky-header-wrap">
@@ -21,9 +25,20 @@
 
     <!-- Brand -->
     <div class="site-brand">
-      <a href="<?php echo home_url('/'); ?>">
-        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" alt="Hombisilu" class="site-logo" width="160" height="80" loading="eager">
-      </a>
+      <?php
+      $logo_file = get_template_directory() . '/assets/images/logo.png';
+      if ( has_custom_logo() ) :
+        the_custom_logo();
+      elseif ( file_exists( $logo_file ) ) : ?>
+        <a href="<?php echo home_url('/'); ?>" rel="home">
+          <img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo.png" alt="Hombisilu" class="site-logo" width="160" height="80" fetchpriority="high" decoding="async">
+        </a>
+      <?php else : ?>
+        <a href="<?php echo home_url('/'); ?>" class="site-wordmark" rel="home">
+          <span class="site-wordmark-name">Hombisilu</span>
+          <span class="site-wordmark-tag">Golden Sunshine</span>
+        </a>
+      <?php endif; ?>
     </div>
 
     <!-- Desktop Navigation -->
@@ -62,6 +77,10 @@
 </header>
 
 </div><!-- /.sticky-header-wrap -->
+
+<!-- Skip-link landing point. Templates own their own <main>, so this is a
+     zero-height anchor rather than a wrapper that would nest them. -->
+<div id="main-content" tabindex="-1"></div>
 
 <!-- Mobile Nav Overlay -->
 <div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
@@ -131,13 +150,24 @@
     if (e.key === 'Escape') closeNav();
   });
 
-  /* Sticky header scroll effect */
-  window.addEventListener('scroll', function() {
-    if (window.scrollY > 60) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
-    }
-  }, { passive: true });
+  /* Close the drawer after tapping a link (same-page anchors especially) */
+  if (mobileNav) {
+    mobileNav.addEventListener('click', function(e) {
+      if (e.target.closest('a')) closeNav();
+    });
+  }
+
+  /* Sticky header scroll effect — rAF-throttled so scrolling stays at 60fps */
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function() {
+      header.classList.toggle('scrolled', window.scrollY > 60);
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 })();
 </script>

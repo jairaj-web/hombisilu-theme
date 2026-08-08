@@ -61,7 +61,16 @@ get_header();
             </div>
             <?php endif; ?>
             <div class="wc-gallery-main">
-              <?php echo wp_get_attachment_image($gallery_ids[0], 'large', false, ['class'=>'wc-gallery-main-img','style'=>'width:100%;max-height:420px;object-fit:contain;display:block;background:#F4F9F0;']); ?>
+              <?php
+              // Main gallery image is the LCP element on this page — load it eagerly.
+              echo wp_get_attachment_image($gallery_ids[0], 'large', false, [
+                'class'         => 'wc-gallery-main-img',
+                'loading'       => 'eager',
+                'fetchpriority' => 'high',
+                'decoding'      => 'async',
+                'style'         => 'width:100%;max-height:420px;object-fit:contain;display:block;background:#F4F9F0;',
+              ]);
+              ?>
             </div>
           </div>
         <?php else : ?>

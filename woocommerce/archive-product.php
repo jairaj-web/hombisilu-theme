@@ -113,8 +113,16 @@ $shop_query = new WP_Query($args);
                 if ($pct > 0) : ?>
                 <span class="product-sale-badge">-<?php echo esc_html($pct); ?>%</span>
               <?php endif; endif; ?>
-              <?php if (has_post_thumbnail()) : ?>
-                <?php the_post_thumbnail('medium', ['loading' => 'lazy']); ?>
+              <?php if (has_post_thumbnail()) :
+                // The first row is above the fold on every viewport — lazy-loading
+                // it would push the LCP back by a full round-trip.
+                $card_index = isset($card_index) ? $card_index + 1 : 0;
+                $eager      = $card_index < 4;
+                the_post_thumbnail('medium', [
+                  'loading'       => $eager ? 'eager' : 'lazy',
+                  'decoding'      => 'async',
+                  'fetchpriority' => $card_index === 0 ? 'high' : 'auto',
+                ]); ?>
               <?php else : ?>
                 <span style="font-size:3.5rem;">🌿</span>
               <?php endif; ?>

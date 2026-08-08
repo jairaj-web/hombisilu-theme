@@ -4,7 +4,8 @@ Description: Authentic South Indian Foods — Modern Theme
 Version: 2.0
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+/* Fonts are enqueued from functions.php (hombisilu-fonts) — do not @import here,
+   an @import blocks first paint behind this file. */
 
 /* ─── DESIGN TOKENS ─────────────────────────────────── */
 :root {
@@ -1842,4 +1843,248 @@ a, button, input[type="submit"], .btn-primary, .btn-outline, .btn-white, .btn-sh
   .section-title { font-size: 1.3rem !important; }
   .categories-grid { gap: 8px !important; }
   .cat-card { padding: 16px 10px !important; }
+}
+
+
+/* ══════════════════════════════════════════════════════
+   MODERN LAYER — 2026 refresh
+   Loaded last so it refines (not replaces) everything above.
+   Covers: motion, focus, fluid type, tablet range, sticky
+   mobile header, render performance, safe areas.
+   ══════════════════════════════════════════════════════ */
+
+/* ── Base modernisation ─────────────────────────────── */
+:root {
+  color-scheme: light;
+  --ease-spring: cubic-bezier(.34, 1.36, .64, 1);
+  --ease-out:    cubic-bezier(.22, 1, .36, 1);
+  /* Layered shadows read as real depth instead of a grey blur */
+  --shadow-sm: 0 1px 2px rgba(26,43,28,.05), 0 2px 6px rgba(26,43,28,.05);
+  --shadow-md: 0 2px 4px rgba(26,43,28,.05), 0 8px 24px rgba(26,43,28,.08);
+  --shadow-lg: 0 4px 8px rgba(26,43,28,.06), 0 20px 48px rgba(26,43,28,.12);
+  --ring: 0 0 0 3px rgba(46,107,62,.35);
+  --header-h: 72px;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scrollbar-gutter: stable;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+}
+/* Drawer scroll must not chain to the page behind it. */
+.mobile-nav { overscroll-behavior: contain; }
+
+/* Headings wrap on meaning, body text avoids orphans */
+h1, h2, h3, .hero-title, .section-title, .hp-h2, .cta-title { text-wrap: balance; }
+p, .section-subtitle, .hero-desc { text-wrap: pretty; }
+
+::selection { background: var(--secondary); color: #1A2B1C; }
+
+/* Media never causes layout shift or overflow */
+img, svg, video, picture, iframe { max-width: 100%; }
+img[width][height] { height: auto; }
+
+/* ── Accessible focus, mouse users unaffected ───────── */
+:focus { outline: none; }
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+a:focus-visible, button:focus-visible,
+input:focus-visible, select:focus-visible, textarea:focus-visible {
+  box-shadow: var(--ring);
+}
+
+/* Keyboard skip target */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 10000;
+  background: var(--primary);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 0 0 10px 0;
+  font-weight: 600;
+}
+.skip-link:focus { left: 0; }
+
+/* ── Brand wordmark fallback (used when no logo file) ── */
+.site-wordmark { display: block; line-height: 1.05; }
+.site-wordmark-name {
+  display: block;
+  font-family: var(--font-serif);
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  font-weight: 700;
+  color: var(--brown);
+  letter-spacing: -.01em;
+}
+.site-wordmark-tag {
+  display: block;
+  font-size: .6rem;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* ── Render performance ─────────────────────────────── */
+/* Skip layout/paint for offscreen sections; contain-intrinsic-size keeps
+   the scrollbar honest so nothing jumps while scrolling. */
+.hp-section,
+.section,
+.testimonials-section,
+.newsletter-section,
+.cta-section,
+.site-footer {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 600px;
+}
+/* Never defer the hero or anything above the fold. */
+.hero, .hero-split, .hp-infobar, .hp-marquee-wrap {
+  content-visibility: visible;
+}
+
+/* GPU-friendly hover transforms */
+.product-card, .cat-card, .promise-item, .testi-card, .hp-card {
+  transition: transform .35s var(--ease-out), box-shadow .35s var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .product-card:hover, .cat-card:hover, .hp-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+/* ── Scroll reveal (progressive enhancement) ────────── */
+.js-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .6s var(--ease-out), transform .6s var(--ease-out);
+}
+.js-reveal.is-visible { opacity: 1; transform: none; }
+/* If JS never runs, content must still be visible. */
+html:not(.js) .js-reveal { opacity: 1; transform: none; }
+
+/* ── Motion sensitivity ─────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .hp-marquee-track { animation: none !important; transform: none !important; }
+  .js-reveal { opacity: 1 !important; transform: none !important; }
+}
+
+/* ── Touch ergonomics ───────────────────────────────── */
+@media (pointer: coarse) {
+  a.btn-primary, a.btn-outline, a.btn-white, .btn-shop,
+  button, .btn-atc, .cart-icon, .hamburger,
+  input[type="submit"], .woocommerce a.button, .woocommerce button.button {
+    min-height: 44px;
+  }
+  .cart-icon, .hamburger {
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* ── Sticky header on mobile too ────────────────────── */
+@media (max-width: 768px) {
+  .sticky-header-wrap {
+    position: sticky !important;
+    top: 0;
+    z-index: 999;
+    background: #fff;
+    box-shadow: 0 1px 0 rgba(26,43,28,.06);
+  }
+  .sticky-header-wrap .site-header { transition: padding .25s var(--ease-out); }
+  .site-header.scrolled { box-shadow: var(--shadow-sm); }
+  /* Anchor links must clear the sticky bar */
+  :target { scroll-margin-top: calc(var(--header-h) + 16px); }
+}
+
+/* ── Tablet range (769–1024px) — was falling through to
+      desktop layout and cramping every grid ─────────── */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container, .hp-container { padding-left: 32px; padding-right: 32px; }
+  .section, .hp-section { padding-top: 60px; padding-bottom: 60px; }
+
+  .products-grid    { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .categories-grid  { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .promise-grid     { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .testimonials-grid{ grid-template-columns: repeat(2, 1fr); gap: 18px; }
+  .footer-grid      { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+
+  .hero-grid, .hp-story-grid { gap: 32px; }
+  .hero-title { font-size: clamp(2.1rem, 5vw, 3rem); }
+
+  /* Single product: 60px gutter is too wide once the viewport shrinks */
+  .wc-product-layout { gap: 32px; }
+  .wc-gallery-main   { max-width: 340px; }
+
+  .main-nav ul { gap: 18px; }
+  .main-nav a  { font-size: .88rem; }
+}
+
+/* ── Wide screens: stop the line lengths running away ── */
+@media (min-width: 1600px) {
+  .container, .hp-container { max-width: 1360px; }
+  .hero-desc, .section-subtitle { max-width: 62ch; margin-left: auto; margin-right: auto; }
+}
+
+/* ── Safe areas (notched phones) ────────────────────── */
+@supports (padding: max(0px)) {
+  .site-footer { padding-bottom: max(24px, env(safe-area-inset-bottom)); }
+  .whatsapp-float {
+    bottom: max(20px, calc(env(safe-area-inset-bottom) + 12px));
+    right:  max(20px, calc(env(safe-area-inset-right)  + 12px));
+  }
+  .mobile-nav { padding-bottom: max(24px, env(safe-area-inset-bottom)); }
+}
+
+/* ── Hero: svh so mobile browser chrome cannot crop it ─ */
+@supports (height: 100svh) {
+  .hero { min-height: 88svh; }
+}
+@media (max-width: 768px) {
+  @supports (height: 100svh) {
+    .hero { min-height: 82svh !important; }
+  }
+}
+
+/* ── Forms: modern, consistent, no iOS zoom ─────────── */
+input, select, textarea, button { font: inherit; color: inherit; }
+input[type="text"], input[type="email"], input[type="tel"],
+input[type="number"], input[type="search"], input[type="password"],
+select, textarea {
+  font-size: 16px; /* below 16px iOS Safari zooms on focus */
+  padding: 12px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  transition: border-color .2s var(--ease-out), box-shadow .2s var(--ease-out);
+  max-width: 100%;
+}
+input:focus, select:focus, textarea:focus {
+  border-color: var(--primary);
+  box-shadow: var(--ring);
+  outline: none;
+}
+
+/* ── Print ──────────────────────────────────────────── */
+@media print {
+  .sticky-header-wrap, .mobile-nav, .mobile-nav-overlay,
+  .whatsapp-float, .site-footer, .hp-marquee-wrap { display: none !important; }
+  body { color: #000; background: #fff; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .8em; }
 }
