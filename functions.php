@@ -52,14 +52,20 @@ function hombisilu_scripts() {
         hombisilu_asset_version( 'assets/css/design-system.css' )
     );
 
-    // Home layout is only needed on the front page.
+    // Home layout is only needed on the front page. home-barab.css (the
+    // earlier restaurant-template mood — carousel, floating cut-outs, angled
+    // CTAs) has been retired in favour of the calm home-*.css set below; the
+    // file is left in place but no longer enqueued.
     if ( is_front_page() ) {
-        wp_enqueue_style(
-            'hombisilu-home',
-            HOMBISILU_URI . '/assets/css/home-barab.css',
-            [ 'hombisilu-ds' ],
-            hombisilu_asset_version( 'assets/css/home-barab.css' )
-        );
+        $home_parts = [ 'hero', 'story', 'shop', 'testimonials', 'contact' ];
+        foreach ( $home_parts as $part ) {
+            wp_enqueue_style(
+                'hombisilu-home-' . $part,
+                HOMBISILU_URI . '/assets/css/home-' . $part . '.css',
+                [ 'hombisilu-ds' ],
+                hombisilu_asset_version( 'assets/css/home-' . $part . '.css' )
+            );
+        }
     }
 
     // Per-page stylesheets, centralised here rather than self-enqueued from

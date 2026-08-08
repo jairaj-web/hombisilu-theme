@@ -1,0 +1,174 @@
+/* ═══════════════════════════════════════════════════════════
+   HOME — GET IN TOUCH + FIND US
+   Calm two-column contact panel and a light, centred sign-off.
+   Namespaced hc-*. Tokens/components come from design-system.css.
+   ═══════════════════════════════════════════════════════════ */
+
+.hc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr));
+  gap: var(--ds-s3);
+  align-items: stretch;
+}
+
+/* ── Left: info card ─────────────────────────────────────── */
+.hc-info {
+  padding: var(--ds-s4);
+  box-shadow: var(--ds-e1);
+}
+
+.hc-info-title {
+  font-family: var(--font-serif);
+  font-size: var(--ds-h3);
+  font-weight: 700;
+  color: var(--ds-forest);
+  margin-bottom: var(--ds-s3);
+}
+
+.hc-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-s2);
+  margin-bottom: var(--ds-s3);
+}
+
+.hc-info-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: .85rem;
+}
+
+.hc-info-list li > span:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: .15rem;
+  font-size: var(--ds-body);
+  line-height: 1.55;
+  color: var(--ds-ink-2);
+}
+
+.hc-info-list li strong {
+  font-size: var(--ds-small);
+  font-weight: 700;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: var(--ds-muted);
+}
+
+.hc-info-list li a {
+  color: var(--ds-ink);
+  font-weight: 600;
+}
+.hc-info-list li a:hover { color: var(--ds-forest); }
+
+.hc-info-icon {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--ds-r-md);
+  background: rgba(31,77,46,.08);
+  color: var(--ds-forest);
+}
+
+/* ── Right: action panel ─────────────────────────────────── */
+.hc-actions {
+  padding: var(--ds-s4);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--ds-forest);
+  box-shadow: var(--ds-e2);
+  border-color: transparent;
+}
+
+.hc-actions-title {
+  font-family: var(--font-serif);
+  font-size: var(--ds-h3);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: var(--ds-s2);
+}
+
+.hc-actions-copy {
+  color: rgba(255,255,255,.78);
+  line-height: 1.65;
+  margin-bottom: var(--ds-s3);
+}
+
+.hc-actions-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .85rem;
+  margin-bottom: var(--ds-s3);
+}
+
+.hc-actions-btns .ds-btn { flex: 1 1 auto; }
+
+.hc-actions-btns .ds-btn--outline {
+  color: #fff;
+  border-color: rgba(255,255,255,.35);
+  background: rgba(255,255,255,.06);
+}
+@media (hover: hover) and (pointer: fine) {
+  .hc-actions-btns .ds-btn--outline:hover {
+    border-color: rgba(255,255,255,.6);
+    background: rgba(255,255,255,.14);
+  }
+}
+
+.hc-actions-note {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  font-size: var(--ds-small);
+  font-weight: 600;
+  color: var(--ds-gold-lt);
+}
+
+/* ── Find Us sign-off ────────────────────────────────────── */
+.hc-findus-inner {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hc-findus-wordmark { margin-bottom: var(--ds-s2); }
+.hc-findus-wordmark .ds-wordmark-name { font-size: clamp(1.6rem, 2.4vw, 2.1rem); }
+
+.hc-findus-copy {
+  max-width: 40ch;
+  color: var(--ds-muted);
+  line-height: 1.65;
+  margin-bottom: var(--ds-s3);
+}
+
+.hc-findus-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--ds-s3);
+}
+
+.hc-findus-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: .92rem;
+  font-weight: 650;
+  color: var(--ds-forest);
+  padding: .5rem .3rem;
+}
+.hc-findus-link svg { color: var(--ds-gold); }
+@media (hover: hover) and (pointer: fine) {
+  .hc-findus-link:hover { color: var(--ds-forest-deep); }
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .hc-actions-btns { flex-direction: column; }
+  .hc-actions-btns .ds-btn { width: 100%; }
+}

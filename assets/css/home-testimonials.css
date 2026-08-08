@@ -1,0 +1,184 @@
+/* ══════════════════════════════════════════════════════════
+   Homepage: Testimonials + FAQ teaser
+   Calm, uniform cards — no featured/dark variant, no marquee.
+   Relies entirely on design-system.css tokens/components.
+══════════════════════════════════════════════════════════ */
+
+/* ── Testimonials grid ─────────────────────────────────── */
+
+.ht-testi-grid { margin-top: var(--ds-s4); }
+
+.ht-testi {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-s2);
+  background: var(--ds-white);
+  border: 1px solid var(--ds-line);
+  border-radius: var(--ds-r-lg);
+  padding: var(--ds-s4);
+  box-shadow: var(--ds-e1);
+  transition: transform var(--ds-base), box-shadow var(--ds-base), border-color var(--ds-base);
+}
+
+@media (hover: hover) {
+  .ht-testi:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--ds-e2);
+    border-color: rgba(201,147,43,.3);
+  }
+}
+
+.ht-testi-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.ht-testi-avatar {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--ds-forest);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: .02em;
+}
+
+.ht-testi-stars { display: flex; gap: .15rem; flex: none; }
+.ht-testi-stars svg { width: 14px; height: 14px; color: var(--ds-gold); }
+
+.ht-testi-quote {
+  margin: 0;
+  flex: 1;
+  font-size: var(--ds-body);
+  line-height: 1.65;
+  color: var(--ds-ink-2);
+}
+
+.ht-testi-name {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: .5rem;
+  font-weight: 700;
+  font-size: .95rem;
+  color: var(--ds-ink);
+  padding-top: var(--ds-s1);
+  border-top: 1px solid var(--ds-line);
+}
+
+.ht-testi-loc {
+  font-weight: 400;
+  font-size: .82rem;
+  color: var(--ds-muted);
+}
+
+/* ── FAQ teaser accordion ──────────────────────────────── */
+
+.ht-faq-section .ds-wrap--narrow { max-width: 52rem; }
+
+.ht-faq-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: .65rem;
+  margin-top: var(--ds-s4);
+}
+
+.ht-faq-item {
+  background: var(--ds-cream);
+  border: 1.5px solid var(--ds-line);
+  border-radius: var(--ds-r-md);
+  overflow: hidden;
+  transition: border-color var(--ds-fast), box-shadow var(--ds-fast), background var(--ds-fast);
+}
+
+.ht-faq-item[open] {
+  border-color: var(--ds-forest);
+  box-shadow: var(--ds-e1);
+  background: var(--ds-white);
+}
+
+.ht-faq-q {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.05rem 1.3rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: var(--ds-body);
+  color: var(--ds-ink);
+  transition: color var(--ds-fast), background var(--ds-fast);
+}
+
+.ht-faq-q::-webkit-details-marker { display: none; }
+.ht-faq-q::marker { content: ''; }
+
+.ht-faq-q:hover { color: var(--ds-forest); }
+.ht-faq-item[open] > .ht-faq-q { color: var(--ds-forest); }
+
+.ht-faq-q:focus-visible {
+  outline: 2px solid var(--ds-forest);
+  outline-offset: -2px;
+}
+
+.ht-faq-chev {
+  flex: none;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  border: 1.5px solid var(--ds-line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ds-muted);
+  transition: background var(--ds-fast), border-color var(--ds-fast), color var(--ds-fast);
+}
+
+.ht-faq-chev svg { transform: rotate(90deg); transition: transform var(--ds-base); }
+
+.ht-faq-item[open] .ht-faq-chev {
+  background: var(--ds-forest);
+  border-color: var(--ds-forest);
+  color: #fff;
+}
+
+.ht-faq-item[open] .ht-faq-chev svg { transform: rotate(-90deg); }
+
+.ht-faq-a {
+  padding: .9rem 1.3rem 1.15rem;
+  border-top: 1px solid var(--ds-line);
+  font-size: var(--ds-small);
+  line-height: 1.65;
+  color: var(--ds-ink-2);
+}
+
+.ht-faq-a a { color: var(--ds-forest); font-weight: 600; }
+.ht-faq-a a:hover { color: var(--ds-gold); }
+.ht-faq-a strong { color: var(--ds-ink); }
+
+.ht-faq-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--ds-s4);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ht-testi { transition: none; }
+  .ht-faq-chev svg { transition: none; }
+}
+
+/* ── Small screens ──────────────────────────────────────── */
+
+@media (max-width: 420px) {
+  .ht-testi-name { flex-direction: column; gap: .15rem; }
+  .ht-faq-q { padding: .9rem 1.05rem; font-size: .92rem; }
+  .ht-faq-a { padding: .8rem 1.05rem 1rem; }
+}

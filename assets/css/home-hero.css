@@ -1,0 +1,150 @@
+/* ═══════════════════════════════════════════════════════════
+   HOME — STATIC HERO + WHY CHOOSE US
+   Calm, corporate-clean hero: one static photo, dark readable
+   overlay, centred copy, two pill CTAs. No slider, no carousel,
+   no floating cut-outs, no angled tags. Pairs with the light
+   "Why Choose Us" feature grid directly beneath it.
+   Tokens/components from assets/css/design-system.css.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── HERO ─────────────────────────────────────────────────── */
+.hh-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  min-height: clamp(420px, 62vw, 640px);
+  padding-block: var(--ds-s6);
+}
+
+.hh-hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 60%;
+}
+
+/* Readable dark overlay, slightly deeper at the bottom for the copy block */
+.hh-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(180deg, rgba(20, 53, 33, .62) 0%, rgba(20, 53, 33, .72) 55%, rgba(20, 53, 33, .8) 100%);
+}
+
+.hh-hero-inner {
+  position: relative;
+  max-width: 760px;
+  margin-inline: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hh-hero-chip {
+  margin-bottom: var(--ds-s3);
+}
+
+.hh-hero-title {
+  font-family: var(--font-serif);
+  font-size: var(--ds-h1);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -.02em;
+  color: #fff;
+  text-wrap: balance;
+}
+
+.hh-hero-lead {
+  margin-top: var(--ds-s3);
+  max-width: 54ch;
+  font-size: var(--ds-lead);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, .86);
+  text-wrap: pretty;
+}
+
+.hh-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--ds-s2);
+  margin-top: var(--ds-s4);
+}
+
+@media (max-width: 560px) {
+  .hh-hero-actions .ds-btn {
+    width: 100%;
+  }
+}
+
+/* ── WHY CHOOSE US ────────────────────────────────────────── */
+.hh-features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: var(--ds-s3);
+}
+
+.hh-feature-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--ds-s2);
+  padding: var(--ds-s4) var(--ds-s3);
+  background: var(--ds-white);
+  border: 1px solid var(--ds-line);
+  border-radius: var(--ds-r-lg);
+  box-shadow: var(--ds-e1);
+  transition: transform var(--ds-base), box-shadow var(--ds-base), border-color var(--ds-base);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hh-feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--ds-e2);
+    border-color: rgba(201, 147, 43, .35);
+  }
+}
+
+.hh-feature-icon {
+  width: 56px;
+  height: 56px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(31, 77, 46, .08);
+  color: var(--ds-forest);
+}
+
+.hh-feature-title {
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: var(--ds-forest);
+  line-height: 1.3;
+}
+
+.hh-feature-desc {
+  font-size: var(--ds-small);
+  line-height: 1.6;
+  color: var(--ds-muted);
+}
+
+/* Five tiles: keep four-per-row at wide desktop widths, wrapping the
+   fifth to its own centred row rather than stretching every tile thin. */
+@media (min-width: 1100px) {
+  .hh-features {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .hh-features .hh-feature-card:last-child {
+    grid-column: 2 / span 2;
+  }
+}

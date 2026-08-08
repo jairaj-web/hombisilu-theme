@@ -1,0 +1,71 @@
+/*
+ * Home — Shop by Category + Best Sellers
+ * Calm, uniform card grid styling. Tokens from assets/css/design-system.css.
+ * Best-sellers product cards reuse .ds-prod / .ds-grid--4 as-is — no new
+ * product-card rules are added here.
+ */
+
+.hs-cat-grid {
+  display: grid;
+  gap: var(--ds-s3);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+}
+
+.hs-cat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .6rem;
+  padding: var(--ds-s4);
+  background: var(--ds-cream);
+  border: 1px solid var(--ds-line);
+  border-radius: var(--ds-r-lg);
+  box-shadow: var(--ds-e1);
+  text-decoration: none;
+  color: var(--ds-ink);
+  transition: transform var(--ds-base), box-shadow var(--ds-base), border-color var(--ds-base);
+}
+
+@media (hover: hover) {
+  .hs-cat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--ds-e2);
+    border-color: rgba(201, 147, 43, .35);
+  }
+}
+
+.hs-cat-icon {
+  display: grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: var(--ds-r-md);
+  background: var(--ds-white);
+  color: var(--ds-forest);
+  box-shadow: var(--ds-e1);
+  flex: none;
+}
+
+.hs-cat-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ds-ink);
+  margin: 0;
+}
+
+.hs-cat-desc {
+  font-size: var(--ds-small);
+  line-height: 1.55;
+  color: var(--ds-muted);
+  margin: 0;
+  flex: 1;
+}
+
+.hs-cat-link {
+  margin-top: auto;
+}
+
+.hs-shop-more {
+  text-align: center;
+  margin-top: var(--ds-s4);
+}

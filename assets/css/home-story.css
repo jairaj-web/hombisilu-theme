@@ -1,0 +1,160 @@
+/* ═══════════════════════════════════════════════════════════
+   HOME — OUR STORY + STAT ROW
+   Calm two-column about section with credential chips, followed
+   by a plain 4-column stat strip. Tokens from design-system.css.
+   No angled tags, no floating cut-outs, no marquee.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Story split ──────────────────────────────────────────── */
+.hs-story {
+  display: grid;
+  grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr);
+  gap: clamp(1.75rem, 1rem + 4vw, 4.5rem);
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .hs-story { grid-template-columns: 1fr; }
+}
+
+.hs-story-figure {
+  position: relative;
+  margin: 0;
+}
+.hs-story-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  border-radius: var(--ds-r-xl);
+  box-shadow: var(--ds-e2);
+}
+
+.hs-story-badge {
+  position: absolute;
+  left: var(--ds-s3);
+  bottom: var(--ds-s3);
+  display: flex;
+  align-items: baseline;
+  gap: .5rem;
+  padding: var(--ds-s2) var(--ds-s3);
+  background: var(--ds-white);
+  border-radius: var(--ds-r-md);
+  box-shadow: var(--ds-e2);
+  max-width: calc(100% - var(--ds-s3) * 2);
+}
+.hs-story-badge strong {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--ds-gold);
+  line-height: 1;
+}
+.hs-story-badge span {
+  font-size: var(--ds-micro);
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--ds-ink-2);
+  line-height: 1.25;
+}
+
+/* ── Copy column ──────────────────────────────────────────── */
+.hs-story-copy .ds-head { margin-bottom: var(--ds-s3); }
+
+.hs-story-prose p {
+  font-size: var(--ds-body);
+  line-height: 1.75;
+  color: var(--ds-ink-2);
+}
+.hs-story-prose p + p { margin-top: var(--ds-s2); }
+
+.hs-quote {
+  margin: var(--ds-s3) 0;
+  padding: var(--ds-s3);
+  border-left: 3px solid var(--ds-gold);
+  background: var(--ds-cream);
+  border-radius: 0 var(--ds-r-md) var(--ds-r-md) 0;
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--ds-forest);
+}
+
+/* Credential chips */
+.hs-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .55rem;
+  margin: var(--ds-s3) 0;
+  padding: 0;
+  list-style: none;
+}
+.hs-chips li.ds-chip { margin: 0; }
+
+.hs-story-cta { margin-top: var(--ds-s2); }
+
+/* ── Stat row ─────────────────────────────────────────────── */
+.hs-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--ds-s3);
+}
+@media (max-width: 760px) {
+  .hs-stats { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 420px) {
+  .hs-stats { grid-template-columns: 1fr; }
+}
+
+.hs-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .4rem;
+  text-align: center;
+  padding: var(--ds-s3) var(--ds-s2);
+  position: relative;
+}
+/* Thin dividers between columns, hidden once stacked */
+.hs-stat + .hs-stat::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 12%;
+  bottom: 12%;
+  width: 1px;
+  background: var(--ds-line);
+}
+@media (max-width: 760px) {
+  .hs-stat:nth-child(odd)::before { display: none; }
+}
+@media (max-width: 420px) {
+  .hs-stat::before { display: none; }
+}
+
+.hs-stat-icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(31,77,46,.07);
+  color: var(--ds-forest);
+  margin-bottom: .2rem;
+}
+.hs-stat-num {
+  font-family: var(--font-serif);
+  font-size: clamp(1.9rem, 1.4rem + 1.6vw, 2.6rem);
+  font-weight: 700;
+  color: var(--ds-forest);
+  line-height: 1;
+}
+.hs-stat-label {
+  font-size: var(--ds-small);
+  font-weight: 650;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--ds-muted);
+}
