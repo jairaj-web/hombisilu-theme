@@ -20,8 +20,9 @@
       <p>Authentic South Indian foods crafted with heritage, rooted in purity. From the fragrant hills of Karnataka to your kitchen table — no shortcuts, no compromise.</p>
       <span class="ds-chip ds-chip--gold">FSSAI: 11225332000490</span>
       <div class="ds-footer-social">
-        <a href="https://wa.me/916362616933" class="ds-btn ds-btn--gold" target="_blank" rel="noopener"><?php echo hb_icon( 'chat', 16 ); ?> WhatsApp</a>
-        <a href="mailto:hombisilufooods@gmail.com" class="ds-btn ds-btn--ghost-light"><?php echo hb_icon( 'mail', 16 ); ?> Email Us</a>
+        <a href="https://wa.me/916362616933" class="ds-footer-icon ds-footer-icon--whatsapp" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><?php echo hb_icon( 'chat', 20 ); ?></a>
+        <a href="mailto:hombisilufooods@gmail.com" class="ds-footer-icon ds-footer-icon--mail" aria-label="Email Hombisilu"><?php echo hb_icon( 'mail', 20 ); ?></a>
+        <a href="tel:+916362616933" class="ds-footer-icon ds-footer-icon--phone" aria-label="Call Hombisilu"><?php echo hb_icon( 'phone', 20 ); ?></a>
       </div>
     </div>
 

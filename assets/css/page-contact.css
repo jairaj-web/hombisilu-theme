@@ -76,7 +76,7 @@ a.pc-quick:hover, a.pc-quick:focus-visible {
   height: 46px;
   border-radius: var(--ds-r-md);
   flex-shrink: 0;
-  background: linear-gradient(135deg, rgba(201,147,43,.15), rgba(31,77,46,.08));
+  background: linear-gradient(135deg, rgba(201,147,43,.15), rgba(107,30,40,.08));
   border: 1.5px solid rgba(201,147,43,.25);
   display: flex;
   align-items: center;
@@ -169,7 +169,7 @@ a.pc-quick:hover, a.pc-quick:focus-visible {
 .pc-field select:focus-visible,
 .pc-field textarea:focus-visible {
   border-color: var(--ds-forest);
-  box-shadow: 0 0 0 3px rgba(31,77,46,.15);
+  box-shadow: 0 0 0 3px rgba(107,30,40,.15);
 }
 .pc-field select {
   appearance: none;

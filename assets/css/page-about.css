@@ -24,7 +24,7 @@
   inset: 0;
   background:
     radial-gradient(700px 320px at 85% 0%, rgba(201,147,43,.32), transparent 65%),
-    linear-gradient(150deg, rgba(20,53,33,.94), rgba(31,77,46,.90) 55%, rgba(20,53,33,.96));
+    linear-gradient(150deg, rgba(67,16,22,.94), rgba(107,30,40,.90) 55%, rgba(67,16,22,.96));
   z-index: 1;
 }
 .ab-pagehead .ds-wrap { position: relative; z-index: 2; }

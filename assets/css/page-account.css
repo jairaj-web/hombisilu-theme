@@ -61,7 +61,7 @@
 .woocommerce form select:focus-visible,
 .select2-container--default.select2-container--focus .select2-selection--single {
   border-color: var(--ds-forest);
-  box-shadow: 0 0 0 3px rgba(31,77,46,.15);
+  box-shadow: 0 0 0 3px rgba(107,30,40,.15);
 }
 
 /* select2 (WooCommerce's country/state dropdowns) matched to the

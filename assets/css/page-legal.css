@@ -8,7 +8,7 @@
 
 /* Opening "electronic record" / platform-scope notice callout */
 .lp-notice {
-  background: rgba(31, 77, 46, .06);
+  background: rgba(107,30,40, .06);
   border-left: 4px solid var(--ds-forest);
   border-radius: 0 var(--ds-r-md) var(--ds-r-md) 0;
   padding: var(--ds-s3);

@@ -93,7 +93,7 @@
   filter: blur(80px);
   pointer-events: none;
 }
-.bb-hero-blob--a { top: -12%; left: -6%;  width: 46vw; aspect-ratio: 1; background: rgba(46,107,62,.55); }
+.bb-hero-blob--a { top: -12%; left: -6%;  width: 46vw; aspect-ratio: 1; background: rgba(140,46,58,.55); }
 .bb-hero-blob--b { bottom: -18%; right: -8%; width: 42vw; aspect-ratio: 1; background: rgba(201,147,43,.22); }
 
 /* Products peeking in from both edges */
@@ -411,7 +411,7 @@
   position: absolute;
   inset: auto 0 0 0;
   padding: var(--ds-s4) var(--ds-s3) var(--ds-s3);
-  background: linear-gradient(transparent, rgba(20,53,33,.92));
+  background: linear-gradient(transparent, rgba(67,16,22,.92));
   color: #fff;
   font-family: var(--font-serif);
   font-size: var(--ds-h2);
@@ -441,7 +441,7 @@
   display: grid;
   place-items: center;
   border-radius: var(--ds-r-md);
-  background: rgba(31,77,46,.07);
+  background: rgba(107,30,40,.07);
   color: var(--ds-forest);
 }
 .bb-combo h3 { font-size: 1.02rem; font-weight: 700; color: var(--ds-ink); }
@@ -517,7 +517,7 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(160deg, rgba(20,53,33,.35), rgba(20,53,33,.9));
+  background: linear-gradient(160deg, rgba(67,16,22,.35), rgba(67,16,22,.9));
 }
 .bb-promo:hover img { transform: scale(1.05); }
 .bb-promo-kicker { font-size: var(--ds-micro); font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--bb-warm-lt); }
@@ -587,7 +587,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(20,53,33,.5);
+  background: rgba(67,16,22,.5);
   opacity: 0;
   transition: opacity var(--ds-base);
 }
