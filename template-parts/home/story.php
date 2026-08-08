@@ -85,8 +85,10 @@ $hs_stats = [
 <section class="ds-section ds-section--tight ds-section--cream">
 	<div class="ds-wrap">
 		<div class="hs-stats">
-			<?php foreach ( $hs_stats as $stat ) : ?>
-				<div class="hs-stat">
+			<?php foreach ( $hs_stats as $stat ) :
+				list( $hs_target, $hs_suffix ) = hb_stat_target_suffix( $stat[1] );
+			?>
+				<div class="hs-stat" data-target="<?php echo (int) $hs_target; ?>" data-suffix="<?php echo esc_attr( $hs_suffix ); ?>">
 					<span class="hs-stat-icon"><?php echo hb_icon( $stat[0], 26 ); ?></span>
 					<strong class="hs-stat-num"><?php echo esc_html( $stat[1] ); ?></strong>
 					<span class="hs-stat-label"><?php echo esc_html( $stat[2] ); ?></span>
@@ -95,3 +97,43 @@ $hs_stats = [
 		</div>
 	</div>
 </section>
+
+<script>
+(function () {
+	var stats = document.querySelectorAll('.hs-stat');
+	if (!stats.length || !('IntersectionObserver' in window)) return;
+	if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+	var animated = false;
+	var observer = new IntersectionObserver(function (entries) {
+		if (animated) return;
+		var visible = entries.some(function (e) { return e.isIntersecting; });
+		if (!visible) return;
+		animated = true;
+		observer.disconnect();
+
+		stats.forEach(function (stat) {
+			var target = parseInt(stat.getAttribute('data-target'), 10);
+			var suffix = stat.getAttribute('data-suffix') || '';
+			var el = stat.querySelector('.hs-stat-num');
+			if (!el || isNaN(target)) return;
+			/* The real value is server-rendered so it's correct with no JS;
+			   only reset to 0 right here, immediately before animating,
+			   so there's no flash of "0" for JS users either. */
+			el.textContent = '0' + suffix;
+			var duration = 1400;
+			var start = performance.now();
+			function tick(now) {
+				var elapsed = now - start;
+				var progress = Math.min(elapsed / duration, 1);
+				var ease = 1 - Math.pow(1 - progress, 3);
+				el.textContent = Math.round(ease * target) + suffix;
+				if (progress < 1) requestAnimationFrame(tick);
+			}
+			requestAnimationFrame(tick);
+		});
+	}, { threshold: 0.4 });
+
+	observer.observe(stats[0]);
+})();
+</script>

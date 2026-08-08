@@ -1262,6 +1262,20 @@ img.ds-logo {
   background: linear-gradient(135deg, var(--ds-gold-lt), var(--ds-gold));
   color: #24170A;
   box-shadow: 0 3px 10px rgba(201,147,43,.35), 0 0 0 1px rgba(255,255,255,.12) inset;
+  animation: ds-medallion-glow 3.2s ease-in-out infinite;
+}
+/* Stagger so the four medallions breathe slightly out of phase rather than
+   pulsing in perfect unison, which reads as more organic and less like a
+   loading indicator. */
+.ds-footer-value:nth-child(2) .ds-footer-value-icon { animation-delay: .5s; }
+.ds-footer-value:nth-child(3) .ds-footer-value-icon { animation-delay: 1s; }
+.ds-footer-value:nth-child(4) .ds-footer-value-icon { animation-delay: 1.5s; }
+@keyframes ds-medallion-glow {
+  0%, 100% { box-shadow: 0 3px 10px rgba(201,147,43,.35), 0 0 0 1px rgba(255,255,255,.12) inset; }
+  50%      { box-shadow: 0 3px 18px rgba(201,147,43,.6),  0 0 0 1px rgba(255,255,255,.18) inset; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ds-footer-value .ds-footer-value-icon { animation: none; }
 }
 .ds-footer-value strong { display: block; color: #fff; font-size: .92rem; font-weight: 650; }
 .ds-footer-value span { display: block; font-size: var(--ds-small); color: rgba(255,255,255,.55); }

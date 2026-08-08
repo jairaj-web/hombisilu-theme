@@ -160,6 +160,17 @@ function hb_stars( $size = 14 ) {
     return str_repeat( hb_icon( 'star', $size ), 5 );
 }
 
+/**
+ * Split a stat's display value into a numeric target and trailing suffix
+ * (e.g. "100%" -> [100, '%'], "26" -> [26, '']) for count-up animations.
+ */
+function hb_stat_target_suffix( $value ) {
+    if ( preg_match( '/^(\d+)(.*)$/', $value, $m ) ) {
+        return [ (int) $m[1], $m[2] ];
+    }
+    return [ 0, '' ];
+}
+
 /* ───────────────────────────────────────────────────────────
    PERFORMANCE
    ─────────────────────────────────────────────────────────── */
