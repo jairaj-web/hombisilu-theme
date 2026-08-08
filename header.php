@@ -30,12 +30,22 @@
 
       <div class="ds-brand">
         <?php
-        $logo_file = get_template_directory() . '/assets/images/logo.png';
+        // The source logo.png is 1536x1024 (2.1MB) but renders ~54px tall, so
+        // serve the resized WebP pair instead and keep the PNG as fallback.
+        $logo_file = get_template_directory() . '/assets/images/logo.webp';
         if ( has_custom_logo() ) :
           the_custom_logo();
         elseif ( file_exists( $logo_file ) ) : ?>
           <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-            <img src="<?php echo esc_url( get_template_directory_uri() ); ?>/assets/images/logo.png" alt="Hombisilu" class="ds-logo" width="160" height="80" fetchpriority="high" decoding="async">
+            <picture>
+              <source type="image/webp"
+                      srcset="<?php echo esc_url( $tpl_uri = get_template_directory_uri() ); ?>/assets/images/logo.webp 240w,
+                              <?php echo esc_url( $tpl_uri ); ?>/assets/images/logo@2x.webp 480w"
+                      sizes="120px">
+              <img src="<?php echo esc_url( $tpl_uri ); ?>/assets/images/logo-small.png"
+                   alt="Hombisilu" class="ds-logo" width="240" height="160"
+                   fetchpriority="high" decoding="async">
+            </picture>
           </a>
         <?php else : ?>
           <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="ds-wordmark" rel="home">
