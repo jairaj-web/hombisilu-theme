@@ -36,16 +36,13 @@
         if ( has_custom_logo() ) :
           the_custom_logo();
         elseif ( file_exists( $logo_file ) ) : ?>
+          <?php $tpl_uri = get_template_directory_uri(); ?>
           <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-            <picture>
-              <source type="image/webp"
-                      srcset="<?php echo esc_url( $tpl_uri = get_template_directory_uri() ); ?>/assets/images/logo.webp 240w,
-                              <?php echo esc_url( $tpl_uri ); ?>/assets/images/logo@2x.webp 480w"
-                      sizes="120px">
-              <img src="<?php echo esc_url( $tpl_uri ); ?>/assets/images/logo-small.png"
-                   alt="Hombisilu" class="ds-logo" width="240" height="160"
-                   fetchpriority="high" decoding="async">
-            </picture>
+            <img src="<?php echo esc_url( $tpl_uri ); ?>/assets/images/logo.webp"
+                 srcset="<?php echo esc_url( $tpl_uri ); ?>/assets/images/logo.webp 1x,
+                         <?php echo esc_url( $tpl_uri ); ?>/assets/images/logo@2x.webp 2x"
+                 alt="Hombisilu" class="ds-logo"
+                 fetchpriority="high" decoding="async">
           </a>
         <?php else : ?>
           <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="ds-wordmark" rel="home">

@@ -1885,7 +1885,11 @@ p, .section-subtitle, .hero-desc { text-wrap: pretty; }
 
 /* Media never causes layout shift or overflow */
 img, svg, video, picture, iframe { max-width: 100%; }
-img[width][height] { height: auto; }
+/* NOTE: no `img[width][height] { height: auto }` here. Its specificity (0,2,1)
+   outranks single-class component rules like `.ds-logo`, so it silently
+   overrode their heights and blew the header up. `img { height: auto }` in the
+   reset above already covers intrinsic sizing at a specificity components can
+   beat. */
 
 /* ── Accessible focus, mouse users unaffected ───────── */
 :focus { outline: none; }

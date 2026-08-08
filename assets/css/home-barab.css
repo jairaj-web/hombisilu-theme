@@ -45,10 +45,11 @@
 .bb-arrow--prev svg { transform: rotate(180deg); }
 @media (max-width: 620px) { .bb-rail-head { flex-direction: column; align-items: stretch; } }
 
+/* Flex, not grid. `grid-auto-columns: minmax(0, …)` let eight cards compress
+   into one screen instead of overflowing into a scroll rail, which crushed
+   every title and button. flex-basis + flex-shrink:0 cannot collapse. */
 .bb-rail {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(240px, 1fr);
+  display: flex;
   gap: var(--ds-s3);
   overflow-x: auto;
   scroll-snap-type: x mandatory;
@@ -60,10 +61,15 @@
   padding-inline: var(--ds-gutter);
 }
 .bb-rail::-webkit-scrollbar { display: none; }
-.bb-rail > * { scroll-snap-align: start; }
-@media (min-width: 640px)  { .bb-rail { grid-auto-columns: minmax(0, calc(50% - var(--ds-s3))); } }
-@media (min-width: 900px)  { .bb-rail { grid-auto-columns: minmax(0, calc(33.333% - var(--ds-s3))); } }
-@media (min-width: 1180px) { .bb-rail { grid-auto-columns: minmax(0, calc(25% - var(--ds-s3) * .75)); } }
+.bb-rail > * {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  width: 78%;
+  max-width: 320px;
+}
+@media (min-width: 640px)  { .bb-rail > * { width: calc(50%    - var(--ds-s3) * .5);  max-width: none; } }
+@media (min-width: 900px)  { .bb-rail > * { width: calc(33.333% - var(--ds-s3) * .67); } }
+@media (min-width: 1180px) { .bb-rail > * { width: calc(25%    - var(--ds-s3) * .75); } }
 @media (prefers-reduced-motion: reduce) { .bb-rail { scroll-behavior: auto; } }
 
 /* ── 1. HERO SLIDER ───────────────────────────────────────── */

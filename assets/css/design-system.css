@@ -646,7 +646,16 @@
 }
 .ds-prod-price del { font-size: .85rem; color: var(--ds-muted); font-weight: 400; margin-right: .35rem; }
 .ds-prod-price ins { text-decoration: none; }
-.ds-prod-cta { margin-top: var(--ds-s2); width: 100%; }
+.ds-prod-cta {
+  margin-top: var(--ds-s2);
+  width: 100%;
+  /* In a narrow rail card, "Add to Cart" was wrapping to three lines inside
+     the pill. Let the label shrink rather than break. */
+  white-space: nowrap;
+  padding-inline: 1rem;
+  font-size: .86rem;
+}
+.ds-prod-title { overflow-wrap: break-word; hyphens: auto; }
 
 /* ── 9. DEAL SPOTLIGHT ────────────────────────────────────── */
 .ds-deal {
@@ -921,7 +930,34 @@ html:not(.js) .js-reveal { opacity: 1; transform: none; }
 }
 .ds-header.is-scrolled .ds-header-inner { padding-block: .45rem; }
 
-.ds-logo { width: auto; height: clamp(40px, 6vw, 54px); }
+/* Brand lockup. The logo is hard-capped in both axes: the source art is
+   1536x1024, and anything that lets it reach intrinsic size destroys the
+   header. Sized by height, with max-width as a second backstop. */
+.ds-brand {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  max-width: 46vw;
+}
+.ds-brand a { display: block; line-height: 0; }
+
+.ds-brand .ds-logo,
+.ds-brand img,
+img.ds-logo {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: clamp(46px, 5.6vw, 64px);
+  max-height: 64px;
+  object-fit: contain;
+}
+.ds-header.is-scrolled .ds-brand .ds-logo,
+.ds-header.is-scrolled .ds-brand .custom-logo { height: clamp(40px, 4.8vw, 52px); }
+
+/* WordPress custom-logo output goes through the same cap. */
+.ds-brand .custom-logo-link { display: block; line-height: 0; }
+.ds-brand .custom-logo { width: auto; height: clamp(46px, 5.6vw, 64px); max-height: 64px; object-fit: contain; }
 
 .ds-wordmark { display: block; line-height: 1.05; }
 .ds-wordmark-name {
@@ -943,7 +979,8 @@ html:not(.js) .js-reveal { opacity: 1; transform: none; }
 }
 
 /* Nav */
-.ds-nav ul { display: flex; align-items: center; gap: clamp(.75rem, 1.6vw, 1.85rem); }
+.ds-nav { min-width: 0; }
+.ds-nav ul { display: flex; align-items: center; flex-wrap: nowrap; gap: clamp(.6rem, 1.4vw, 1.75rem); }
 .ds-nav a {
   position: relative;
   display: block;
@@ -951,6 +988,7 @@ html:not(.js) .js-reveal { opacity: 1; transform: none; }
   font-size: .9rem;
   font-weight: 600;
   color: var(--ds-ink-2);
+  white-space: nowrap;   /* "About Us" must not break onto two lines */
   transition: color var(--ds-fast);
 }
 .ds-nav a::after {
