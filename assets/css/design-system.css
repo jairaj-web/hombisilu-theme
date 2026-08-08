@@ -1842,6 +1842,7 @@ img.ds-logo {
   text-wrap: balance;
 }
 .ab-page section, .ct-page section, .fq-page section, .lp-page section { padding-block: var(--ds-s5); }
+.fq-page .fq-group { padding-block: 0; }
 
 /* Any legacy card-ish block picks up the new elevation + radius */
 .ab-card, .ct-card, .fq-card, .lp-card,
