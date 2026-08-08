@@ -755,3 +755,22 @@ ul.woocommerce-order-overview li strong {
 .woocommerce-orders-table__cell-order-actions .button {
   margin: .2rem .3rem .2rem 0;
 }
+
+/* The empty-cart "New in store" suggestions use WooCommerce's block-based
+   product template, whose Add to Cart is a Gutenberg button
+   (.wp-block-button__link), not the classic .button class every other
+   override in this file targets. Two unrelated rules were combining badly
+   on it: the sitewide `a { color: var(--primary) }` base style tinted its
+   text maroon, while WordPress core's own default block-button background
+   (a dark charcoal, not ours) was left untouched — maroon text on
+   near-black, effectively illegible. */
+.wp-block-button__link.add_to_cart_button {
+  background: var(--ds-forest) !important;
+  color: #fff !important;
+  border-radius: var(--ds-r-pill) !important;
+  min-height: 44px;
+  padding: .7rem 1.4rem !important;
+  font-weight: 650 !important;
+  border: none !important;
+}
+.wp-block-button__link.add_to_cart_button:hover { background: var(--ds-forest-deep) !important; }
