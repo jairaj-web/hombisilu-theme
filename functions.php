@@ -172,6 +172,79 @@ function hb_stat_target_suffix( $value ) {
 }
 
 /* ───────────────────────────────────────────────────────────
+   CONTACT FORM
+   ─────────────────────────────────────────────────────────── */
+
+/**
+ * Handles the Contact Us form (template-contact.php posts to admin-post.php
+ * with action=hombisilu_contact). Until this existed, nothing was hooked to
+ * that action, so every message was dropped and the visitor got WordPress'
+ * bare 400 error page.
+ *
+ * No nonce check: the contact page is served from LiteSpeed's page cache for
+ * days, far longer than a nonce lives, so a nonce would reject real visitors.
+ * A honeypot field and a per-IP throttle keep bots out instead.
+ */
+function hombisilu_handle_contact() {
+    $back = wp_get_referer();
+    if ( ! $back || false === strpos( $back, home_url() ) ) {
+        $back = home_url( '/contact-us/' );
+    }
+    $back = remove_query_arg( 'sent', $back );
+    $done = function ( $status ) use ( $back ) {
+        wp_safe_redirect( add_query_arg( 'sent', $status, $back ) . '#contact-form' );
+        exit;
+    };
+
+    // Bots fill every field; people never see this one.
+    if ( ! empty( $_POST['contact_website'] ) ) {
+        $done( '1' );
+    }
+
+    $name    = isset( $_POST['contact_name'] ) ? sanitize_text_field( wp_unslash( $_POST['contact_name'] ) ) : '';
+    $email   = isset( $_POST['contact_email'] ) ? sanitize_email( wp_unslash( $_POST['contact_email'] ) ) : '';
+    $phone   = isset( $_POST['contact_phone'] ) ? sanitize_text_field( wp_unslash( $_POST['contact_phone'] ) ) : '';
+    $subject = isset( $_POST['contact_subject'] ) ? sanitize_key( wp_unslash( $_POST['contact_subject'] ) ) : '';
+    $message = isset( $_POST['contact_message'] ) ? sanitize_textarea_field( wp_unslash( $_POST['contact_message'] ) ) : '';
+
+    $subjects = [
+        'order'   => 'Order Related',
+        'product' => 'Product Enquiry',
+        'bulk'    => 'Bulk / Wholesale Order',
+        'return'  => 'Return / Refund',
+        'other'   => 'Other',
+    ];
+
+    if ( '' === $name || ! is_email( $email ) || ! isset( $subjects[ $subject ] ) || '' === $message ) {
+        $done( 'invalid' );
+    }
+
+    $ip_key = 'hb_contact_' . md5( isset( $_SERVER['REMOTE_ADDR'] ) ? $_SERVER['REMOTE_ADDR'] : '' );
+    if ( get_transient( $ip_key ) ) {
+        $done( 'wait' );
+    }
+    set_transient( $ip_key, 1, 30 );
+
+    $body = "New message from the hombisilu.com contact form\n\n"
+          . "Name:    {$name}\n"
+          . "Email:   {$email}\n"
+          . 'Phone:   ' . ( $phone ? $phone : '-' ) . "\n"
+          . "Subject: {$subjects[ $subject ]}\n\n"
+          . "{$message}\n";
+
+    $sent = wp_mail(
+        get_option( 'admin_email' ),
+        '[Hombisilu] ' . $subjects[ $subject ] . ' — ' . $name,
+        $body,
+        [ 'Reply-To: ' . $name . ' <' . $email . '>' ]
+    );
+
+    $done( $sent ? '1' : '0' );
+}
+add_action( 'admin_post_nopriv_hombisilu_contact', 'hombisilu_handle_contact' );
+add_action( 'admin_post_hombisilu_contact', 'hombisilu_handle_contact' );
+
+/* ───────────────────────────────────────────────────────────
    PERFORMANCE
    ─────────────────────────────────────────────────────────── */
 
@@ -195,9 +268,10 @@ function hombisilu_preload_lcp() {
     if ( ! is_front_page() ) {
         return;
     }
-    // First hero slide background — matches the srcset in front-page.php.
-    $lg = HOMBISILU_URI . '/assets/images/hero-pickle.webp';
-    $sm = HOMBISILU_URI . '/assets/images/hero-pickle-900.webp';
+    // Hero background — must match the srcset in template-parts/home/hero.php,
+    // or this preloads an image the page never shows.
+    $lg = HOMBISILU_URI . '/assets/images/hero-bg.webp';
+    $sm = HOMBISILU_URI . '/assets/images/hero-bg-900.webp';
     printf(
         '<link rel="preload" as="image" href="%s" imagesrcset="%s 900w, %s 1600w" imagesizes="100vw" fetchpriority="high">' . "\n",
         esc_url( $lg ),
@@ -299,7 +373,9 @@ add_filter( 'script_loader_tag', 'hombisilu_defer_scripts', 10, 2 );
  * in-viewport image left eager so the LCP is not delayed.
  */
 function hombisilu_image_attrs( $attr, $attachment, $size ) {
-    if ( ! isset( $attr['loading'] ) ) {
+    // Core deliberately omits loading on LCP candidates; don't undo that.
+    $is_priority = isset( $attr['fetchpriority'] ) && 'high' === $attr['fetchpriority'];
+    if ( ! isset( $attr['loading'] ) && ! $is_priority ) {
         $attr['loading'] = 'lazy';
     }
     if ( ! isset( $attr['decoding'] ) ) {
@@ -334,6 +410,9 @@ add_action( 'init', function () {
 
 // Force our custom shop template - bypass WooCommerce block overrides
 add_filter( 'template_include', function ( $template ) {
+    if ( ! function_exists( 'is_shop' ) ) {
+        return $template;
+    }
     if ( is_shop() || is_product_category() || is_product_tag() ) {
         $custom = HOMBISILU_DIR . '/woocommerce/archive-product.php';
         if ( file_exists( $custom ) ) {
@@ -349,8 +428,47 @@ add_filter( 'template_include', function ( $template ) {
     return $template;
 }, 99 );
 
+/**
+ * Header cart button. Shared by header.php and the cart fragment below so the
+ * server render and the AJAX refresh can never drift apart.
+ */
+function hb_header_cart_link() {
+    $count = ( function_exists( 'WC' ) && WC()->cart ) ? (int) WC()->cart->get_cart_contents_count() : 0;
+    return sprintf(
+        '<a href="%s" class="ds-icon-btn ds-cart-link" aria-label="%s">%s%s</a>',
+        esc_url( wc_get_cart_url() ),
+        esc_attr( 'Shopping cart' . ( $count ? ', ' . $count . ' items' : '' ) ),
+        hb_icon( 'bag', 20 ),
+        $count > 0 ? '<span class="ds-cart-count">' . $count . '</span>' : ''
+    );
+}
+
+function hb_drawer_cart_count() {
+    $count = ( function_exists( 'WC' ) && WC()->cart ) ? (int) WC()->cart->get_cart_contents_count() : 0;
+    return '<span class="ds-drawer-cart-count">' . $count . '</span>';
+}
+
+/**
+ * Keep the header cart count live. Pages are served from LiteSpeed's full-page
+ * cache, so the count rendered into the HTML is whatever the cached copy had
+ * (usually 0) — a shopper with items in their cart saw an empty badge on every
+ * page but /cart/. The fragments below are swapped in after an AJAX add-to-cart
+ * and, via wc-cart-fragments, on every page load.
+ */
+add_filter( 'woocommerce_add_to_cart_fragments', function ( $fragments ) {
+    $fragments['a.ds-cart-link']            = hb_header_cart_link();
+    $fragments['span.ds-drawer-cart-count'] = hb_drawer_cart_count();
+    return $fragments;
+} );
+
+add_action( 'wp_enqueue_scripts', function () {
+    if ( function_exists( 'WC' ) ) {
+        wp_enqueue_script( 'wc-cart-fragments' );
+    }
+} );
+
 add_action( 'pre_get_posts', function ( $q ) {
-    if ( ! is_admin() && $q->is_main_query() && ( is_shop() || is_product_category() ) ) {
+    if ( ! is_admin() && function_exists( 'is_shop' ) && $q->is_main_query() && ( is_shop() || is_product_category() || is_product_tag() ) ) {
         $q->set( 'posts_per_page', 12 );
     }
 } );

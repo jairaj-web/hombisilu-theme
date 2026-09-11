@@ -31,9 +31,9 @@
       <ul>
         <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
         <li><a href="<?php echo esc_url( hb_shop_url() ); ?>">Shop All</a></li>
-        <li><a href="<?php echo esc_url( home_url( '/about-us' ) ); ?>">About Us</a></li>
-        <li><a href="<?php echo esc_url( home_url( '/contact-us' ) ); ?>">Contact Us</a></li>
-        <li><a href="<?php echo esc_url( home_url( '/faqs' ) ); ?>">FAQs</a></li>
+        <li><a href="<?php echo esc_url( home_url( '/about-us/' ) ); ?>">About Us</a></li>
+        <li><a href="<?php echo esc_url( home_url( '/contact-us/' ) ); ?>">Contact Us</a></li>
+        <li><a href="<?php echo esc_url( home_url( '/faqs/' ) ); ?>">FAQs</a></li>
         <?php if ( function_exists( 'wc_get_page_id' ) ) : ?>
           <li><a href="<?php echo esc_url( wc_get_cart_url() ); ?>">Cart</a></li>
           <li><a href="<?php echo esc_url( wc_get_checkout_url() ); ?>">Checkout</a></li>
@@ -57,7 +57,7 @@
         foreach ( $footer_cats as $slug => $label ) {
           printf(
             '<li><a href="%s">%s</a></li>',
-            esc_url( home_url( '/product-category/' . $slug ) ),
+            esc_url( home_url( '/product-category/' . $slug . '/' ) ),
             $label
           );
         }
@@ -80,10 +80,10 @@
   <div class="ds-wrap ds-footer-bottom">
     <p>&copy; <?php echo esc_html( date( 'Y' ) ); ?> Hombisilu by SGR Manufacturing &amp; Trading. All rights reserved.</p>
     <nav class="ds-footer-legal" aria-label="Legal">
-      <a href="<?php echo esc_url( home_url( '/terms-and-conditions' ) ); ?>">Terms &amp; Conditions</a>
-      <a href="<?php echo esc_url( home_url( '/privacy-policy' ) ); ?>">Privacy Policy</a>
-      <a href="<?php echo esc_url( home_url( '/refund-policy' ) ); ?>">Refund Policy</a>
-      <a href="<?php echo esc_url( home_url( '/faqs' ) ); ?>">FAQs</a>
+      <a href="<?php echo esc_url( home_url( '/terms-and-conditions/' ) ); ?>">Terms &amp; Conditions</a>
+      <a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>">Privacy Policy</a>
+      <a href="<?php echo esc_url( home_url( '/refund-policy/' ) ); ?>">Refund Policy</a>
+      <a href="<?php echo esc_url( home_url( '/faqs/' ) ); ?>">FAQs</a>
     </nav>
     <p class="ds-footer-credit">Website designed by <a href="https://printigly.in" target="_blank" rel="noopener">Printigly</a></p>
   </div>

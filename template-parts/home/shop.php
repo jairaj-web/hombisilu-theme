@@ -98,9 +98,9 @@ $shop = hb_shop_url();
             <span class="ds-prod-cat"><?php echo esc_html( $pterms[0]->name ); ?></span>
           <?php endif; ?>
           <h3 class="ds-prod-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-          <div class="ds-prod-stars" aria-label="Rated <?php echo esc_attr( $rating ? $rating : 5 ); ?> out of 5">
+          <div class="ds-prod-stars" aria-label="Rated <?php echo esc_attr( $rating ); ?> out of 5">
             <?php for ( $s = 1; $s <= 5; $s++ ) : ?>
-              <span class="<?php echo ( ! $rating || $s <= round( $rating ) ) ? 'is-on' : 'is-off'; ?>"><?php echo hb_icon( 'star', 13 ); ?></span>
+              <span class="<?php echo $s <= round( $rating ) ? 'is-on' : 'is-off'; ?>"><?php echo hb_icon( 'star', 13 ); ?></span>
             <?php endfor; ?>
           </div>
           <div class="ds-prod-price"><?php echo $prod->get_price_html(); ?></div>

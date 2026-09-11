@@ -34,6 +34,12 @@ foreach ( $extra_ids as $gid ) {
 
 $avg_rating   = (float) $product->get_average_rating();
 $rating_count = (int) $product->get_rating_count();
+
+// Product JSON-LD (price, stock, rating). WooCommerce emits it from its own
+// single-product hooks, which this custom template never runs.
+if ( isset( WC()->structured_data ) ) {
+  WC()->structured_data->generate_product_data( $product );
+}
 ?>
 
   <!-- ═══ BREADCRUMB ═══ -->
@@ -53,6 +59,8 @@ $rating_count = (int) $product->get_rating_count();
 
   <!-- ═══ PRODUCT ═══ -->
   <section class="ds-section ds-section--tight ds-section--white">
+    <?php // "Added to cart" / "Not enough stock" etc. — nothing showed them before. ?>
+    <div class="ds-wrap ds-notices"><?php woocommerce_output_all_notices(); ?></div>
     <div class="ds-wrap ds-pdp">
 
       <!-- Gallery -->

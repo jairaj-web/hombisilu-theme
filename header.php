@@ -3,7 +3,7 @@
 <head>
 <meta charset="<?php bloginfo('charset'); ?>">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#1F4D2E">
+<meta name="theme-color" content="#6B1E28">
 <script>document.documentElement.className+=' js';</script>
 <?php wp_head(); ?>
 </head>
@@ -32,21 +32,22 @@
 
       <div class="ds-brand">
         <?php
-        // The source logo.png is 1536x1024 (2.1MB) but renders ~54px tall, so
-        // serve the resized WebP pair instead and keep the PNG as fallback.
+        // The Customizer logo is the 1536x1024 (2.3MB) original and renders
+        // ~54px tall, so the resized WebP pair wins whenever it's present —
+        // checking has_custom_logo() first meant the WebP was never used.
         $logo_file = get_template_directory() . '/assets/images/logo.webp';
-        if ( has_custom_logo() ) :
-          the_custom_logo();
-        elseif ( file_exists( $logo_file ) ) : ?>
+        if ( file_exists( $logo_file ) ) : ?>
           <?php $tpl_uri = get_template_directory_uri(); ?>
           <a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
             <img src="<?php echo esc_url( $tpl_uri ); ?>/assets/images/logo.webp"
                  srcset="<?php echo esc_url( $tpl_uri ); ?>/assets/images/logo.webp 1x,
                          <?php echo esc_url( $tpl_uri ); ?>/assets/images/logo@2x.webp 2x"
                  alt="Hombisilu" class="ds-logo"
-                 fetchpriority="high" decoding="async">
+                 width="240" height="160" fetchpriority="high" decoding="async">
           </a>
-        <?php else : ?>
+        <?php elseif ( has_custom_logo() ) :
+          the_custom_logo();
+        else : ?>
           <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="ds-wordmark" rel="home">
             <span class="ds-wordmark-name">Hombisilu</span>
             <span class="ds-wordmark-tag">Golden Sunshine</span>
@@ -64,13 +65,7 @@
       </nav>
 
       <div class="ds-header-actions">
-        <?php if ( function_exists( 'WC' ) ) :
-          $count = WC()->cart ? WC()->cart->get_cart_contents_count() : 0; ?>
-          <a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="ds-icon-btn" aria-label="Shopping cart<?php echo $count ? ', ' . (int) $count . ' items' : ''; ?>">
-            <?php echo hb_icon( 'bag', 20 ); ?>
-            <?php if ( $count > 0 ) : ?><span class="ds-cart-count"><?php echo (int) $count; ?></span><?php endif; ?>
-          </a>
-        <?php endif; ?>
+        <?php if ( function_exists( 'WC' ) ) { echo hb_header_cart_link(); } ?>
 
         <a href="<?php echo esc_url( hb_shop_url() ); ?>" class="ds-btn ds-btn--primary ds-header-cta">Shop Now <?php echo hb_icon( 'arrow', 14 ); ?></a>
 
@@ -109,7 +104,7 @@
   <div class="ds-drawer-actions">
     <a href="<?php echo esc_url( hb_shop_url() ); ?>" class="ds-btn ds-btn--primary"><?php echo hb_icon( 'bag', 16 ); ?> Shop All Products</a>
     <?php if ( function_exists( 'WC' ) ) : ?>
-      <a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="ds-btn ds-btn--outline">Cart (<?php echo WC()->cart ? (int) WC()->cart->get_cart_contents_count() : 0; ?>)</a>
+      <a href="<?php echo esc_url( wc_get_cart_url() ); ?>" class="ds-btn ds-btn--outline">Cart (<?php echo hb_drawer_cart_count(); ?>)</a>
     <?php endif; ?>
   </div>
 

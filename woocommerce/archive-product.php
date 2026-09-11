@@ -9,6 +9,7 @@ get_header();
 
 $paged    = get_query_var( 'page' ) ? (int) get_query_var( 'page' ) : ( get_query_var( 'paged' ) ? (int) get_query_var( 'paged' ) : 1 );
 $cat_slug = get_query_var( 'product_cat' );
+$tag_slug = is_product_tag() ? get_query_var( 'product_tag' ) : '';
 $shop_url = hb_shop_url();
 
 $sort        = isset( $_GET['orderby'] ) ? sanitize_text_field( wp_unslash( $_GET['orderby'] ) ) : 'date';
@@ -37,9 +38,28 @@ if ( $cat_slug ) {
     'terms'    => $cat_slug,
   ] ];
 }
+// Tag archives are routed to this template too (see functions.php), so they
+// must filter by the tag or every /product-tag/ page lists the whole shop.
+if ( $tag_slug ) {
+  $args['tax_query'] = [ [
+    'taxonomy' => 'product_tag',
+    'field'    => 'slug',
+    'terms'    => $tag_slug,
+  ] ];
+}
+
+// A product search (?s=…&post_type=product) is a shop archive as far as
+// WordPress is concerned, so it lands here too and must keep the term.
+if ( is_search() ) {
+  $args['s'] = get_search_query( false );
+}
 
 $shop_query = new WP_Query( $args );
-$page_title = $cat_slug ? single_term_title( '', false ) : 'Our Shop';
+if ( is_search() ) {
+  $page_title = sprintf( 'Results for “%s”', get_search_query( false ) );
+} else {
+  $page_title = ( $cat_slug || $tag_slug ) ? single_term_title( '', false ) : 'Our Shop';
+}
 ?>
 
 <main class="ds-shop">
@@ -51,7 +71,7 @@ $page_title = $cat_slug ? single_term_title( '', false ) : 'Our Shop';
         <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a>
         <?php echo hb_icon( 'chev', 12 ); ?>
         <a href="<?php echo esc_url( $shop_url ); ?>">Shop</a>
-        <?php if ( $cat_slug ) : ?>
+        <?php if ( $cat_slug || $tag_slug ) : ?>
           <?php echo hb_icon( 'chev', 12 ); ?>
           <span aria-current="page"><?php echo esc_html( $page_title ); ?></span>
         <?php endif; ?>
@@ -59,7 +79,7 @@ $page_title = $cat_slug ? single_term_title( '', false ) : 'Our Shop';
 
       <span class="ds-eyebrow">100% Natural &middot; No Preservatives &middot; FSSAI Certified</span>
       <h1 class="ds-pagehead-title"><?php echo esc_html( $page_title ); ?></h1>
-      <?php if ( $cat_slug && term_description() ) : ?>
+      <?php if ( ( $cat_slug || $tag_slug ) && term_description() ) : ?>
         <div class="ds-sub"><?php echo wp_kses_post( term_description() ); ?></div>
       <?php endif; ?>
     </div>
@@ -67,6 +87,8 @@ $page_title = $cat_slug ? single_term_title( '', false ) : 'Our Shop';
 
   <section class="ds-section ds-section--tight ds-section--cream">
     <div class="ds-wrap">
+
+      <div class="ds-notices"><?php woocommerce_output_all_notices(); ?></div>
 
       <!-- ═══ CATEGORY FILTER ═══ -->
       <div class="ds-filterbar" role="navigation" aria-label="Product categories">
@@ -98,6 +120,10 @@ $page_title = $cat_slug ? single_term_title( '', false ) : 'Our Shop';
             <option value="rating"     <?php selected( $sort, 'rating' ); ?>>Avg. Rating</option>
             <option value="title"      <?php selected( $sort, 'title' ); ?>>Name: A–Z</option>
           </select>
+          <?php if ( is_search() ) : ?>
+            <input type="hidden" name="s" value="<?php echo esc_attr( get_search_query( false ) ); ?>">
+            <input type="hidden" name="post_type" value="product">
+          <?php endif; ?>
           <noscript><button type="submit" class="ds-btn ds-btn--outline">Apply</button></noscript>
         </form>
       </div>
@@ -183,10 +209,12 @@ $page_title = $cat_slug ? single_term_title( '', false ) : 'Our Shop';
         <?php if ( $shop_query->max_num_pages > 1 ) : ?>
         <nav class="ds-pagination" aria-label="Products pagination">
           <?php
-          $shop_base = trailingslashit( $shop_url );
+          // Paginate the current archive (shop, category or tag), not always
+          // /shop/ — otherwise page 2 of a category jumped to the full shop.
+          $big = 999999999;
           echo paginate_links( [
-            'base'      => $shop_base . '%_%',
-            'format'    => 'page/%#%/',
+            'base'      => esc_url_raw( str_replace( $big, '%#%', remove_query_arg( 'add-to-cart', get_pagenum_link( $big, false ) ) ) ),
+            'format'    => '',
             'total'     => $shop_query->max_num_pages,
             'current'   => $paged,
             'prev_text' => '&larr; Prev',

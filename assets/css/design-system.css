@@ -1177,10 +1177,11 @@ img.ds-logo {
   background: var(--ds-white);
   box-shadow: -20px 0 60px rgba(67,16,22,.2);
   transform: translateX(100%);
-  transition: transform .34s cubic-bezier(.22,1,.36,1);
+  /* visibility flips only after the slide-out, or the close is instant. */
+  transition: transform .34s cubic-bezier(.22,1,.36,1), visibility 0s linear .34s;
   visibility: hidden;
 }
-.ds-drawer.is-open { transform: none; visibility: visible; }
+.ds-drawer.is-open { transform: none; visibility: visible; transition-delay: 0s; }
 
 .ds-drawer-head {
   display: flex;
@@ -1544,6 +1545,22 @@ img.ds-logo {
   -webkit-appearance: none;
   cursor: pointer;
 }
+/* Search box on the 404 / empty-results state (index.php). */
+.ds-sort input[type="search"] {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: min(320px, 100%);
+  padding: .6rem 1.1rem;
+  min-height: 42px;
+  border: 1.5px solid var(--ds-line);
+  border-radius: var(--ds-r-pill);
+  background: #fff;
+  font: inherit;
+  font-size: .9rem;
+  color: var(--ds-ink);
+}
+.ds-sort input[type="search"]:focus { outline: none; border-color: var(--ds-gold); }
+.ds-empty .ds-sort { width: min(460px, 100%); }
 
 .ds-prod-flag--out { background: #6B7280; }
 .ds-prod-stars .is-off { color: rgba(201,147,43,.28); }
@@ -1867,8 +1884,6 @@ img.ds-logo {
 .btn-primary:hover { background: var(--ds-forest-deep) !important; transform: translateY(-2px); }
 
 /* ── 28. CART / CHECKOUT / ACCOUNT ────────────────────────── */
-.woocommerce-cart .ds-wrap,
-.woocommerce-checkout .ds-wrap { padding-block: var(--ds-s4); }
 .woocommerce table.shop_table {
   border: 1px solid var(--ds-line);
   border-radius: var(--ds-r-md);

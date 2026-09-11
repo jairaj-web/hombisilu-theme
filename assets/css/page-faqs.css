@@ -134,7 +134,7 @@
 .fq-q::marker { content: ''; }
 
 .fq-q:hover { color: var(--ds-forest); background: var(--ds-cream); }
-.fq-item[open] > .fq-q { color: var(--ds-forest); background: rgba(26,61,46,.05); }
+.fq-item[open] > .fq-q { color: var(--ds-forest); background: rgba(107,30,40,.05); }
 
 .fq-q:focus-visible {
   outline: 2px solid var(--ds-forest);

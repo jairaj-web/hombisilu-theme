@@ -578,8 +578,12 @@ ul.woocommerce-order-overview li strong {
   line-height: 1.6;
 }
 
+/* Cart and checkout blocks are two-column; page.php's 900px text-page card
+   squeezed the order summary until product names wrapped word by word. */
+.woocommerce-cart .inner-page .page-card,
+.woocommerce-checkout .inner-page .page-card { max-width: 1180px; }
+
 /* ── 5. My Account ──────────────────────────────────────────── */
-.woocommerce-account .ds-wrap { padding-block: var(--ds-s4); }
 
 .woocommerce-account .woocommerce {
   display: flex;

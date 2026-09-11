@@ -107,14 +107,30 @@ get_header(); ?>
       </div>
 
       <!-- RIGHT: Form -->
-      <div class="ds-card pc-form-card">
+      <div class="ds-card pc-form-card" id="contact-form">
         <span class="ds-eyebrow">Message Us</span>
         <h2 class="ds-title">Send Us a Message</h2>
         <p class="ds-sub">We typically respond within 24 hours on business days.</p>
 
+        <?php
+        $sent_state = isset( $_GET['sent'] ) ? sanitize_key( wp_unslash( $_GET['sent'] ) ) : '';
+        $notices    = [
+          '1'       => [ 'ok', 'Thank you! Your message has been sent &mdash; we&rsquo;ll get back to you within 24 hours.' ],
+          '0'       => [ 'err', 'Sorry, your message could not be sent right now. Please call or WhatsApp us on +91 6362616933.' ],
+          'invalid' => [ 'err', 'Please fill in your name, a valid email, a subject and your message.' ],
+          'wait'    => [ 'err', 'You just sent a message &mdash; please wait a few seconds before sending another.' ],
+        ];
+        if ( isset( $notices[ $sent_state ] ) ) :
+          list( $notice_type, $notice_text ) = $notices[ $sent_state ]; ?>
+          <p class="pc-notice pc-notice--<?php echo esc_attr( $notice_type ); ?>" role="<?php echo 'ok' === $notice_type ? 'status' : 'alert'; ?>"><?php echo wp_kses_post( $notice_text ); ?></p>
+        <?php endif; ?>
+
         <form class="pc-form" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>">
           <input type="hidden" name="action" value="hombisilu_contact">
-          <?php wp_nonce_field( 'hombisilu_contact_nonce' ); ?>
+          <div class="pc-hp" aria-hidden="true">
+            <label for="contact_website">Website</label>
+            <input type="text" id="contact_website" name="contact_website" tabindex="-1" autocomplete="off">
+          </div>
 
           <div class="pc-row">
             <div class="pc-field">

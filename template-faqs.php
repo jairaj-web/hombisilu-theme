@@ -22,9 +22,9 @@ get_header(); ?>
     <p class="ds-sub">Everything you need to know about Hombisilu products, orders, and delivery.</p>
 
     <div class="fq-stats">
-      <div class="fq-stat"><span class="fq-stat-num">23</span><span class="fq-stat-lbl">Questions Answered</span></div>
+      <div class="fq-stat"><span class="fq-stat-num">28</span><span class="fq-stat-lbl">Questions Answered</span></div>
       <div class="fq-stat-div"></div>
-      <div class="fq-stat"><span class="fq-stat-num">5</span><span class="fq-stat-lbl">Categories</span></div>
+      <div class="fq-stat"><span class="fq-stat-num">6</span><span class="fq-stat-lbl">Categories</span></div>
       <div class="fq-stat-div"></div>
       <div class="fq-stat"><span class="fq-stat-num">24h</span><span class="fq-stat-lbl">Response Time</span></div>
     </div>

@@ -89,7 +89,7 @@ $hb_faq_teaser = [
 		</div>
 
 		<div class="ht-faq-cta">
-			<a href="<?php echo esc_url( home_url( '/faqs' ) ); ?>" class="ds-btn ds-btn--outline">
+			<a href="<?php echo esc_url( home_url( '/faqs/' ) ); ?>" class="ds-btn ds-btn--outline">
 				View All FAQs
 				<?php echo hb_icon( 'arrow', 16 ); ?>
 			</a>

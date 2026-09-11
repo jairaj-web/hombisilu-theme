@@ -134,6 +134,22 @@ a.pc-quick:focus-visible { background: rgba(255,255,255,.18); }
 .pc-form-card .ds-sub { margin-bottom: var(--ds-s3); }
 
 .pc-form { display: grid; gap: 0; margin-top: var(--ds-s2); }
+
+/* Honeypot — off-screen rather than display:none, which some bots skip. */
+.pc-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.pc-form-card { scroll-margin-top: 120px; }
+
+.pc-notice {
+  margin-bottom: var(--ds-s2);
+  padding: .85rem 1.1rem;
+  border-radius: var(--ds-r-md);
+  border: 1px solid;
+  font-size: var(--ds-small);
+  font-weight: 600;
+  line-height: 1.5;
+}
+.pc-notice--ok  { background: #EEF7EF; border-color: #B7DDBC; color: #1E5B2A; }
+.pc-notice--err { background: #FBEFEF; border-color: #EBC1C1; color: #8A1F1F; }
 .pc-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
