@@ -268,15 +268,11 @@ function hombisilu_preload_lcp() {
     if ( ! is_front_page() ) {
         return;
     }
-    // Hero background — must match the srcset in template-parts/home/hero.php,
+    // Hero video poster — must match the poster in template-parts/home/hero.php,
     // or this preloads an image the page never shows.
-    $lg = HOMBISILU_URI . '/assets/images/hero-bg.webp';
-    $sm = HOMBISILU_URI . '/assets/images/hero-bg-900.webp';
     printf(
-        '<link rel="preload" as="image" href="%s" imagesrcset="%s 900w, %s 1600w" imagesizes="100vw" fetchpriority="high">' . "\n",
-        esc_url( $lg ),
-        esc_url( $sm ),
-        esc_url( $lg )
+        '<link rel="preload" as="image" href="%s" fetchpriority="high">' . "\n",
+        esc_url( HOMBISILU_URI . '/assets/images/hero-video-poster.webp' )
     );
 }
 add_action( 'wp_head', 'hombisilu_preload_lcp', 2 );
