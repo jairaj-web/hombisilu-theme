@@ -57,9 +57,10 @@ $shop = hb_shop_url();
 <section class="ds-section ds-section--cream">
   <div class="ds-wrap">
     <div class="ds-head ds-head--center">
-      <span class="ds-eyebrow">Customer Favourites</span>
-      <h2 class="ds-title">Our Signature Range</h2>
-      <p class="ds-sub">The jars that keep coming back to the same kitchens, month after month.</p>
+      <?php // The query below is newest-first, not by sales — so the heading says so. ?>
+      <span class="ds-eyebrow">Fresh From Our Kitchen</span>
+      <h2 class="ds-title">New in the Pantry</h2>
+      <p class="ds-sub">The latest jars and packs to leave our Bengaluru kitchen.</p>
     </div>
 
     <div class="ds-grid ds-grid--4 ds-grid--prods">
