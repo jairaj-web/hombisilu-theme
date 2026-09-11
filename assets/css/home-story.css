@@ -24,7 +24,7 @@
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 2 / 3;
+  aspect-ratio: 4 / 5; /* the family-meal photo's own ratio — no cropping */
   object-fit: cover;
   border-radius: var(--ds-r-xl);
   box-shadow: var(--ds-e2);

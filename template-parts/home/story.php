@@ -39,12 +39,12 @@ $hs_stats = [
 	<div class="ds-wrap hs-story">
 
 		<figure class="hs-story-figure">
-			<img src="<?php echo esc_url( $tpl ); ?>/assets/images/about-story.webp"
-				srcset="<?php echo esc_url( $tpl ); ?>/assets/images/about-story-500.webp 500w,
-						<?php echo esc_url( $tpl ); ?>/assets/images/about-story.webp 800w"
+			<img src="<?php echo esc_url( $tpl ); ?>/assets/images/about-family-1000.webp"
+				srcset="<?php echo esc_url( $tpl ); ?>/assets/images/about-family-560.webp 560w,
+						<?php echo esc_url( $tpl ); ?>/assets/images/about-family-1000.webp 1000w"
 				sizes="(max-width:900px) 90vw, 480px"
-				width="800" height="1200"
-				alt="Hombisilu heritage kitchen" loading="lazy" decoding="async">
+				width="1000" height="1250"
+				alt="A South Indian family sharing a traditional home-cooked meal on banana leaves, served from brass vessels" loading="lazy" decoding="async">
 			<figcaption class="hs-story-badge">
 				<strong>15+</strong>
 				<span>Years of Heritage</span>
