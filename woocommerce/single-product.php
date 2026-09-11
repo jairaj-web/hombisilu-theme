@@ -193,26 +193,10 @@ if ( isset( WC()->structured_data ) ) {
         <span class="ds-eyebrow">More to Explore</span>
         <h2 class="ds-title">You May Also Like</h2>
       </div>
-      <div class="ds-grid ds-grid--4">
-        <?php foreach ( $related as $related_id ) :
-          $rp = wc_get_product( $related_id );
-          if ( ! $rp ) { continue; }
-          $rp_link = get_permalink( $related_id );
-        ?>
-        <article class="ds-prod">
-          <a href="<?php echo esc_url( $rp_link ); ?>" class="ds-prod-img" aria-label="<?php echo esc_attr( $rp->get_name() ); ?>">
-            <?php
-            $thumb = get_the_post_thumbnail( $related_id, 'medium', [ 'loading' => 'lazy', 'decoding' => 'async' ] );
-            echo $thumb ? $thumb : '<span class="ds-ph">' . hb_icon( 'leaf', 40 ) . '</span>';
-            ?>
-          </a>
-          <div class="ds-prod-body">
-            <h3 class="ds-prod-title"><a href="<?php echo esc_url( $rp_link ); ?>"><?php echo esc_html( $rp->get_name() ); ?></a></h3>
-            <div class="ds-prod-price"><?php echo $rp->get_price_html(); ?></div>
-            <a href="<?php echo esc_url( $rp->add_to_cart_url() ); ?>" class="ds-btn ds-btn--outline ds-prod-cta" rel="nofollow"><?php echo hb_icon( 'bag', 15 ); ?> Add to Cart</a>
-          </div>
-        </article>
-        <?php endforeach; ?>
+      <div class="ds-grid ds-grid--4 ds-grid--prods">
+        <?php foreach ( $related as $i => $related_id ) {
+          hb_product_card( wc_get_product( $related_id ), 99 );
+        } ?>
       </div>
     </div>
   </section>

@@ -155,6 +155,81 @@ function hb_shop_url() {
     return home_url( '/shop/' );
 }
 
+/**
+ * The one product card. Home best-sellers, the shop/category/tag/search grid
+ * and "You May Also Like" all render through this, so every card on the site
+ * has the same parts in the same order at the same size.
+ *
+ * @param WC_Product $product
+ * @param int        $index   Position in its grid; the first row loads eagerly.
+ * @param string     $title_tag h2 on archive pages (cards are the main list), h3 elsewhere.
+ */
+function hb_product_card( $product, $index = 99, $title_tag = 'h3' ) {
+    if ( ! $product ) {
+        return;
+    }
+    $id        = $product->get_id();
+    $permalink = get_permalink( $id );
+    $name      = $product->get_name();
+    $rating    = (float) $product->get_average_rating();
+    $title_tag = in_array( $title_tag, [ 'h2', 'h3' ], true ) ? $title_tag : 'h3';
+
+    $cat_name = '';
+    $terms    = get_the_terms( $id, 'product_cat' );
+    if ( $terms && ! is_wp_error( $terms ) ) {
+        $visible = array_values( array_filter( $terms, function ( $t ) { return 15 != $t->term_id; } ) );
+        if ( ! empty( $visible ) ) {
+            $cat_name = $visible[0]->name;
+        }
+    }
+
+    $flag = '';
+    if ( ! $product->is_in_stock() ) {
+        $flag = '<span class="ds-prod-flag ds-prod-flag--out">Sold out</span>';
+    } elseif ( $product->is_on_sale() ) {
+        $regular = (float) $product->get_regular_price();
+        $sale    = (float) $product->get_sale_price();
+        $pct     = $regular > 0 ? round( ( ( $regular - $sale ) / $regular ) * 100 ) : 0;
+        $flag    = '<span class="ds-prod-flag ds-prod-flag--sale">' . ( $pct > 0 ? '-' . (int) $pct . '%' : 'Sale' ) . '</span>';
+    }
+
+    $thumb = get_the_post_thumbnail( $id, 'medium', [
+        // First row is above the fold on every viewport — lazy-loading it
+        // would push the LCP back by a full round-trip.
+        'loading'       => $index < 4 ? 'eager' : 'lazy',
+        'decoding'      => 'async',
+        'fetchpriority' => 0 === $index ? 'high' : 'auto',
+    ] );
+    ?>
+    <article class="ds-prod">
+      <a href="<?php echo esc_url( $permalink ); ?>" class="ds-prod-img" aria-label="<?php echo esc_attr( $name ); ?>">
+        <?php echo $thumb ? $thumb : '<span class="ds-ph">' . hb_icon( 'leaf', 44 ) . '</span>'; ?>
+        <?php echo $flag; ?>
+      </a>
+      <div class="ds-prod-body">
+        <span class="ds-prod-cat"><?php echo esc_html( $cat_name ); ?></span>
+        <<?php echo $title_tag; ?> class="ds-prod-title"><a href="<?php echo esc_url( $permalink ); ?>"><?php echo esc_html( $name ); ?></a></<?php echo $title_tag; ?>>
+        <div class="ds-prod-stars" aria-label="Rated <?php echo esc_attr( $rating ); ?> out of 5">
+          <?php for ( $s = 1; $s <= 5; $s++ ) : ?>
+            <span class="<?php echo $s <= round( $rating ) ? 'is-on' : 'is-off'; ?>"><?php echo hb_icon( 'star', 13 ); ?></span>
+          <?php endfor; ?>
+        </div>
+        <div class="ds-prod-price"><?php echo $product->get_price_html(); ?></div>
+        <?php if ( $product->is_purchasable() && $product->is_in_stock() ) : ?>
+          <a href="<?php echo esc_url( $product->add_to_cart_url() ); ?>"
+             class="ds-btn ds-btn--primary ds-prod-cta add_to_cart_button<?php echo $product->supports( 'ajax_add_to_cart' ) ? ' ajax_add_to_cart' : ''; ?>"
+             data-product_id="<?php echo (int) $id; ?>"
+             data-product_type="<?php echo esc_attr( $product->get_type() ); ?>"
+             aria-label="<?php echo esc_attr( 'Add ' . $name . ' to cart' ); ?>"
+             rel="nofollow"><?php echo hb_icon( 'bag', 15 ); ?> <span>Add to Cart</span></a>
+        <?php else : ?>
+          <a href="<?php echo esc_url( $permalink ); ?>" class="ds-btn ds-btn--outline ds-prod-cta"><span>View Product</span></a>
+        <?php endif; ?>
+      </div>
+    </article>
+    <?php
+}
+
 /** Five filled stars in currentColor. */
 function hb_stars( $size = 14 ) {
     return str_repeat( hb_icon( 'star', $size ), 5 );

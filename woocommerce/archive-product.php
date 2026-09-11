@@ -130,77 +130,11 @@ if ( is_search() ) {
 
       <!-- ═══ GRID ═══ -->
       <?php if ( $shop_query->have_posts() ) : ?>
-        <div class="ds-grid ds-grid--4">
+        <div class="ds-grid ds-grid--4 ds-grid--prods">
           <?php
           $card_index = 0;
           while ( $shop_query->have_posts() ) : $shop_query->the_post();
-            $product = wc_get_product( get_the_ID() );
-            if ( ! $product ) { continue; }
-
-            $permalink = get_permalink();
-            $rating    = (float) $product->get_average_rating();
-            $terms     = get_the_terms( get_the_ID(), 'product_cat' );
-            $cat_name  = '';
-            if ( $terms && ! is_wp_error( $terms ) ) {
-              $visible = array_values( array_filter( $terms, function ( $t ) { return 15 != $t->term_id; } ) );
-              if ( ! empty( $visible ) ) { $cat_name = $visible[0]->name; }
-            }
-          ?>
-          <article class="ds-prod">
-            <a href="<?php echo esc_url( $permalink ); ?>" class="ds-prod-img" aria-label="<?php the_title_attribute(); ?>">
-              <?php if ( has_post_thumbnail() ) :
-                // First row is above the fold on every viewport — lazy-loading it
-                // would push the LCP back by a full round-trip.
-                the_post_thumbnail( 'medium', [
-                  'loading'       => $card_index < 4 ? 'eager' : 'lazy',
-                  'decoding'      => 'async',
-                  'fetchpriority' => 0 === $card_index ? 'high' : 'auto',
-                ] );
-              else : ?>
-                <span class="ds-ph"><?php echo hb_icon( 'leaf', 44 ); ?></span>
-              <?php endif; ?>
-
-              <?php
-              if ( $product->is_on_sale() ) {
-                $regular = (float) $product->get_regular_price();
-                $sale    = (float) $product->get_sale_price();
-                $pct     = $regular > 0 ? round( ( ( $regular - $sale ) / $regular ) * 100 ) : 0;
-                if ( $pct > 0 ) {
-                  echo '<span class="ds-prod-flag ds-prod-flag--sale">-' . esc_html( $pct ) . '%</span>';
-                }
-              }
-              if ( ! $product->is_in_stock() ) {
-                echo '<span class="ds-prod-flag ds-prod-flag--out">Sold out</span>';
-              }
-              ?>
-            </a>
-
-            <div class="ds-prod-body">
-              <?php if ( $cat_name ) : ?>
-                <span class="ds-prod-cat"><?php echo esc_html( $cat_name ); ?></span>
-              <?php endif; ?>
-
-              <h2 class="ds-prod-title"><a href="<?php echo esc_url( $permalink ); ?>"><?php the_title(); ?></a></h2>
-
-              <div class="ds-prod-stars" aria-label="Rated <?php echo esc_attr( $rating ); ?> out of 5">
-                <?php for ( $s = 1; $s <= 5; $s++ ) : ?>
-                  <span class="<?php echo $s <= round( $rating ) ? 'is-on' : 'is-off'; ?>"><?php echo hb_icon( 'star', 13 ); ?></span>
-                <?php endfor; ?>
-              </div>
-
-              <div class="ds-prod-price"><?php echo $product->get_price_html(); ?></div>
-
-              <a href="<?php echo esc_url( $product->add_to_cart_url() ); ?>"
-                 class="ds-btn ds-btn--primary ds-prod-cta add_to_cart_button ajax_add_to_cart"
-                 data-product_id="<?php echo (int) get_the_ID(); ?>"
-                 data-product_type="<?php echo esc_attr( $product->get_type() ); ?>"
-                 rel="nofollow">
-                <?php echo hb_icon( 'bag', 15 ); ?> Add to Cart
-              </a>
-            </div>
-          </article>
-          <?php
-            $card_index++;
+            hb_product_card( wc_get_product( get_the_ID() ), $card_index++, 'h2' );
           endwhile;
           wp_reset_postdata();
           ?>

@@ -62,7 +62,7 @@ $shop = hb_shop_url();
       <p class="ds-sub">The jars that keep coming back to the same kitchens, month after month.</p>
     </div>
 
-    <div class="ds-grid ds-grid--4">
+    <div class="ds-grid ds-grid--4 ds-grid--prods">
       <?php
       $sig = new WP_Query( [
         'post_type'      => 'product',
@@ -74,43 +74,13 @@ $shop = hb_shop_url();
       if ( $sig->have_posts() ) :
         $si = 0;
         while ( $sig->have_posts() ) : $sig->the_post();
-          $prod = function_exists( 'wc_get_product' ) ? wc_get_product( get_the_ID() ) : null;
-          if ( ! $prod ) { continue; }
-          $rating = (float) $prod->get_average_rating();
-          $pterms = get_the_terms( get_the_ID(), 'product_cat' );
+          if ( function_exists( 'wc_get_product' ) ) {
+            hb_product_card( wc_get_product( get_the_ID() ), $si++ );
+          }
+        endwhile;
+        wp_reset_postdata();
+      endif;
       ?>
-      <article class="ds-prod">
-        <a href="<?php the_permalink(); ?>" class="ds-prod-img" aria-label="<?php the_title_attribute(); ?>">
-          <?php if ( has_post_thumbnail() ) :
-            the_post_thumbnail( 'medium', [
-              'loading'  => $si < 4 ? 'eager' : 'lazy',
-              'decoding' => 'async',
-            ] );
-          else : ?>
-            <span class="ds-ph"><?php echo hb_icon( 'leaf', 44 ); ?></span>
-          <?php endif; ?>
-          <?php if ( $prod->is_on_sale() ) : ?>
-            <span class="ds-prod-flag ds-prod-flag--sale">Sale</span>
-          <?php endif; ?>
-        </a>
-        <div class="ds-prod-body">
-          <?php if ( $pterms && ! is_wp_error( $pterms ) ) : ?>
-            <span class="ds-prod-cat"><?php echo esc_html( $pterms[0]->name ); ?></span>
-          <?php endif; ?>
-          <h3 class="ds-prod-title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
-          <div class="ds-prod-stars" aria-label="Rated <?php echo esc_attr( $rating ); ?> out of 5">
-            <?php for ( $s = 1; $s <= 5; $s++ ) : ?>
-              <span class="<?php echo $s <= round( $rating ) ? 'is-on' : 'is-off'; ?>"><?php echo hb_icon( 'star', 13 ); ?></span>
-            <?php endfor; ?>
-          </div>
-          <div class="ds-prod-price"><?php echo $prod->get_price_html(); ?></div>
-          <a href="<?php echo esc_url( $prod->add_to_cart_url() ); ?>" class="ds-btn ds-btn--primary ds-prod-cta add_to_cart_button ajax_add_to_cart"
-             data-product_id="<?php echo (int) get_the_ID(); ?>"
-             data-product_type="<?php echo esc_attr( $prod->get_type() ); ?>"
-             rel="nofollow"><?php echo hb_icon( 'bag', 15 ); ?> Add to Cart</a>
-        </div>
-      </article>
-      <?php $si++; endwhile; wp_reset_postdata(); endif; ?>
     </div>
 
     <div class="hs-shop-more">

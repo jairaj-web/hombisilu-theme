@@ -61,6 +61,9 @@
   font-weight: 600;
 }
 .hc-info-list li a:hover { color: var(--ds-forest); }
+@media (max-width: 767px) {
+  .hc-info-list li a { display: inline-flex; align-items: center; min-height: 40px; }
+}
 
 .hc-info-icon {
   flex: none;
