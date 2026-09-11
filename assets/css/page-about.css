@@ -29,6 +29,8 @@
 }
 .ab-pagehead .ds-wrap { position: relative; z-index: 2; }
 .ab-pagehead-pills { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: var(--ds-s3); }
+/* Light chips on the dark head — the gold-on-maroon variant was barely legible. */
+.ab-pagehead-pills .ds-chip { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.24); color: #fff; }
 .ab-pagehead-pills .ds-chip svg { color: var(--ds-gold-lt); }
 
 /* ── STATS STRIP ── */

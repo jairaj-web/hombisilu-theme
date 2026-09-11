@@ -1298,7 +1298,13 @@ img.ds-logo {
   padding-block: var(--ds-s5);
 }
 @media (max-width: 1000px) { .ds-footer-main { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 560px)  { .ds-footer-main { grid-template-columns: 1fr; gap: var(--ds-s3); } }
+/* Phones: brand and contact full width, Quick Links and Categories side by
+   side — stacked, the footer was ~1500px of single-column links. */
+@media (max-width: 560px)  {
+  .ds-footer-main { grid-template-columns: 1fr 1fr; gap: var(--ds-s3) var(--ds-s2); }
+  .ds-footer-main > .ds-footer-brand,
+  .ds-footer-main > :last-child { grid-column: 1 / -1; }
+}
 
 /* Faint vertical seams between columns, desktop only — reads as a
    considered grid rather than four blocks floating in open space. */
@@ -1420,6 +1426,17 @@ img.ds-logo {
   .ds-crumbs a { display: inline-flex; align-items: center; min-height: 36px; }
   /* Review star picker: WooCommerce sizes each star link at 24px. */
   .ds-prose p.stars a { width: 36px; height: 36px; font-size: 34px; }
+  .ds-prose .comment-form-cookies-consent input { width: 20px; height: 20px; }
+  /* .ds-single prefix: the product-page rules these override come later in
+     this file, so equal specificity would lose. */
+  .ds-single .ds-pdp-info > .ds-prod-cat { display: inline-flex; align-items: center; min-height: 36px; }
+  .ds-single .ds-pdp-rating a { display: inline-flex; align-items: center; min-height: 36px; }
+  /* iOS Safari zooms the whole page when a field under 16px gets focus. */
+  form.ds-sort select,
+  form.ds-sort input[type="search"] { font-size: 16px; }
+  /* Three trust badges in one row, not two plus an orphan. */
+  .ds-single .ds-pdp-trust { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ds-single .ds-pdp-trust li { font-size: .72rem; padding: .7rem .35rem; text-align: center; }
 }
 
 /* ── 20. WHATSAPP FLOAT ───────────────────────────────────── */

@@ -69,3 +69,13 @@
   text-align: center;
   margin-top: var(--ds-s4);
 }
+
+/* Phones: two category cards per row (nine stacked one-per-row made a
+   ~1100px column). A ninth, odd card spans the row rather than sitting
+   alone at half width. */
+@media (max-width: 599px) {
+  .hs-cat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+  .hs-cat-card { padding: var(--ds-s3) .9rem; gap: .45rem; border-radius: var(--ds-r-md); }
+  .hs-cat-card:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .hs-cat-desc { font-size: .8rem; }
+}

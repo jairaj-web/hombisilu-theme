@@ -778,3 +778,41 @@ ul.woocommerce-order-overview li strong {
   border: none !important;
 }
 .wp-block-button__link.add_to_cart_button:hover { background: var(--ds-forest-deep) !important; }
+
+/* ── Cart / checkout primary buttons ─────────────────────────
+   "Proceed to Checkout" and "Place Order" are WooCommerce block buttons.
+   A classic theme gives them no colours, so the cart's showed as plain
+   maroon link text and checkout's as a grey default box. */
+.wc-block-cart__submit-button,
+.wc-block-components-checkout-place-order-button {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 52px;
+  padding: .9rem 1.6rem !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: var(--ds-forest) !important;
+  color: #fff !important;
+  font-family: var(--font-sans, inherit);
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  box-shadow: 0 8px 22px rgba(107,30,40,.25);
+  transition: background-color .2s, transform .2s;
+}
+.wc-block-cart__submit-button:hover,
+.wc-block-components-checkout-place-order-button:hover {
+  background: var(--ds-forest-deep) !important;
+  transform: translateY(-1px);
+}
+.wc-block-cart__submit-button:focus-visible,
+.wc-block-components-checkout-place-order-button:focus-visible {
+  outline: 3px solid var(--ds-gold);
+  outline-offset: 2px;
+}
+.wc-block-components-checkout-place-order-button[disabled],
+.wc-block-components-checkout-place-order-button.wc-block-components-button--loading {
+  opacity: .7;
+}

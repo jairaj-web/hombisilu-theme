@@ -203,3 +203,20 @@
     grid-template-columns: repeat(5, 1fr);
   }
 }
+
+/* Phones: the five promise cards become compact icon-left rows instead of
+   five tall centred cards. */
+@media (max-width: 599px) {
+  .hh-features { gap: .6rem; }
+  .hh-feature-card {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    column-gap: .9rem;
+    row-gap: .15rem;
+    align-items: start;
+    text-align: left;
+    padding: 1rem 1.1rem;
+  }
+  .hh-feature-icon { grid-row: span 2; width: 44px; height: 44px; }
+  .hh-feature-icon svg { width: 22px; height: 22px; }
+}
