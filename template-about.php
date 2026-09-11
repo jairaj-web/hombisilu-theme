@@ -68,7 +68,13 @@ $shop_url = hb_shop_url();
     <div class="ds-story">
 
       <div class="ds-story-figure">
-        <img src="<?php echo esc_url( $img . 'about-story.jpg' ); ?>" alt="Hombisilu heritage food being prepared by hand" loading="lazy" decoding="async">
+        <img src="<?php echo esc_url( $img . 'about-family-1000.webp' ); ?>"
+             srcset="<?php echo esc_url( $img . 'about-family-560.webp' ); ?> 560w,
+                     <?php echo esc_url( $img . 'about-family-1000.webp' ); ?> 1000w"
+             sizes="(max-width: 900px) 92vw, 480px"
+             width="1000" height="1250"
+             alt="A South Indian family sharing a traditional home-cooked meal on banana leaves, served from brass vessels"
+             loading="lazy" decoding="async">
         <div class="ds-story-tag">
           <strong>ಹೊಂಬಿಸಿಲು</strong>
           <span>"Golden Sunshine"</span>
