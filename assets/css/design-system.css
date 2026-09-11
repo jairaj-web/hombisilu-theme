@@ -969,7 +969,9 @@ html:not(.js) .js-reveal { opacity: 1; transform: none; }
   gap: var(--ds-s3);
   padding-block: .7rem;
 }
-.ds-header.is-scrolled .ds-header-inner { padding-block: .45rem; }
+/* No size change on scroll: the header is sticky (in flow), so shrinking it
+   moved the page under the scroll threshold and toggled the class back —
+   the header flickered between sizes. Scrolling only adds the shadow. */
 
 /* Brand lockup. The logo is hard-capped in both axes: the source art is
    1536x1024, and anything that lets it reach intrinsic size destroys the
@@ -993,8 +995,6 @@ img.ds-logo {
   max-height: 64px;
   object-fit: contain;
 }
-.ds-header.is-scrolled .ds-brand .ds-logo,
-.ds-header.is-scrolled .ds-brand .custom-logo { height: clamp(40px, 4.8vw, 52px); }
 
 /* WordPress custom-logo output goes through the same cap. */
 .ds-brand .custom-logo-link { display: block; line-height: 0; }

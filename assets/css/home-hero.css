@@ -1,9 +1,8 @@
 /* ═══════════════════════════════════════════════════════════
-   HOME — STATIC HERO + WHY CHOOSE US
-   Calm, corporate-clean hero: one static photo, dark readable
-   overlay, centred copy, two pill CTAs. No slider, no carousel,
-   no floating cut-outs, no angled tags. Pairs with the light
-   "Why Choose Us" feature grid directly beneath it.
+   HOME — VIDEO HERO + WHY CHOOSE US
+   Full-bleed hero: a looping product film fills the section and
+   melts into the maroon brand ground behind the copy. Pairs with
+   the light "Why Choose Us" feature grid directly beneath it.
    Tokens/components from assets/css/design-system.css.
    ═══════════════════════════════════════════════════════════ */
 
@@ -12,63 +11,94 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  padding-block: var(--ds-s5);
-  background:
-    radial-gradient(640px 360px at 88% 12%, rgba(201,147,43,.20), transparent 65%),
-    linear-gradient(150deg, var(--ds-forest) 0%, var(--ds-forest-deep) 100%);
-}
-
-/* Copy left, film right; stacks (copy first) below 960px. */
-.hh-hero-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
-  align-items: center;
-  gap: clamp(2rem, 1rem + 3vw, 4rem);
-}
-
-.hh-hero-inner {
-  position: relative;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
+  align-items: center;
+  min-height: clamp(560px, 44vw, 760px);
+  padding-block: var(--ds-s5);
+  background: linear-gradient(150deg, var(--ds-forest) 0%, var(--ds-forest-deep) 100%);
 }
 
+/* The film owns the right ~70% edge to edge, so the products stay clear of
+   the copy; the overlay dissolves its left edge into the maroon ground. */
 .hh-hero-media {
-  margin: 0;
-  position: relative;
-  aspect-ratio: 16 / 9;
-  max-width: 100%;
-  border-radius: var(--ds-r-xl);
-  overflow: hidden;
-  background: #F3EADB; /* the film's own backdrop, shown while it loads */
-  box-shadow: 0 30px 70px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.08);
-}
-/* Thin gold keyline inside the frame. */
-.hh-hero-media::after {
-  content: "";
   position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  box-shadow: inset 0 0 0 1px rgba(232,196,120,.35);
-  pointer-events: none;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 70%;
+  z-index: -2;
+  background: #F3EADB; /* the film's own backdrop, shown while it loads */
+  /* Dissolve the film's left edge itself, so there is no seam to hide. */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 38%);
+          mask-image: linear-gradient(90deg, transparent 0%, #000 38%);
 }
 .hh-hero-video {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
 }
 
-/* Half-width column: cap the headline so it sets in 2–3 lines, not 4. */
+.hh-hero-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg,
+      rgba(67,16,22,.55) 0%,
+      rgba(67,16,22,.45) 36%,
+      rgba(67,16,22,.18) 50%,
+      rgba(67,16,22,0) 62%),
+    linear-gradient(0deg, rgba(67,16,22,.35) 0%, rgba(67,16,22,0) 22%),
+    linear-gradient(180deg, rgba(67,16,22,.18) 0%, rgba(67,16,22,0) 18%);
+}
+
+.hh-hero-inner {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+.hh-hero-inner > * { max-width: 34rem; }
+.hh-hero-inner > .hh-hero-lead { max-width: 30rem; }
+
 @media (min-width: 960px) {
-  .hh-hero-title { font-size: clamp(2.4rem, 1.2rem + 2.4vw, 3.5rem); }
+  .hh-hero-title { font-size: clamp(2.6rem, 1.4rem + 2.4vw, 3.9rem); }
 }
 
+/* Below 960px the film sits edge to edge on top, fading into the copy. */
 @media (max-width: 959px) {
-  .hh-hero-grid { grid-template-columns: 1fr; }
-  .hh-hero-inner { align-items: center; text-align: center; max-width: 680px; margin-inline: auto; }
-  .hh-hero-media { border-radius: var(--ds-r-lg); }
+  .hh-hero {
+    display: block;
+    min-height: 0;
+    padding-block: 0 var(--ds-s5);
+  }
+  .hh-hero-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    z-index: 0;
+    -webkit-mask-image: none;
+            mask-image: none;
+  }
+  .hh-hero-media::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 45%;
+    background: linear-gradient(0deg, var(--ds-forest) 0%, rgba(107,30,40,0) 100%);
+  }
+  .hh-hero-overlay { display: none; }
+  .hh-hero-inner {
+    margin-top: calc(var(--ds-s3) * -1);
+    align-items: center;
+    text-align: center;
+  }
+  .hh-hero-inner > * { max-width: 40rem; }
 }
 
 .hh-hero-chip {

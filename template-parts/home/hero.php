@@ -2,7 +2,7 @@
 /**
  * Home — Video hero + Why Choose Us feature grid.
  *
- * Split hero (copy left, looping product film right) followed by a
+ * Full-bleed video hero (copy over a looping product film) followed by a
  * light 5-tile "Our Promise" feature grid, reusing the exact copy from
  * the previous homepage builds (front-page-v2.php / homepage.html).
  *
@@ -43,8 +43,23 @@ $hh_features = [
 
 <!-- ═══════════ VIDEO HERO ═══════════ -->
 <section class="hh-hero">
-  <div class="ds-wrap hh-hero-grid">
-  <div class="hh-hero-inner">
+  <?php
+  // Full-bleed looping product film behind the copy. The poster is the LCP
+  // image (preloaded in functions.php) so a frame is on screen before the
+  // video arrives; phones get a 720p encode; reduced-motion keeps the still.
+  ?>
+  <div class="hh-hero-media" aria-hidden="true">
+    <video class="hh-hero-video"
+           autoplay muted loop playsinline preload="metadata"
+           poster="<?php echo esc_url( $tpl ); ?>/assets/images/hero-video-poster.webp"
+           width="1280" height="720">
+      <source src="<?php echo esc_url( $tpl ); ?>/assets/video/hero-720.mp4" type="video/mp4" media="(max-width: 767px)">
+      <source src="<?php echo esc_url( $tpl ); ?>/assets/video/hero.mp4" type="video/mp4">
+    </video>
+  </div>
+  <span class="hh-hero-overlay" aria-hidden="true"></span>
+
+  <div class="ds-wrap hh-hero-inner">
     <span class="ds-chip ds-chip--light hh-hero-chip"><?php echo hb_icon( 'leaf', 14 ); ?> Heritage Recipes, Made Fresh</span>
     <h1 class="hh-hero-title">Taste the Tradition.<br>Savour the Difference.</h1>
     <p class="hh-hero-lead">Small-batch pickles, chutney powders, honey and filter coffee made the way South Indian kitchens have always made them — natural, FSSAI certified, and shipped fresh to your door.</p>
@@ -53,23 +68,6 @@ $hh_features = [
       <a href="<?php echo esc_url( $shop ); ?>" class="ds-btn ds-btn--gold"><?php echo hb_icon( 'bag', 16 ); ?> Shop Now</a>
       <a href="<?php echo esc_url( home_url( '/about-us/' ) ); ?>" class="ds-btn ds-btn--ghost-light">Discover Our Story <?php echo hb_icon( 'arrow', 16 ); ?></a>
     </div>
-  </div>
-
-  <?php
-  // Muted, looping product film. The poster is the LCP image (preloaded in
-  // functions.php) so the frame is on screen before the video arrives; phones
-  // get a 720p encode. Reduced-motion visitors keep the still poster.
-  ?>
-  <figure class="hh-hero-media">
-    <video class="hh-hero-video"
-           autoplay muted loop playsinline preload="metadata"
-           poster="<?php echo esc_url( $tpl ); ?>/assets/images/hero-video-poster.webp"
-           width="1280" height="720"
-           aria-label="Hombisilu pickles, honey, spices and filter coffee">
-      <source src="<?php echo esc_url( $tpl ); ?>/assets/video/hero-720.mp4" type="video/mp4" media="(max-width: 767px)">
-      <source src="<?php echo esc_url( $tpl ); ?>/assets/video/hero.mp4" type="video/mp4">
-    </video>
-  </figure>
   </div>
 </section>
 
